@@ -1,5 +1,5 @@
 # MusiShop
 SpringBoot 
-JPA
+JPA + mybatis
 mysql 
 thymeleaf
