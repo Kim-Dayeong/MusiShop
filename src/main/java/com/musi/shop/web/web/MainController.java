@@ -24,10 +24,10 @@ public class MainController {
         return "homeView.html";
     }
 
-    @GetMapping("/albumlist")
-    public String albumList(Model model) {
-        System.out.println("출력:"+albumService.AlbumList());
-        model.addAttribute("list", albumService.AlbumList());
-        return "albumlist.html";
-    }
+//    @GetMapping("/albumlist")
+//    public String albumList(Model model) {
+//        System.out.println("출력:"+albumService.AlbumList());
+//        model.addAttribute("list", albumService.AlbumList());
+//        return "albumlist.html";
+//    }
 }

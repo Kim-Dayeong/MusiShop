@@ -51,7 +51,23 @@
 
 <body>
 
+<tbody>
+<tr th:each="album : ${albumlist}">
+    <td>리스트</td>
+    <td>
+        <span th:text="${album.id}"></span>
+    </td>
 
+    <td>
+        <span th:text="${album.price}"></span>
+    </td>
+
+
+    <td>
+        <a th:text="${album.title}" th:href="@{/(id=${album.id})}"></a>
+    </td>
+</tr>
+</tbody>
 
 
 </body>

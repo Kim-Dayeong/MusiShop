@@ -11,6 +11,11 @@
         <module name="Musishop.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="11" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Musishop.main" options="--add-modules java.base" />
+    </option>
   </component>
 </project>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="~{fragment/header::headerFragment(~{::title})}">
+    <title th:text="회원가입"></title>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <h2>회원 가입</h2>
+    <div>
+        <form>
+            <div>
+                <div>아이디</div>
+                <input id="id" type="text" name="id"/>
+            </div>
+            <div>
+                <div>비밀번호</div>
+                <input id="pwd" type="pwd" name="pwd"/>
+            </div>
+            <div>
+                <div>비밀번호확인</div>
+                <input id="confirmPassword" type="password" name="confirmPassword"/>
+            </div>
+            <div>
+                <div>이름</div>
+                <input id="name" type="text" name="name"/>
+            </div>
+            <input class="btn-submit" type="submit" value="회원가입">
+        </form>
+    </div>
+
+</th:block>
+
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(function () {
+            $('.btn-submit').click((e) => {
+                const id = $('#id').val();
+                const password = $('#password').val();
+                const confirmPassword = $('#confirmPassword').val()
+                const name = $('#name').val();
+
+                if (id == '') {
+                    alert('아이디를 입력해주세요');
+                    e.preventDefault();
+                }
+                if (password == '') {
+                    alert('패스워드를 입력해주세요');
+                    e.preventDefault();
+                }
+                if (confirmPassword == '') {
+                    alert('패스워드 확인을 입력해주세요');
+                    e.preventDefault();
+                }
+                if (name == '') {
+                    alert('이름을 입력해주세요');
+                    e.preventDefault();
+                }
+
+                if (password != confirmPassword) {
+                    alert('비밀번호가 일치하지 않습니다.')
+                    e.preventDefault();
+                } else {
+                    const path = 'http://localhost:8086/api/signup';
+                    const json = JSON.stringify({
+                        'id': id,
+                        'password': password,
+                        'name': name
+                    });
+                    $.ajax({
+                        url: path,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: json,
+                    }).done((response) => {
+                        if (response == 'success') {
+                            alert('회원가입 성공')
+                            location.href = "http://localhost:8086"
+                        } else if (response == 'fail') {
+                            alert('아이디를 변경하세요.');
+                        } else {
+                            alert('회원가입 실패');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,12 +1,9 @@
 package com.musi.shop.web.entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Builder
 @ToString
@@ -14,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Entity(name="Album")
 @Data
-public class AlbumCrudEntity {
+public class Album {
 
     //@Column(nullable = false, unique = true)
 

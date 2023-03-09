@@ -28,7 +28,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group 'com.musi.shop'
 version '1.0-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -65,6 +65,8 @@ dependencies {
 
     // JQuery
     implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+
+
 
 
 }

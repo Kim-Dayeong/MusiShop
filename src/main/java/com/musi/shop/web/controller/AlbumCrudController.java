@@ -1,14 +1,11 @@
 package com.musi.shop.web.controller;
 
-import com.musi.shop.web.entity.AlbumCrudEntity;
+import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.repository.AlbumCrudEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -19,13 +16,13 @@ public class AlbumCrudController {
     private final AlbumCrudEntityRepository albumCrudEntityRepository;
 
     @GetMapping("/search") //모든 데이터 read
-    public List<AlbumCrudEntity> list(){
+    public List<Album> list(){
         return albumCrudEntityRepository.findAll();
 
     }
 
     @PostMapping("/join")
-    public String Join(AlbumCrudEntity crudEntity){
+    public String Join(Album crudEntity){
         System.out.println("id : " +crudEntity.getId());
         System.out.println("Title : " + crudEntity.getTitle());
         System.out.println("artist: " + crudEntity.getArtist());
@@ -41,8 +38,8 @@ public class AlbumCrudController {
 
     //update ..수정이 아니라 추가가 되버림 나중에 고쳐야함
     @PutMapping("/update/{id}")
-    public AlbumCrudEntity update(@PathVariable int id, @RequestBody AlbumCrudEntity crudEntity){
-        AlbumCrudEntity albumCrudEntity = albumCrudEntityRepository.findById(id).orElseThrow(() -> {
+    public Album update(@PathVariable int id, @RequestBody Album crudEntity){
+        Album album = albumCrudEntityRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("수정에 실패했습니다.");
         });
 
