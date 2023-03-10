@@ -26,14 +26,6 @@ public class User {
     @Column
     private String name;
 
-    @Column
-    private int point;
-
-    @Column
-    private Date regdate;
-
-    @Column
-    private String grade;
 
     @Column
     private String email;

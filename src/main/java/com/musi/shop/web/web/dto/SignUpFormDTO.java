@@ -12,8 +12,7 @@ public class SignUpFormDTO {
     private String id;
     private String pwd;
     private String name;
-    private int point;
-    private Date regdate;
-    private String grade;
     private String email;
+
+
 }

@@ -11,7 +11,7 @@
 <th:block layout:fragment="content">
     <h2>회원 가입</h2>
     <div>
-        <form>
+
             <div>
                 <div>아이디</div>
                 <input id="id" type="text" name="id"/>
@@ -20,72 +20,63 @@
                 <div>비밀번호</div>
                 <input id="pwd" type="pwd" name="pwd"/>
             </div>
-            <div>
-                <div>비밀번호확인</div>
-                <input id="confirmPassword" type="password" name="confirmPassword"/>
-            </div>
+
             <div>
                 <div>이름</div>
                 <input id="name" type="text" name="name"/>
             </div>
-            <input class="btn-submit" type="submit" value="회원가입">
-        </form>
+
+        <div>
+            <div>이메일</div>
+            <input id="email" type="text" name="email"/>
+        </div>
+
+
+
+
+
+            <input class="btn" type="submit" value="회원가입">
+
+
     </div>
 
 </th:block>
 
 <th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('.btn-submit').click((e) => {
+            $('.btn').click((e) => {
                 const id = $('#id').val();
-                const password = $('#password').val();
+                const password = $('#pwd').val();
                 const confirmPassword = $('#confirmPassword').val()
                 const name = $('#name').val();
+                const email = $('#email').val();
 
-                if (id == '') {
-                    alert('아이디를 입력해주세요');
-                    e.preventDefault();
-                }
-                if (password == '') {
-                    alert('패스워드를 입력해주세요');
-                    e.preventDefault();
-                }
-                if (confirmPassword == '') {
-                    alert('패스워드 확인을 입력해주세요');
-                    e.preventDefault();
-                }
-                if (name == '') {
-                    alert('이름을 입력해주세요');
-                    e.preventDefault();
-                }
-
-                if (password != confirmPassword) {
-                    alert('비밀번호가 일치하지 않습니다.')
-                    e.preventDefault();
-                } else {
-                    const path = 'http://localhost:8086/api/signup';
-                    const json = JSON.stringify({
+                    const path = 'http://localhost:8083/signup';
+                    const json = ({
                         'id': id,
-                        'password': password,
-                        'name': name
+                        'pwd': confirmPassword,
+                        'name': name,
+                        'email': email
+
                     });
                     $.ajax({
                         url: path,
                         type: 'POST',
                         contentType: 'application/json',
-                        data: json,
+                        data: JSON.stringify(json),
                     }).done((response) => {
                         if (response == 'success') {
                             alert('회원가입 성공')
-                            location.href = "http://localhost:8086"
+
                         } else if (response == 'fail') {
                             alert('아이디를 변경하세요.');
                         } else {
                             alert('회원가입 실패');
                         }
                     });
-                }
+
             });
         });
     </script>

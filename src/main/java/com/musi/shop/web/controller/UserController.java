@@ -1,5 +1,6 @@
 package com.musi.shop.web.controller;
 
+import com.musi.shop.web.Service.UserService;
 import com.musi.shop.web.Service.UserServiceImpl;
 import com.musi.shop.web.repository.UserEntityRepository;
 import com.musi.shop.web.web.dto.SignUpFormDTO;
@@ -8,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @Controller
@@ -20,7 +23,12 @@ public class UserController {
     @Autowired
     private UserEntityRepository userEntityRepository;
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
+
+    @GetMapping("/signupView")
+   public String signupPage() {
+        return "signup.html";
+    }
 
 
     @PostMapping("/signup")

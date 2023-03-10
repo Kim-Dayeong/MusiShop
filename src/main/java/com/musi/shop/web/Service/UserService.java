@@ -5,5 +5,5 @@ import com.musi.shop.web.web.dto.SignUpFormDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
-    ResponseEntity signup(SignUpFormDTO formTO);
+    ResponseEntity signup(SignUpFormDTO formDTO);
 }

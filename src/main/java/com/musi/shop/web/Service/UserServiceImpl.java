@@ -26,10 +26,8 @@ public class UserServiceImpl implements UserService {
                     .id(formDTO.getId())
                     .pwd(formDTO.getPwd())
                     .name(formDTO.getName())
-                    .point(formDTO.getPoint())
-                    .grade(formDTO.getGrade())
-                    .regdate(formDTO.getRegdate())
                     .email(formDTO.getEmail())
+
                     .build();
 
             userEntityRepository.save(newUser);
