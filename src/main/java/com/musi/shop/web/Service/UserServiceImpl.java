@@ -2,42 +2,43 @@ package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.User;
 import com.musi.shop.web.repository.UserEntityRepository;
-import com.musi.shop.web.web.dto.SignUpFormDTO;
+import com.musi.shop.web.web.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
     private final UserEntityRepository userEntityRepository;
 
-    public ResponseEntity signup(SignUpFormDTO formDTO) {
+    public String signup(UserDTO formDTO) {
 
-        Optional<User> user = userEntityRepository.findById(formDTO.getId());
+        //dto를  entity로 변환해야함
 
-        if(user.isEmpty()) {
-            User newUser = User.builder()
-                    .id(formDTO.getId())
-                    .pwd(formDTO.getPwd())
-                    .name(formDTO.getName())
-                    .email(formDTO.getEmail())
+        //userEntityRepository.save(User.toSaveEntity(formDTO));//무조건 entitiy로 받음
+        User user = User.toSaveEntity(formDTO);
+        String savedId = userEntityRepository.save(user).getId();
+        return savedId;
+    }
 
-                    .build();
+    public UserDTO login(UserDTO userDTO) {
 
-            userEntityRepository.save(newUser);
-
-            return new ResponseEntity("success", HttpStatus.OK);
-
-
+        Optional<User> optionalUser = userEntityRepository.findByid(userDTO.getId());
+        if(optionalUser.isPresent()) {
+            User loginEntity = optionalUser.get();
+            if(loginEntity.getPwd().equals(userDTO.getPwd())){
+                return UserDTO.toUserDTO(loginEntity);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
         }
-        else{
-            return new ResponseEntity("fail", HttpStatus.OK);
-        }
+
     }
 }
