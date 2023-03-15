@@ -7,15 +7,12 @@ import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @Slf4j
-@Controller
+@RestController
 
 @RequiredArgsConstructor
 public class UserController {
@@ -31,7 +28,9 @@ public class UserController {
     }
 
 
+
     @PostMapping("/signup")
+   // @RequestMapping(value = "/signup",produces = "application/json", method = RequestMethod.POST)
     public String userSignup(@RequestBody UserDTO userDTO){
         userService.signup(userDTO);
         return "/";

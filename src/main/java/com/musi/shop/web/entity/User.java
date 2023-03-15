@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -21,7 +22,8 @@ public class User {
 
     @Id
     @Column
-    private String id;
+    @GeneratedValue
+    private int id;
 
     @Column
     private String pwd;
