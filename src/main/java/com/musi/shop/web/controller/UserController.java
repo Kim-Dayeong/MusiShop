@@ -1,15 +1,18 @@
 package com.musi.shop.web.controller;
 
-import com.musi.shop.web.Service.UserServiceImpl;
+import com.musi.shop.web.entity.Users;
 import com.musi.shop.web.repository.UserEntityRepository;
-import com.musi.shop.web.web.dto.UserDTO;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.URI;
 
 @Slf4j
 @RestController
@@ -20,37 +23,62 @@ public class UserController {
     @Autowired
     private UserEntityRepository userEntityRepository;
 
-    private final UserServiceImpl userService;
+
 
     @GetMapping("/signupView")
-   public String signupPage() {
-        return "signup.html";
+   public ModelAndView signupPage() throws IOException {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("signup.html");
+        String testval = "test";
+       // modelAndView.addObject("signupview",testval);
+
+        return modelAndView;
     }
 
 
 
+//    @PostMapping("/signup")
+//   // @RequestMapping(value = "/signup",produces = "application/json", method = RequestMethod.POST)
+//    public Users put( @RequestParam String name, @RequestParam String email,@RequestParam String pwd){
+//        return userEntityRepository.save(new Users(name, email,pwd));
+//
+//
+//    }
+
     @PostMapping("/signup")
-   // @RequestMapping(value = "/signup",produces = "application/json", method = RequestMethod.POST)
-    public String userSignup(@RequestBody UserDTO userDTO){
-        userService.signup(userDTO);
-        return "/";
+    // @RequestMapping(value = "/signup",produces = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<?> put(@RequestParam String name, @RequestParam String email, @RequestParam String pwd){
+        userEntityRepository.save(new Users(name, email,pwd));
+        ModelAndView modelAndView = new ModelAndView();
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setLocation(URI.create("/"));
+
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+
+
+
+
+
     }
 
     //로그인
-    @GetMapping("/LoginView")
-    public String loginPage() {return "login.html";}
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute UserDTO userDTO, HttpSession session) {
-       UserDTO loginResult =  userService.login(userDTO);
-       if(loginResult != null) {
-          session.setAttribute("loginEmail", loginResult.getEmail());
-          session.setAttribute("id",loginResult.getId());
-          return "/";
-       }else {
-           return "login.html";
-       }
-    }
+//    @GetMapping("/LoginView")
+//    public String loginPage() {return "login.html";}
+//
+//    @PostMapping("/login")
+//    public String login(@ModelAttribute UserDTO userDTO, HttpSession session) {
+//       UserDTO loginResult =  userService.login(userDTO);
+//       if(loginResult != null) {
+//          session.setAttribute("loginEmail", loginResult.getEmail());
+//          session.setAttribute("id",loginResult.getId());
+//          return "/";
+//       }else {
+//           return "login.html";
+//       }
+//    }
 
 
 
