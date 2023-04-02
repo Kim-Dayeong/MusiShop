@@ -1,6 +1,6 @@
 package com.musi.shop.web.controller;
 
-import com.musi.shop.web.entity.Users;
+import com.musi.shop.web.entity.User;
 import com.musi.shop.web.repository.UserEntityRepository;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("/signup")
     // @RequestMapping(value = "/signup",produces = "application/json", method = RequestMethod.POST)
     public ResponseEntity<?> put(@RequestParam String name, @RequestParam String email, @RequestParam String pwd){
-        userEntityRepository.save(new Users(name, email,pwd));
+        userEntityRepository.save(new User(name, email,pwd));
         ModelAndView modelAndView = new ModelAndView();
 
         HttpHeaders headers = new HttpHeaders();
@@ -65,20 +65,23 @@ public class UserController {
     }
 
     //로그인
-//    @GetMapping("/LoginView")
-//    public String loginPage() {return "login.html";}
-//
-//    @PostMapping("/login")
-//    public String login(@ModelAttribute UserDTO userDTO, HttpSession session) {
-//       UserDTO loginResult =  userService.login(userDTO);
-//       if(loginResult != null) {
-//          session.setAttribute("loginEmail", loginResult.getEmail());
-//          session.setAttribute("id",loginResult.getId());
-//          return "/";
-//       }else {
-//           return "login.html";
-//       }
-//    }
+    @GetMapping("/LoginView")
+    public String loginPage() {return "login.html";}
+
+    //로그인 결과 페이지
+    @GetMapping("/login/result")
+    public String LoginResultview() {
+        return "/loginSucess";
+    }
+
+    //로그아웃 결과 페이지
+    @GetMapping("/logout/result")
+    public String Logoutview() {
+        return "/logout";
+
+    }
+
+
 
 
 

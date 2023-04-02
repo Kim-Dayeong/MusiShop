@@ -29,5 +29,4 @@ public class ListController { //album, user, item 등 list
         model.addAttribute("albumlist",albumListResponseList);
         return "albumlist.html";
     }
-
 }
