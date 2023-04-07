@@ -1,6 +1,5 @@
 package com.musi.shop.web;
 
-import com.musi.shop.web.web.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

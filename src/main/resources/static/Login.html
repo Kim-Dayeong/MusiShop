@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
+<meta charset="UTF-8">
 <head th:replace="~{fragment/header::headerFragment(~{::title})}">
     <title th:text="로그인"></title>
 </head>
 <body>
-<form action="/user/login" method="post">
-    이메일: <input type="text" name="memberEmail"> <br>
-    비밀번호: <input type="text" name="memberPassword"> <br>
-    <input type="submit" value="로그인">
+<form action="/login" method="post" th:object="loginVO" >
+    이메일: <input type="text" th:field="*{loginId}" th:name="loginId"  id="loginId"> <br>
+    password: <input type="password" th:name="password" th:field="*{password}" id="password" > <br>
+    <input type="submit" value="login">
 </form>
 
 </body>

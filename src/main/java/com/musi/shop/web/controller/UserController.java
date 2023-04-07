@@ -65,24 +65,24 @@ public class UserController {
     }
 
     //로그인
-    @GetMapping("/LoginView")
-    public String loginPage() {return "login.html";}
+//    @GetMapping("/LoginView")
+//    public String loginPage() {return "login.html";}
+//
+//    //로그인 결과 페이지
+//    @GetMapping("/login/result")
+//    public String LoginResultview() {
+//        return "/loginSucess";
+//    }
+//
+//    //로그아웃 결과 페이지
+//    @GetMapping("/logout/result")
+//    public String Logoutview() {
+//        return "/logout";
 
-    //로그인 결과 페이지
-    @GetMapping("/login/result")
-    public String LoginResultview() {
-        return "/loginSucess";
     }
 
-    //로그아웃 결과 페이지
-    @GetMapping("/logout/result")
-    public String Logoutview() {
-        return "/logout";
-
-    }
 
 
 
 
 
-}
