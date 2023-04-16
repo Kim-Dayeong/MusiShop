@@ -1,0 +1,201 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.musi.shop.web.entity;
+
+import com.musi.shop.web.web.dto.UserDTO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(
+    name = "User"
+)
+public class User {
+    @Id
+    @Column
+    private String id;
+    @Column
+    private String pwd;
+    @Column
+    private String name;
+    @Column
+    private String email;
+
+    public static User toSaveEntity(UserDTO userDTO) {
+        User user = new User();
+        user.setEmail(userDTO.getEmail());
+        user.setId(userDTO.getId());
+        user.setPwd(userDTO.getPwd());
+        user.setName(user.getName());
+        return user;
+    }
+
+    public static UserBuilder builder() {
+        return new UserBuilder();
+    }
+
+    public String toString() {
+        String var10000 = this.getId();
+        return "User(id=" + var10000 + ", pwd=" + this.getPwd() + ", name=" + this.getName() + ", email=" + this.getEmail() + ")";
+    }
+
+    public User(final String id, final String pwd, final String name, final String email) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+    }
+
+    public User() {
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof User)) {
+            return false;
+        } else {
+            User other = (User)o;
+            if (!other.canEqual(this)) {
+                return false;
+            } else {
+                label59: {
+                    Object this$id = this.getId();
+                    Object other$id = other.getId();
+                    if (this$id == null) {
+                        if (other$id == null) {
+                            break label59;
+                        }
+                    } else if (this$id.equals(other$id)) {
+                        break label59;
+                    }
+
+                    return false;
+                }
+
+                Object this$pwd = this.getPwd();
+                Object other$pwd = other.getPwd();
+                if (this$pwd == null) {
+                    if (other$pwd != null) {
+                        return false;
+                    }
+                } else if (!this$pwd.equals(other$pwd)) {
+                    return false;
+                }
+
+                Object this$name = this.getName();
+                Object other$name = other.getName();
+                if (this$name == null) {
+                    if (other$name != null) {
+                        return false;
+                    }
+                } else if (!this$name.equals(other$name)) {
+                    return false;
+                }
+
+                Object this$email = this.getEmail();
+                Object other$email = other.getEmail();
+                if (this$email == null) {
+                    if (other$email != null) {
+                        return false;
+                    }
+                } else if (!this$email.equals(other$email)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof User;
+    }
+
+    public int hashCode() {
+        int PRIME = true;
+        int result = 1;
+        Object $id = this.getId();
+        result = result * 59 + ($id == null ? 43 : $id.hashCode());
+        Object $pwd = this.getPwd();
+        result = result * 59 + ($pwd == null ? 43 : $pwd.hashCode());
+        Object $name = this.getName();
+        result = result * 59 + ($name == null ? 43 : $name.hashCode());
+        Object $email = this.getEmail();
+        result = result * 59 + ($email == null ? 43 : $email.hashCode());
+        return result;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getPwd() {
+        return this.pwd;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public void setPwd(final String pwd) {
+        this.pwd = pwd;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public static class UserBuilder {
+        private String id;
+        private String pwd;
+        private String name;
+        private String email;
+
+        UserBuilder() {
+        }
+
+        public UserBuilder id(final String id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder pwd(final String pwd) {
+            this.pwd = pwd;
+            return this;
+        }
+
+        public UserBuilder name(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public UserBuilder email(final String email) {
+            this.email = email;
+            return this;
+        }
+
+        public User build() {
+            return new User(this.id, this.pwd, this.name, this.email);
+        }
+
+        public String toString() {
+            return "User.UserBuilder(id=" + this.id + ", pwd=" + this.pwd + ", name=" + this.name + ", email=" + this.email + ")";
+        }
+    }
+}

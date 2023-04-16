@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<meta charset="UTF-8">
+<head th:replace="~{fragment/header::headerFragment(~{::title})}">
+    <title th:text="로그인"></title>
+</head>
+<body>
+
+    <form method=POST" action="http://localhost:8083/login">
+    <input type="text"  th:name="email">
+    <input type="text" th:name="password">
+        <input type="submit" formmethod="POST">
+    </form>
+
+
+</div>
+
+
+
+
+</body>
+</html>
