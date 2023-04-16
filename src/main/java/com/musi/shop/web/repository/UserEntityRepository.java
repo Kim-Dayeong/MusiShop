@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface UserEntityRepository extends JpaRepository <User,Integer> {
 
+    User findByEmail(String email); //이메일로 중복 검사
     }
 

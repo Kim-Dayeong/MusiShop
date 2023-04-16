@@ -8,11 +8,18 @@
     <title th:text="로그인"></title>
 </head>
 <body>
-<form action="/login" method="post" th:object="loginVO" >
-    이메일: <input type="text" th:field="*{loginId}" th:name="loginId"  id="loginId"> <br>
-    password: <input type="password" th:name="password" th:field="*{password}" id="password" > <br>
-    <input type="submit" value="login">
-</form>
+
+    <form method=POST" action="http://localhost:8083/login">
+    <input type="text"  th:name="email">
+    <input type="text" th:name="password">
+        <input type="submit" formmethod="POST">
+    </form>
+
+
+</div>
+
+
+
 
 </body>
 </html>

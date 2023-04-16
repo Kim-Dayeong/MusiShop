@@ -13,10 +13,10 @@ public class LoginService {
     private final UserRepository userRepository;
 
     // @return null 로그인 실패
-    public User login(String loginId, String password){
-        return userRepository.findByLoginId(loginId)
-                .filter(m -> m.getPwd().equals(password))
-                .orElse(null);
-
-    }
+//    public User login(String loginId, String password){
+//        return userRepository.findByLoginId(loginId)
+//                .filter(m -> m.getPwd().equals(password))
+//                .orElse(null);
+//
+//    }
 }
