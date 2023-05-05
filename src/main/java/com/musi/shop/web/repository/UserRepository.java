@@ -11,14 +11,14 @@ import java.util.*;
 @Repository
 public class UserRepository {
 
-    private static Map<Long, User> store = new HashMap<>();   // static 사용
-    private static long sequence = 0L;
-
-
-
-    public List<User> findAll() {
-        return new ArrayList<>(store.values());
-    }
+//    private static Map<Long, User> store = new HashMap<>();   // static 사용
+//    private static long sequence = 0L;
+//
+//
+//
+//    public List<User> findAll() {
+//        return new ArrayList<>(store.values());
+//    }
 
 
 

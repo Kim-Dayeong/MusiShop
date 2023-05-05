@@ -19,12 +19,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
-    public ModelAndView loginForm(@ModelAttribute LoginForm loginVO,
-                                  HttpServletRequest request) throws IOException {
 
-        return new ModelAndView("Login.html");
-    }
 
 //    @PostMapping("/login")
 //    public ModelAndView login(@Valid LoginForm loginVO, BindingResult result,

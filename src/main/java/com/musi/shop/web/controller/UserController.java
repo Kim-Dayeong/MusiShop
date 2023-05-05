@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 
 @RequiredArgsConstructor
@@ -22,14 +24,11 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/signup")
-    public String userForm(Model model){
-       model.addAttribute("userFormDto", new UserFormDto());
-        return "userForm";
-    }
+
 
     @PostMapping(value ="signup")
-    public String userForm(@Valid UserFormDto userFormDto, BindingResult bindingResult, Model model){
+    public String userJoin(@Valid UserFormDto userFormDto, BindingResult bindingResult, Model model){
+
         if(bindingResult.hasErrors()){
             System.out.println("가입 오류!!!!!!!"+bindingResult);
 
