@@ -27,9 +27,10 @@ public class ViewController {
 
 
     @GetMapping("/login")
-    public ModelAndView loginForm(@ModelAttribute LoginForm loginVO,
-                                  HttpServletRequest request) throws IOException {
+    public ModelAndView loginForm() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("Login.html");
 
-        return new ModelAndView("Login.html");
+        return modelAndView;
     }
 }

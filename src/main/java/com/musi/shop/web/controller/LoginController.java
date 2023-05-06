@@ -5,6 +5,12 @@ import com.musi.shop.web.web.domain.LoginForm;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,9 +21,11 @@ import java.io.IOException;
 @RestController
 
 @RequiredArgsConstructor
+
 public class LoginController {
 
     private final LoginService loginService;
+
 
 
 

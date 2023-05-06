@@ -1,5 +1,5 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/common_head :: commonHead">
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,6 +21,15 @@
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/login">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/signup">Signup</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/search">AlbumList</a>
                 </li>

@@ -1,21 +1,26 @@
-package com.musi.shop.web.web;
+package com.musi.shop.web.controller;
 
 import com.musi.shop.web.Service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-public class MainController {
+@RestController
+public class MainviewController {
 
     @Autowired
     private AlbumService albumService;
 
     @RequestMapping("/")
-    public String mainView() {
-        return "index.html";
+    public ModelAndView mainView() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+
+        return modelAndView;
+
     }
 
     @RequestMapping("/home")
