@@ -5,11 +5,7 @@ import com.musi.shop.web.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -17,17 +13,17 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 //@Getter
 public class UserFormDto {
 
-    @NotBlank(message ="이름은 비워둘수 없습니다.")
+    //@NotBlank(message ="이름은 비워둘수 없습니다.")
     @JsonProperty("name")
     private String name;
 
-   @NotEmpty(message = "이메일은 비워둘수 없습니다.")
-    @Email(message = "틀린 이메일 입니다.")
+   //@NotEmpty(message = "이메일은 비워둘수 없습니다.")
+    //@Email(message = "틀린 이메일 입니다.")
    @JsonProperty("email")
     private String email;
 
-    @NotEmpty(message = "비밀번호는 비워둘수 없습니다.")
-    @Length(min =4, max=16, message = "비밀번호는 4자 이상 16자 이하로 입력해주세요")
+    //@NotEmpty(message = "비밀번호는 비워둘수 없습니다.")
+    //@Length(min =4, max=16, message = "비밀번호는 4자 이상 16자 이하로 입력해주세요")
     @JsonProperty("pwd")
     private String pwd;
 

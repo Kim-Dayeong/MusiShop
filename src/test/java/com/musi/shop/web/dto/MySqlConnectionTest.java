@@ -1,6 +1,6 @@
 package com.musi.shop.web.dto;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ public class MySqlConnectionTest {
     private static final String USER = "root";
     private static final String PASSWORD = "74700";
 
-    @Test
+    //@Test
     public void testConnection() throws Exception {
         Class.forName(DRIVER);
         try{

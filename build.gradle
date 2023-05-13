@@ -1,22 +1,45 @@
 
-buildscript {
-    ext {
-        springbootVersion = '2.1.7.RELEASE'
-    }
-    repositories {
-        mavenCentral()
+//buildscript {
+//    ext {
+//        springbootVersion = '2.7.4.RELEASE'
+//    }
+//    repositories {
+//        mavenCentral()
 //        jcenter()
-    }
+//        google()
+//
+//    }
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+}
 
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springbootVersion}")
+
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springbootVersion}")
+//    }
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
 }
+
+repositories {
+    mavenCentral()
+}
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
 
 
 
