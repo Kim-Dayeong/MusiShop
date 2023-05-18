@@ -2,7 +2,6 @@ package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.User;
 import com.musi.shop.web.repository.UserEntityRepository;
-import com.musi.shop.web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

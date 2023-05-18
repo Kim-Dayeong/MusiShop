@@ -6,12 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityFilterConfig {
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     //권한 부여
    @Bean
@@ -25,9 +29,14 @@ public class SecurityFilterConfig {
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
-                .loginProcessingUrl("/loginProc")
+                .loginProcessingUrl("/loginProc") //service에서 메소드 자동 실행(loadUserByUsername) 컨트롤러 x
                 .defaultSuccessUrl("/")
                 .and().build();
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+       return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
