@@ -25,8 +25,9 @@ import java.util.stream.Collectors;
 @Table(name = "User")
 public class LoginUser implements UserDetails {
 
+
+    @Column(updatable = false, unique = true, nullable = false)
     @Id
-    @Column(name = "member_id",updatable = false, unique = true, nullable = false)
     private String memberId;
 
     @Column(nullable = false)
@@ -35,6 +36,8 @@ public class LoginUser implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+    @javax.persistence.Id
+    private Long id;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,4 +75,6 @@ public class LoginUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

@@ -1,9 +1,9 @@
 package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.LoginUser;
-import com.musi.shop.web.entity.User;
 import com.musi.shop.web.repository.LoginRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,9 +25,10 @@ public class CustomUserDetailService implements UserDetailsService {
     }
     //해당 유저 데이터가 존재하면 userDetails 객체로 만들어 리턴
     private UserDetails createUserDetails(LoginUser loginUser){
-        return User.builder().email(loginUser.getUsername())
-                .pwd(passwordEncoder.encode(loginUser.getPassword()))
-                .role(loginUser.getRoles().toArray(new String[0]))
+        return User.builder()
+                .username(loginUser.getUsername())
+                .password(passwordEncoder.encode(loginUser.getPassword()))
+                .roles(loginUser.getRoles().toArray(new String[0]))
                 .build();
     }
 
