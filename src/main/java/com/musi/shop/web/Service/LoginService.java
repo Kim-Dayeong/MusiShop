@@ -26,8 +26,8 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public TokenDto login(String memberId, String password){
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, password); //id,pw기반으로 authentication 객체 생성 , autehnticated 값 false
+    public TokenDto login(String email, String pwd){
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,pwd); //id,pw기반으로 authentication 객체 생성 , autehnticated 값 false
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken); // 사용자 비밀번호체크(실제검증)
         TokenDto tokenInfo = jwtTokenProvider.generateToken(authentication); //인증정보를 기반으로 토큰 생성
 

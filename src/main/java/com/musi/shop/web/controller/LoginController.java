@@ -28,9 +28,9 @@ public class LoginController {
 
     @PostMapping("/login")
     public TokenDto login(@RequestBody UserLoginRequestDto userLoginRequestDto){
-        String memberId = userLoginRequestDto.getMemberId();
-        String password = userLoginRequestDto.getPassword();
-        TokenDto tokenDto = loginService.login(memberId,password);
+        String email = userLoginRequestDto.getEmail();
+        String pwd = userLoginRequestDto.getPwd();
+        TokenDto tokenDto = loginService.login(email,pwd);
         return tokenDto;
     }
 

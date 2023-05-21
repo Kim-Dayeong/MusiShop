@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,33 +27,37 @@ public class LoginUser implements UserDetails {
 
 
     @Column(updatable = false, unique = true, nullable = false)
+//    @javax.persistence.Id
     @Id
-    private String memberId;
+    private int id;
+
+@Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String pwd;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    private List<String> roles = new ArrayList<>();
-    @javax.persistence.Id
-    private Long id;
+    private List<String> role = new ArrayList<>();
+//    @javax.persistence.Id
+//    private Long id;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
+        return this.role.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getUsername() {
-        return memberId;
+        return email;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return pwd;
     }
 
     @Override
