@@ -1,18 +1,13 @@
 package com.musi.shop.web.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.musi.shop.web.entity.User;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 //@NoArgsConstructor
 //@Getter
@@ -53,16 +48,16 @@ public class UserFormDto {
     }
 
     //dto -> entity
-    public User toEntity() {
-        User user = User.builder()
-
-                .name(name)
-                .email(email)
-                .pwd(pwd)
-                .build();
-
-        return user;
-    }
+//    public User toEntity() {
+//        User user = User.builder()
+//
+//                .name(name)
+//                .email(email)
+//                .pwd(pwd)
+//                .build();
+//
+//        return user;
+//    }
 
 
 
