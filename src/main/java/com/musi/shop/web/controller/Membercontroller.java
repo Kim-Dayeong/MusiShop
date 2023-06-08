@@ -27,9 +27,9 @@ public class Membercontroller {
         return tokenDto;
     }
 
-    @PostMapping("/test")
-    public String test(){
-        return "sucess";
-    }
+//    @PostMapping("/test")
+//    public String test(){
+//        return "sucess";
+//    }
 
 }
