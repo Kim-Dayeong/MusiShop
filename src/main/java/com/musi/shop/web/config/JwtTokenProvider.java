@@ -12,8 +12,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,13 +58,32 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(now + 86400000))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
+        System.out.println(refreshToken);//테스트
+        System.out.println(accessToken);
+
+
+        // 쿠키 생성 및 설정
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+        Cookie acfreshTokenCookie = new Cookie("accessToken", accessToken);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(86400); // 86400초 = 24시간
+        refreshTokenCookie.setHttpOnly(true); // JavaScript로 쿠키에 접근 불가
+        refreshTokenCookie.setSecure(true); // HTTPS 프로토콜을 통해서만 전송
+        response.addCookie(refreshTokenCookie);
+        //response.addCookie(acfreshTokenCookie);
+
+
 
         return TokenDto.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+
     }
+
+
 
     // JWT 토큰을 복호화하여 토큰에 들어있는 정보를 꺼내는 메서드
     public Authentication getAuthentication(String accessToken) {
