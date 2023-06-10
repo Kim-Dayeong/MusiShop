@@ -35,10 +35,10 @@
 <script>
     $(function() {
         $('#submit').click(function (){
-           // event.preventDefault(); // 폼 제출 이벤트 중단
 
-            var email = $('#inputEmail').val(); // 이메일 입력란 값 가져오기
-            var password = $('#inputPassword').val(); // 비밀번호 입력란 값 가져오기
+
+            var email = $('#inputEmail').val();
+            var password = $('#inputPassword').val();
 
             var formData = {
                 email: email,
@@ -48,19 +48,21 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/members/login', // 서버 요청 URL
-                data: JSON.stringify(formData), // 데이터를 JSON 문자열로 변환하여 전송
-                contentType: 'application/json', // 요청 데이터의 타입
+                url: '/members/login',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
                 success: function(response) {
 
                     //console.log(response);
-                    alert("성공!!!!");
-                    window.location.href = '/';
+                    alert("로그인 성공");
+                    window.location.href = '/'; //리다이렉트
 
                 },
                 error: function(xhr, status, error) {
 
                     console.log(error);
+                    alert("로그인 실패");
+
                 }
             });
         });
