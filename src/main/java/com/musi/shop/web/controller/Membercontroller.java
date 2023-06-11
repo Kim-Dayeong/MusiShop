@@ -1,31 +1,53 @@
 package com.musi.shop.web.controller;
 
 
-import com.musi.shop.web.Service.MemberService;
-import com.musi.shop.web.config.TokenDto;
-import com.musi.shop.web.web.dto.MemberLoginRequestDto;
+
+
+import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@Slf4j
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/members")
+
+@Controller
 public class Membercontroller {
 
-    private final MemberService memberService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PostMapping("/login")
-    private TokenDto login(@RequestBody MemberLoginRequestDto memberLoginRequestDto){
-        String email = memberLoginRequestDto.getEmail();
-        String pwd = memberLoginRequestDto.getPwd();
-        TokenDto tokenDto = memberService.login(email, pwd);
-        return tokenDto;
+    @Autowired
+    MemberRepository userRepository;
+
+
+
+    @GetMapping("/user")
+    public @ResponseBody String user(Model model) {
+        return "user";
     }
+
+    @PostMapping("/joinProc")
+    public String joinProc(Member member){
+        String rawPassword = member.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        member.setPassword(encPassword);
+        member.setRole("ROLE_USER");
+        userRepository.save(member);
+        return "redirect:/";
+    }
+
+
+//    @PostMapping("/login")
+//    private TokenDto login(@RequestBody MemberLoginRequestDto memberLoginRequestDto){
+//        String email = memberLoginRequestDto.getEmail();
+//        String pwd = memberLoginRequestDto.getPwd();
+//        TokenDto tokenDto = memberService.login(email, pwd);
+//        return tokenDto;
+//    }
 
 //    @PostMapping("/test")
 //    public String test(){

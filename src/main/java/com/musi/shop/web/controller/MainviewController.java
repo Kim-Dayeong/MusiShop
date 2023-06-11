@@ -41,13 +41,15 @@ public class MainviewController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/signup")
+    @GetMapping(value = "/join")
     public ModelAndView userForm() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userForm.html");
+        modelAndView.setViewName("join.html");
 
         return modelAndView;
     }
+
+
 
 //    @GetMapping("/albumlist")
 //    public String albumList(Model model) {

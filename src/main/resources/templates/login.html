@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-
 <html lang="ko"
-      xmlns:th="http://thymeleaf.org"
-      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+       xmlns:th="http://thymeleaf.org"
+       xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 >
 <meta charset="UTF-8">
 <head>
@@ -12,65 +10,25 @@
 </head>
 
 <body>
-<h2>로그인</h2>
-<!--<form method="post" th:action="@{/members/login}">-->
+<h1>로그인 페이지</h1>
+<hr/>
+
+
+
 <form>
     <div class="form-group">
-        <label for="inputemail">email</label>
-        <input type="email" class="form-control" id="inputEmail" name="email" required>
+        <label for="username">email</label>
+        <input type="email" class="form-control" id="username" name="username" required>
     </div>
 
     <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" id="inputPassword" name="pwd" required>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
     </div>
 
     <button type="button" class="btn btn-primary" id="submit">Submit</button>
 </form>
-<a th:href="@{/signup}"></a><button type="button" class="btn btn-primary" >회원가입</button>
-
-</div>
-
-
-
-<script>
-    $(function() {
-        $('#submit').click(function (){
-
-
-            var email = $('#inputEmail').val();
-            var password = $('#inputPassword').val();
-
-            var formData = {
-                email: email,
-                pwd: password
-            };
-            alert("전송!!!!");
-
-            $.ajax({
-                type: 'POST',
-                url: '/members/login',
-                data: JSON.stringify(formData),
-                contentType: 'application/json',
-                success: function(response) {
-
-                    //console.log(response);
-                    alert("로그인 성공");
-                    window.location.href = '/'; //리다이렉트
-
-                },
-                error: function(xhr, status, error) {
-
-                    console.log(error);
-                    alert("로그인 실패");
-
-                }
-            });
-        });
-    });
-</script>
-
-
+<a th:href="@{/join}"></a><button type="button" class="btn btn-primary" >회원가입</button>
 
 
 </body>

@@ -4,14 +4,15 @@
 >
 <meta charset="UTF-8">
 <head>
-    <title th:text="로그인"></title>
+    <title th:text="회원가입"></title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<h1>로그인 페이지</h1>
+<h1>회원가입 페이지</h1>
 <hr/>
+
 
 
 
@@ -25,11 +26,12 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
     </div>
+    <div class="form-group">
+        <label for="name">이름</label>
+        <input type="name" class="form-control" id="name" name="name" required>
+    </div>
 
     <button type="button" class="btn btn-primary" id="submit">Submit</button>
 </form>
-<a th:href="@{/join}"></a><button type="button" class="btn btn-primary" >회원가입</button>
-
-
 </body>
 </html>
