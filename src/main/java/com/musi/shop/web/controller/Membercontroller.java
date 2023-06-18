@@ -40,6 +40,17 @@ public class Membercontroller {
         return "redirect:/";
     }
 
+    //아티스트 회원가입
+    @PostMapping("/ArtjoinProc")
+    public String ArtjoinProc(Member member){
+        String rawPassword = member.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        member.setPassword(encPassword);
+        member.setRole("ROLE_ARTIST");
+        userRepository.save(member);
+        return "redirect:/";
+    }
+
 
 //    @PostMapping("/login")
 //    private TokenDto login(@RequestBody MemberLoginRequestDto memberLoginRequestDto){

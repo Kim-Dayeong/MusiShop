@@ -15,21 +15,12 @@
 
 
 
-<form>
-    <div class="form-group">
-        <label for="username">email</label>
-        <input type="email" class="form-control" id="username" name="username" required>
-    </div>
+<form action="/loginProc" method="post">
+    <input type="email" name="username" placeholder="Username"/> <br/>
+    <input type="password" name="password" placeholder="Password"/> <br/>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-
-    <button type="button" class="btn btn-primary" id="submit">Submit</button>
+    <button>로그인</button>
 </form>
-<a th:href="@{/join}"></a><button type="button" class="btn btn-primary" >회원가입</button>
-
 
 </body>
 </html>

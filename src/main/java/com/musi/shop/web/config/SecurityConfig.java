@@ -36,6 +36,7 @@ public class SecurityConfig  {
                 .antMatchers("/**").permitAll()
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/artist/**").access("hasRole('ROLE_ARTIST')") //아티스트 페이지
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

@@ -16,22 +16,11 @@
 
 
 
-<form>
-    <div class="form-group">
-        <label for="username">email</label>
-        <input type="email" class="form-control" id="username" name="username" required>
-    </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-        <label for="name">이름</label>
-        <input type="name" class="form-control" id="name" name="name" required>
-    </div>
-
-    <button type="button" class="btn btn-primary" id="submit">Submit</button>
+<form action="/joinProc" method="post">
+    <input type="email" name="username" placeholder="Username"/> <br/>
+    <input type="password" name="password" placeholder="Password"/> <br/>
+    <input type="text" name="name" placeholder="name"/> <br/>
+    <button>회원가입</button>
 </form>
 </body>
 </html>
