@@ -49,19 +49,20 @@ public class MainviewController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/artjoin")
+    public ModelAndView artjoin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("artjoin.html");
 
+        return modelAndView;
+    }
 
-//    @GetMapping("/albumlist")
-//    public String albumList(Model model) {
-//        System.out.println("출력:"+albumService.AlbumList());
-//        model.addAttribute("list", albumService.AlbumList());
-//        return "albumlist.html";
-//    }
+    @GetMapping(value = "/list")
+    public ModelAndView albumlist() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("albumlist.html");
 
-//    @GetMapping("/albumlist")
-//    public String albumlist(Model model) {
-//        List<AlbumListResponse> albumListResponseList = albumService.AlbumList();
-//        model.addAttribute("albumlist",albumListResponseList);
-//        return "albumlist.html";
-//    }
+        return modelAndView;
+    }
+
 }

@@ -18,14 +18,14 @@ public class Album {
 //    @GeneratedValue(generator = "USER_GENERATOR")
 //    @GenericGenerator(name = "USER_GENERATOR",strategy = "uuid")
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
     private String title;
 
     @Column
-    private String artist;
+    private String name;
 
     @Column
     private BigDecimal price;

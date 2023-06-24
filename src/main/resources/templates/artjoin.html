@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<meta charset="UTF-8">
 <head>
-    <meta charset="UTF-8">
-    <title>아티스트 회원가입</title>
-</head>
-<body>
 
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>아티스트 회원가입 페이지</h1>
+<hr/>
+
+<form action="/ArtjoinProc" method="post">
+    <input type="email" name="username" placeholder="Username"/> <br/>
+    <input type="password" name="password" placeholder="Password"/> <br/>
+    <input type="text" name="name" placeholder="name"/> <br/>
+    <button>회원가입</button>
+</form>
 </body>
 </html>
