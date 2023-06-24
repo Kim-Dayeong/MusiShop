@@ -1,0 +1,45 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+</head>
+
+
+
+
+<style>
+    .layout {
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+</style>
+<body>
+
+<div class="layout">
+    <table>
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "board:${list}">
+            <td th:text="${list.id}"></td>
+            <td th:text="${list.title}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+
