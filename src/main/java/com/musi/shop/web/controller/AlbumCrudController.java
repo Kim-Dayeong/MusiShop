@@ -41,7 +41,8 @@ public class AlbumCrudController {
 
     //update ..수정이 아니라 추가가 되버림 나중에 고쳐야함
     @PutMapping("/update/{id}")
-    public Album update(@PathVariable int id, @RequestBody Album crudEntity){
+    //public Album update(@PathVariable int id, @RequestBody Album crudEntity){ //requestbody라 json으로 날려야됨
+        public Album update(@PathVariable int id, @RequestBody Album crudEntity){
         Album album = albumRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("수정에 실패했습니다.");
         });
