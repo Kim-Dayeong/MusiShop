@@ -57,12 +57,12 @@ public class MainviewController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/list")
-    public ModelAndView albumlist() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("albumlist.html");
-
-        return modelAndView;
-    }
+//    @GetMapping(value = "/list")
+//    public ModelAndView albumlist() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("albumlist.html");
+//
+//        return modelAndView;
+//    }
 
 }

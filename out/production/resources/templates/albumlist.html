@@ -1,11 +1,12 @@
-<html lang="ko"
-      xmlns:th="http://thymeleaf.org"
-      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
->
-<meta charset="UTF-8">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
 </head>
 
 
@@ -30,8 +31,9 @@
         </thead>
         <tbody>
 
-        <tr>
-           
+        <tr th:each = "board:${list}">
+            <td th:text="${board.id}"></td>
+            <td th:text="${board.title}"></td>
 
         </tr>
         </tbody>
