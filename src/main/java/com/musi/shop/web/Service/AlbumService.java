@@ -5,6 +5,8 @@ import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.response.AlbumListResponse;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -21,8 +23,8 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
 
 
-    public List<Album> albumList(){ //앨범 불러오기
-        return albumRepository.findAll();
+    public Page<Album> albumList(Pageable pageable){ //앨범 불러오기
+        return albumRepository.findAll(pageable);
     }
 
 
