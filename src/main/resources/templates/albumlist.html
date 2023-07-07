@@ -36,7 +36,7 @@
         </tr>
         </tbody>
     </table>
-    <!--<a th:text ="첫 페이지"th:href="@{/album/list(page=${starttotal})}"></a>-->
+
 
     <a th:href="@{/album/list?page=0}">첫 페이지</a>
     <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">

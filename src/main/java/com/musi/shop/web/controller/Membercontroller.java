@@ -51,6 +51,12 @@ public class Membercontroller {
         return "redirect:/";
     }
 
+    @GetMapping("/logout/result")
+    public String Logoutview(){
+        return "redirect:/";
+    }
+
+
 
 //    @PostMapping("/login")
 //    private TokenDto login(@RequestBody MemberLoginRequestDto memberLoginRequestDto){

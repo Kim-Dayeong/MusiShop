@@ -57,6 +57,22 @@ public class MainviewController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/artist")
+    public ModelAndView artist() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("artistview.html");
+
+        return modelAndView;
+    }
+
+
+    @GetMapping(value = "/admin")
+    public ModelAndView admin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminview.html");
+
+        return modelAndView;
+    }
 //    @GetMapping(value = "/list")
 //    public ModelAndView albumlist() {
 //        ModelAndView modelAndView = new ModelAndView();
