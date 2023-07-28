@@ -28,14 +28,14 @@ public class SecurityConfig  {
 
         http
                 //.httpBasic().disable()
-                .csrf().disable()
+                .csrf().disable();
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                // .and()
-
+        http
                 .authorizeRequests()
-                .antMatchers("/home").permitAll() //해당 api 모든요청 허용
-                .antMatchers("/**").permitAll()
-                .antMatchers("/user/**").authenticated()
+                //.antMatchers("/home").permitAll() //해당 api 모든요청 허용
+                //.antMatchers("/**").permitAll()
+                //.antMatchers("/user/**").authenticated()
                 //.antMatchers("/admin/").hasRole("ADMIN")
                 .antMatchers("/admin/").denyAll()
                 .antMatchers("/artist/**").access("hasRole('ROLE_ARTIST')") //아티스트 페이지
