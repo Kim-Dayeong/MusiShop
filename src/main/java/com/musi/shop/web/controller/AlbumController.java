@@ -44,6 +44,13 @@ public class AlbumController {
 
     }
 
+    @GetMapping("/album/write")
+    public String albumWrite(Album album){
+        albumService.write(album);
+
+        return "";
+    }
+
 
 
 }

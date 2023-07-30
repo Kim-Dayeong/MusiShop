@@ -28,6 +28,11 @@ public class AlbumService {
     }
 
 
+    //쓰기
+    public void write(Album album){
+        albumRepository.save(album);
+    }
+
 
 //    public List<AlbumListResponse> AlbumList() {
 //        List<Album> album = albumRepository.findAll();

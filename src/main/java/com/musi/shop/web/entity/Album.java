@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @ToString
@@ -27,6 +29,10 @@ public class Album {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    private List<Song> songs = new ArrayList<>();
+
+
     @Column
     private BigDecimal price;
 
@@ -35,6 +41,11 @@ public class Album {
 
     @Column
     private String regdate;
+
+    public void addSong(Song song){
+        this.songs.add(song);
+        song.updateAlbum(this);
+    }
 
 
 
