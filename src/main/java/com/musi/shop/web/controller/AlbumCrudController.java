@@ -26,7 +26,7 @@ public class AlbumCrudController {
 
     @PostMapping("/upload")
     public String Upload(Album crudEntity){
-        System.out.println("id : " +crudEntity.getId());
+        System.out.println("id : " +crudEntity.getAlbumid());
         System.out.println("Title : " + crudEntity.getTitle());
         System.out.println("artist: " + crudEntity.getName());
         System.out.println("price : " + crudEntity.getPrice());
@@ -42,8 +42,8 @@ public class AlbumCrudController {
     //update ..수정이 아니라 추가가 되버림 나중에 고쳐야함
     @PutMapping("/update/{id}")
     //public Album update(@PathVariable int id, @RequestBody Album crudEntity){ //requestbody라 json으로 날려야됨
-        public Album update(@PathVariable int id, @RequestBody Album crudEntity){
-        Album album = albumRepository.findById(id).orElseThrow(() -> {
+        public Album update(@PathVariable int albumid, @RequestBody Album crudEntity){
+        Album album = albumRepository.findById(albumid).orElseThrow(() -> {
             return new IllegalArgumentException("수정에 실패했습니다.");
         });
 
@@ -57,14 +57,14 @@ public class AlbumCrudController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id){
+    public String delete(@PathVariable int albumid){
         try{
-            albumRepository.deleteById(id);
+            albumRepository.deleteById(albumid);
         }catch (EmptyResultDataAccessException e) {
             return "삭제에 실패하였습니다. 해당 id는 db에 없습니다.";
         }
 
-        return "삭제 완료 id: " + id;
+        return "삭제 완료 id: " + albumid;
     }
 
 

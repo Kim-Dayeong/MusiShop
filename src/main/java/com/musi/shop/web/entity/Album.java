@@ -21,7 +21,7 @@ public class Album {
 //    @GenericGenerator(name = "USER_GENERATOR",strategy = "uuid")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int albumid;
 
     @Column
     private String title;

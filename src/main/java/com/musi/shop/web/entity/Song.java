@@ -28,9 +28,9 @@ public class Song {
     @JoinColumn(name = "albumid")
     private Album album;
 
-    public Song(String song_name){
-        this.song_name = song_name;
-    }
+//    public Song(String song_name){
+//        this.song_name = song_name;
+//    }
 
     public void updateAlbum(Album album){
         this.album = album;
