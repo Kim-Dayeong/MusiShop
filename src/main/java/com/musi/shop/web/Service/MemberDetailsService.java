@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberDetailsService implements UserDetailsService {
     @Autowired
-    MemberRepository memberRepository;
+   private MemberRepository memberRepository;
     @Override
     public UserDetails loadUserByUsername(String username) {
         Member member = memberRepository.findByUsername(username);

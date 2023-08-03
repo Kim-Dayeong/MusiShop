@@ -42,11 +42,19 @@ public class Album {
     @Column
     private String regdate;
 
-    public void addSong(Song song){
-        this.songs.add(song);
-        song.updateAlbum(this);
-    }
+//    public void addSong(Song song){
+//        this.songs.add(song);
+//        song.updateAlbum(this);
+//    }
 
+    @Builder
+    public Album(String title, String name, BigDecimal price, String img, String regdate){
+        this.title = title;
+        this.name = name;
+        this.price = price;
+        this.regdate = regdate;
+        this.img = img;
+    }
 
 
 

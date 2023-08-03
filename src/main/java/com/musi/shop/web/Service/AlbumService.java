@@ -3,23 +3,28 @@ package com.musi.shop.web.Service;
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.response.AlbumListResponse;
+import com.musi.shop.web.web.dto.AlbumRequsetDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 @Transactional
 @RequiredArgsConstructor //생성자 주입
+@Service
 public class AlbumService {
 
 
+    @Autowired
     private final AlbumRepository albumRepository;
 
 
@@ -29,8 +34,17 @@ public class AlbumService {
 
 
     //쓰기
-    public void write(Album album){
-        albumRepository.save(album);
+    @Transactional
+    public int write(final AlbumRequsetDto params){
+
+        Album entity = albumRepository.save(params.toEntity());
+        return entity.getAlbumid();
+
+    }
+
+    //읽기
+    public void read(int albumid){
+        System.out.println(albumRepository.findByAlbumid(albumid));
     }
 
 

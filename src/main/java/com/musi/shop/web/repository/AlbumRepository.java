@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Integer> {
 
