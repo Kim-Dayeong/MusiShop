@@ -1,10 +1,10 @@
-package com.musi;
+package com.musi.shop.web;
 
 import com.musi.shop.web.Service.AlbumService;
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.SongRepository;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -16,14 +16,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
-//@RunWith(SpringRunner.class)
-@SpringBootConfiguration
-@SpringBootTest
+@RunWith(SpringRunner.class)
+//@SpringBootConfiguration
+@SpringBootTest()
+//@ContextConfiguration
 public class AlbumTest {
-    @Autowired(required = true)
+    @Autowired
     AlbumService albumService;
 
-    @Autowired(required = true)
+     @Autowired
     AlbumRepository albumRepository;
     @Test
     public void album과song조회() throws Exception{
