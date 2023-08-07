@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Getter
 public class AlbumResponseDto {
 
-    private int albumid;
+    private Long id;
     private String title;
     private String name;
     private BigDecimal price;
@@ -16,7 +16,7 @@ public class AlbumResponseDto {
     private String regdate;
 
     public AlbumResponseDto(Album entity){
-        this.albumid = entity.getAlbumid();
+        this.id = entity.getId();
         this.title = entity.getTitle();
         this.name = entity.getName();
         this.price = entity.getPrice();

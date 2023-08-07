@@ -15,6 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 //@SpringBootConfiguration
@@ -26,22 +29,23 @@ public class AlbumTest {
 
      @Autowired
     AlbumRepository albumRepository;
-    @Test
-    public void album과song조회() throws Exception{
-     //   albumService.read(3063);
-//        System.out.println(albumRepository.findByAlbumid(12).get());
-       // Album album = albumRepository.findByAlbumid(3063).get();
-      //  System.out.println(album);
-
-        //List<Song> songList = album.getSongs();
-       // for(Song song: songList){
-      //      System.out.println(song.getSong_name());
-      //  }
-    }
+//    @Test
+//    public void album과song조회() throws Exception{
+//       albumService.read(3063);
+//     System.out.println(albumRepository.findByAlbumid(12).get());
+//        Album album = albumRepository.findByAlbumid(3063).get();
+//        System.out.println(album);
+//
+//        List<Song> songList = album.getSongs();
+//        for(Song song: songList){
+//            System.out.println(song.getSong_name());
+//        }
+//    }
 
     @Test
     public void album추가() throws Exception{
         Album params = Album.builder()
+                .id(1L)
                 .title("앨범테스트")
                 .name("테스트회원")
                 .price(BigDecimal.valueOf(222))

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AlbumRequsetDto {
 
-    private int albumid;
+    private Long id;
     private String title;
     private String name;
     private BigDecimal price;
@@ -20,6 +20,7 @@ public class AlbumRequsetDto {
 
     public Album toEntity() {
         return Album.builder()
+                .id(id)
         .title(title)
                 .name(name)
                 .price(price)

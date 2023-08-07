@@ -35,17 +35,15 @@ public class AlbumService {
 
     //쓰기
     @Transactional
-    public int write(final AlbumRequsetDto params){
+    public Long write(final AlbumRequsetDto params){
 
         Album entity = albumRepository.save(params.toEntity());
-        return entity.getAlbumid();
+        return entity.getId();
 
     }
 
     //읽기
-    public void read(int albumid){
-        System.out.println(albumRepository.findByAlbumid(albumid));
-    }
+
 
 
 //    public List<AlbumListResponse> AlbumList() {

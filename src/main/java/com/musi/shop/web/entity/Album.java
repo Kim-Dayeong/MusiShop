@@ -21,7 +21,8 @@ public class Album {
 //    @GenericGenerator(name = "USER_GENERATOR",strategy = "uuid")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int albumid;
+    @Column(name = "ALBUM_ID")
+    private Long id;
 
     @Column
     private String title;
@@ -29,7 +30,7 @@ public class Album {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "album")
     private List<Song> songs = new ArrayList<>();
 
 
@@ -48,7 +49,8 @@ public class Album {
 //    }
 
     @Builder
-    public Album(String title, String name, BigDecimal price, String img, String regdate){
+    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate){
+        this.id = id;
         this.title = title;
         this.name = name;
         this.price = price;

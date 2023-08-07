@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="Song")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,16 +16,17 @@ import javax.persistence.*;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int song_id;
+    @Column(name="SONG_ID")
+    private Long id;
 
     private String song_name;
 
-    private int albumid;
+   // private int albumid;
 
     private int songdex;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "albumid")
+    @ManyToOne
+    @JoinColumn(name = "ALBUM_ID")
     private Album album;
 
 //    public Song(String song_name){

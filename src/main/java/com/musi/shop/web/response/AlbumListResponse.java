@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 public class AlbumListResponse { //전체 게시글 보내기
 
-    private int albumid;
+    private Long id;
     private String name;
     private BigDecimal price;
     private String img;
@@ -20,7 +20,7 @@ public class AlbumListResponse { //전체 게시글 보내기
 
     public Album toEntity() {
         Album build = Album.builder()
-                .albumid(albumid)
+                .id(id)
                 .name(name)
                 .price(price)
                 .title(title)
@@ -30,8 +30,8 @@ public class AlbumListResponse { //전체 게시글 보내기
     }
 
     @Builder
-    public AlbumListResponse(int albumid, String name, BigDecimal price, String img, String regdate, String title){
-        this.albumid = albumid;
+    public AlbumListResponse(Long id, String name, BigDecimal price, String img, String regdate, String title){
+        this.id = id;
         this.name = name;
         this.price = price;
         this.img = img;
