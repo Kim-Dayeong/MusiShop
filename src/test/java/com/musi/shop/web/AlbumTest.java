@@ -2,6 +2,7 @@ package com.musi.shop.web;
 
 import com.musi.shop.web.Service.AlbumService;
 import com.musi.shop.web.entity.Album;
+import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.SongRepository;
 import org.junit.Test;
@@ -29,6 +30,9 @@ public class AlbumTest {
 
      @Autowired
     AlbumRepository albumRepository;
+
+     @Autowired
+     SongRepository songRepository;
 //    @Test
 //    public void album과song조회() throws Exception{
 //       albumService.read(3063);
@@ -45,16 +49,30 @@ public class AlbumTest {
     @Test
     public void album추가() throws Exception{
         Album params = Album.builder()
-                .id(1L)
-                .title("앨범테스트")
-                .name("테스트회원")
+
+                .title("앨범테스트3")
+                .name("테스트회원3")
                 .price(BigDecimal.valueOf(222))
-                .img("테스트커버")
+                .img("테스트커버3")
                 .regdate("2023")
                 .build();
 
         albumRepository.save(params);
 
+        Song songs = Song.builder()
+                .album(params)
+                .song_name("테스트곡")
+                .songdex(1)
+                .build();
+
+        songRepository.save(songs);
+
+
+
+    }
+
+    @Test
+    public void song추가() throws Exception{
 
     }
 

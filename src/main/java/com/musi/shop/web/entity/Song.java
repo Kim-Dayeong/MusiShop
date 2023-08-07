@@ -1,9 +1,6 @@
 package com.musi.shop.web.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -29,11 +26,20 @@ public class Song {
     @JoinColumn(name = "ALBUM_ID")
     private Album album;
 
+
 //    public Song(String song_name){
 //        this.song_name = song_name;
 //    }
 
     public void updateAlbum(Album album){
+        this.album = album;
+    }
+
+    @Builder
+    public Song(Long id, String song_name, int songdex,Album album){
+        this.id = id;
+        this.song_name = song_name;
+        this.songdex = songdex;
         this.album = album;
     }
 
