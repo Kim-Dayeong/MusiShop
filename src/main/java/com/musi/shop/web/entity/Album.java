@@ -27,7 +27,8 @@ public class Album {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("songdex asc")
     private List<Song> songs = new ArrayList<>();
 
 
