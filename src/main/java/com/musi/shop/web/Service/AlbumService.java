@@ -3,7 +3,8 @@ package com.musi.shop.web.Service;
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.response.AlbumListResponse;
-import com.musi.shop.web.web.dto.AlbumRequsetDto;
+
+import com.musi.shop.web.web.dto.AlbumDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,9 @@ import java.util.List;
 public class AlbumService {
 
 
-    @Autowired
+
     private final AlbumRepository albumRepository;
+
 
 
     public Page<Album> albumList(Pageable pageable){ //앨범 불러오기
@@ -35,10 +37,10 @@ public class AlbumService {
 
     //쓰기
     @Transactional
-    public Long write(final AlbumRequsetDto params){
+    public Album write(AlbumDto albumDto){
 
-        Album entity = albumRepository.save(params.toEntity());
-        return entity.getId();
+         return albumRepository.save(albumDto.toEntity());
+
 
     }
 

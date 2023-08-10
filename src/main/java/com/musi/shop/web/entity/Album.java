@@ -12,13 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="Album")
+@Getter
 @Data
 public class Album {
 
-    //@Column(nullable = false, unique = true)
-
-//    @GeneratedValue(generator = "USER_GENERATOR")
-//    @GenericGenerator(name = "USER_GENERATOR",strategy = "uuid")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ALBUM_ID")
@@ -43,10 +40,7 @@ public class Album {
     @Column
     private String regdate;
 
-//    public void addSong(Song song){
-//        this.songs.add(song);
-//        song.updateAlbum(this);
-//    }
+
 
     @Builder
     public Album(Long id,String title, String name, BigDecimal price, String img, String regdate){

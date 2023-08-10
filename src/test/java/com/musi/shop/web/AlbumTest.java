@@ -5,6 +5,7 @@ import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.SongRepository;
+import com.musi.shop.web.web.dto.AlbumDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,8 @@ public class AlbumTest {
 
     @Test
     public void album추가() throws Exception{
-        Album params = Album.builder()
+
+        AlbumDto albumDto = AlbumDto.builder()
 
                 .title("앨범테스트3")
                 .name("테스트회원3")
@@ -57,23 +59,33 @@ public class AlbumTest {
                 .regdate("2023")
                 .build();
 
-        albumRepository.save(params);
+        // albumRepository.save(params);
+        albumService.write(albumDto);
 
-        Song songs = Song.builder()
-                .album(params)
-                .song_name("테스트곡")
-                .songdex(1)
-                .build();
+//        Album params = Album.builder()
+//
+//                .title("앨범테스트3")
+//                .name("테스트회원3")
+//                .price(BigDecimal.valueOf(222))
+//                .img("테스트커버3")
+//                .regdate("2023")
+//                .build();
+//
+//       // albumRepository.save(params);
+//        albumService.write(params);
 
-        songRepository.save(songs);
+//        Song songs = Song.builder()
+//                .album(params)
+//                .song_name("테스트곡")
+//                .songdex(1)
+//                .build();
+//
+//        songRepository.save(songs);
 
 
 
     }
 
-    @Test
-    public void song추가() throws Exception{
 
-    }
 
 }

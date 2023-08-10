@@ -1,0 +1,34 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<meta charset="UTF-8">
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>앨범 등록 페이지</h1>
+
+<form action="/album/add" method = "post">
+    <input type="text" name="title">
+    <input type="text" name="name"><!--로그인시 이름으로 수정-->
+    <input type="number" name="price">
+    <input type="text" name="img">
+    <input type="text" name="regdate">
+
+    <!--추가 버튼으로 원하는 만큼 곡 추가기능 수정-->
+    <!--album이랑 연관관계 매핑...?-->
+    <!--
+    <input type="text" name="song_name">
+    <input type="number" name="songdex">
+-->
+    <input type="submit" value="등록">
+
+
+
+</form>
+</body>
+</html>

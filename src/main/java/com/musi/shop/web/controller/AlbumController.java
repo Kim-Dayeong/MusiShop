@@ -45,6 +45,12 @@ public class AlbumController {
     }
 
 
+    @GetMapping("/album/add")
+    public String albumAdd(){
+        return "albumAdd.html";
+
+    }
+
 
 
 
