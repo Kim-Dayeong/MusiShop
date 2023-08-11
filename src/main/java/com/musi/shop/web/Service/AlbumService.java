@@ -1,10 +1,13 @@
 package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.Album;
+import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
+import com.musi.shop.web.repository.SongRepository;
 import com.musi.shop.web.response.AlbumListResponse;
 
 import com.musi.shop.web.web.dto.AlbumDto;
+import com.musi.shop.web.web.dto.SongDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,27 +28,47 @@ import java.util.List;
 public class AlbumService {
 
 
-
     private final AlbumRepository albumRepository;
+    private final SongRepository songRepository;
 
 
-
-    public Page<Album> albumList(Pageable pageable){ //앨범 불러오기
+    //페이징
+    public Page<Album> albumList(Pageable pageable) { //앨범 불러오기
         return albumRepository.findAll(pageable);
     }
 
 
     //쓰기
     @Transactional
-    public Album write(AlbumDto albumDto){
+    public void write(AlbumDto albumDto, List<SongDto> songDtos){
 
-         return albumRepository.save(albumDto.toEntity());
+        //앨범
+        Album album = albumDto.toEntity();
+         albumRepository.save(album);
+
+         //음악
+//        Song song = songDto.toEntity();
+//        song.setAlbum(album);
+//        songRepository.save(song);
+
+        List<Song> songs = new ArrayList<>();
+        for (SongDto songDto : songDtos){
+            Song song = songDto.toEntity();
+            song.setAlbum(album);
+            songs.add(song);
+        }
+        songRepository.saveAll(songs);
+
+
 
 
     }
 
-    //읽기
 
+
+
+
+        //읽기
 
 
 //    public List<AlbumListResponse> AlbumList() {
@@ -71,4 +94,6 @@ public class AlbumService {
 //
 //        return albumList;
 //    }
-}
+    }
+
+

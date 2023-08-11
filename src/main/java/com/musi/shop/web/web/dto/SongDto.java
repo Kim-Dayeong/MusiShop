@@ -2,10 +2,9 @@ package com.musi.shop.web.web.dto;
 
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.entity.Song;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import java.util.List;
 
 
 @Getter
@@ -20,6 +19,14 @@ public class SongDto {
     private int songdex;
 
     private Album album;
+
+    @Builder
+    public SongDto(Long id, String song_name, int songdex, Album album){
+        this.id = id;
+        this.song_name = song_name;
+        this.songdex = songdex;
+        this.album = album;
+    }
 
     public Song toEntity() {
         Song build = Song.builder()

@@ -4,31 +4,25 @@
 >
 <meta charset="UTF-8">
 <head>
-
+    <meta charset="UTF-8">
+    <title>앨범 등록 페이지</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
 <h1>앨범 등록 페이지</h1>
 
-<form action="/album/add" method = "post">
-    <input type="text" name="title">
-    <input type="text" name="name"><!--로그인시 이름으로 수정-->
-    <input type="number" name="price">
-    <input type="text" name="img">
-    <input type="text" name="regdate">
+<form th:action="@{/album/add}" method="post" th:object="${albumDto}">
+    <!-- 앨범 필드 입력 -->
+    <input type="text" th:field="*{title}">
+    <input type="text" th:field="*{name}">
+    <input type="number" th:field="*{price}">
+    <input type="text" th:field="*{img}">
+    <input type="text" th:field="*{regdate}">
 
-    <!--추가 버튼으로 원하는 만큼 곡 추가기능 수정-->
-    <!--album이랑 연관관계 매핑...?-->
-    <!--
-    <input type="text" name="song_name">
-    <input type="number" name="songdex">
--->
-    <input type="submit" value="등록">
-
-
-
+    <!-- 음악 필드 입력 -->
+    <input type="number" th:field="*{songdex}">
+    <input type="text" th:field="*{song_name}">
 </form>
 </body>
 </html>

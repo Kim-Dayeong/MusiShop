@@ -6,6 +6,7 @@ import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.SongRepository;
 import com.musi.shop.web.web.dto.AlbumDto;
+import com.musi.shop.web.web.dto.SongDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -52,40 +54,21 @@ public class AlbumTest {
 
         AlbumDto albumDto = AlbumDto.builder()
 
-                .title("앨범테스트3")
-                .name("테스트회원3")
+                .title("앨범테스트6")
+                .name("테스트회원6")
                 .price(BigDecimal.valueOf(222))
-                .img("테스트커버3")
+                .img("테스트커버6")
                 .regdate("2023")
                 .build();
 
-        // albumRepository.save(params);
-        albumService.write(albumDto);
+        List<SongDto> songDtos = new ArrayList<>();
+        songDtos.add(SongDto.builder().song_name("name1").songdex(1).build());
+        songDtos.add(SongDto.builder().song_name("name2").songdex(2).build());
+        songDtos.add(SongDto.builder().song_name("name3").songdex(3).build());
 
-//        Album params = Album.builder()
-//
-//                .title("앨범테스트3")
-//                .name("테스트회원3")
-//                .price(BigDecimal.valueOf(222))
-//                .img("테스트커버3")
-//                .regdate("2023")
-//                .build();
-//
-//       // albumRepository.save(params);
-//        albumService.write(params);
-
-//        Song songs = Song.builder()
-//                .album(params)
-//                .song_name("테스트곡")
-//                .songdex(1)
-//                .build();
-//
-//        songRepository.save(songs);
+        albumService.write(albumDto,songDtos);
 
 
 
     }
-
-
-
 }

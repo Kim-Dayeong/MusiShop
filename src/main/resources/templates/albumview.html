@@ -1,0 +1,43 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>앨범 상세보기</title>
+</head>
+
+<body>
+
+<div class="layout">
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th>제목</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each = "album:${list}">
+      <td th:text="${album.title}"></td><!--앨범명-->
+      <td th:text="${album.name}"></td>
+      <td th:text="${album.img}"></td>
+      <!--반복문으로 song -->
+      <td th:text="${album.songdex}"></td>
+      <td th:text="${album.song_name}"></td>
+
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+</div>
+
+</body>
+</html>

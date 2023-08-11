@@ -11,6 +11,4 @@ import java.util.Optional;
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
-
-
 }

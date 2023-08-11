@@ -4,6 +4,7 @@ import com.musi.shop.web.Service.AlbumService;
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.web.dto.AlbumDto;
+import com.musi.shop.web.web.dto.SongDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,11 @@ public class AlbumCrudController {
 
     //쓰기
     @PostMapping("/album/add")
-    public String albumWrite(AlbumDto albumDto){
+    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
 
-        albumService.write(albumDto);
+        albumService.write(albumDto,songDtos);
         return "redirect:/";
     }
-
-
 
 
 

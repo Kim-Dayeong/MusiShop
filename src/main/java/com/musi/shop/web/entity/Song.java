@@ -27,10 +27,6 @@ public class Song {
     private Album album;
 
 
-//    public Song(String song_name){
-//        this.song_name = song_name;
-//    }
-
     public void updateAlbum(Album album){
         this.album = album;
     }
