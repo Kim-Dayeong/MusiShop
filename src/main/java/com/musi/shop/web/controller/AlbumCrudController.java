@@ -1,31 +1,31 @@
-package com.musi.shop.web.controller;
-
-import com.musi.shop.web.Service.AlbumService;
-import com.musi.shop.web.entity.Album;
-import com.musi.shop.web.repository.AlbumRepository;
-import com.musi.shop.web.web.dto.AlbumDto;
-import com.musi.shop.web.web.dto.SongDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-@Controller
-@RequiredArgsConstructor
-
-public class AlbumCrudController {
-
-    private final AlbumService albumService;
+//package com.musi.shop.web.controller;
+//
+//import com.musi.shop.web.Service.AlbumService;
+//import com.musi.shop.web.entity.Album;
+//import com.musi.shop.web.repository.AlbumRepository;
+//import com.musi.shop.web.web.dto.AlbumDto;
+//import com.musi.shop.web.web.dto.SongDto;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.dao.EmptyResultDataAccessException;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//
+//@Controller
+//@RequiredArgsConstructor
+//
+//public class AlbumCrudController {
+//
+//    private final AlbumService albumService;
 
     //쓰기
-    @PostMapping("/album/add")
-    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
-
-        albumService.write(albumDto,songDtos);
-        return "redirect:/";
-    }
+//    @PostMapping("/album/add")
+//    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
+//
+//        albumService.write(albumDto,songDtos);
+//        return "redirect:/";
+//    }
 
 
 
@@ -85,4 +85,4 @@ public class AlbumCrudController {
 //    }
 
 
-}
+//}

@@ -13,23 +13,20 @@
 
 <div class="layout">
   <table>
-    <thead>
-    <tr>
-      <th></th>
-      <th>제목</th>
-    </tr>
-    </thead>
+
     <tbody>
 
-    <tr th:each = "album:${list}">
-      <td th:text="${album.title}"></td><!--앨범명-->
-      <td th:text="${album.name}"></td>
-      <td th:text="${album.img}"></td>
+    <h2 th:text = "${albumDto.title}"></h2>
+      <td th:text="${albumDto.name}"></td>
+      <td th:text="${albumDto.img}"></td>
       <!--반복문으로 song -->
+    <!--
       <td th:text="${album.songdex}"></td>
       <td th:text="${album.song_name}"></td>
 
-    </tr>
+      -->
+
+    </h2>
     </tbody>
   </table>
 

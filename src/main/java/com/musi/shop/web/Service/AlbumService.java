@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Transactional
@@ -59,8 +60,23 @@ public class AlbumService {
         }
         songRepository.saveAll(songs);
 
+    }
 
+    //읽기
+    @Transactional
+    public AlbumDto getAlbum(Long id){
+        Optional<Album> albumWrapper = albumRepository.findById(id);
+        Album album = albumWrapper.get();
 
+        AlbumDto albumDto = AlbumDto.builder()
+                .id(album.getId())
+                .title(album.getTitle())
+                .name(album.getName())
+                .regdate(album.getImg())
+                .img(album.getImg())
+                .build();
+
+        return albumDto;
 
     }
 

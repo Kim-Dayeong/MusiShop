@@ -12,6 +12,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -56,10 +58,30 @@ public class AlbumController {
 //        return "albumAdd.html";
 //    }
 
+    //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
     @GetMapping("/album/add")
     public String showAlbumForm(Model model) {
         model.addAttribute("albumDto", new AlbumDto());
         return "albumAdd.html";
+    }
+
+    //쓰기
+    @PostMapping("/album/add")
+    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
+
+        albumService.write(albumDto,songDtos);
+        return "redirect:/";
+    }
+
+
+    //앨범 상세 페이지 조회
+    @GetMapping("/album/view/{no}")
+    public String albumView(@PathVariable("no") Long id, Model model){
+        AlbumDto albumDto = albumService.getAlbum(id);
+
+        model.addAttribute("albumDto", albumDto);
+
+        return"albumview.html";
     }
 
 
