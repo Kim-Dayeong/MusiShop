@@ -19,12 +19,14 @@
     <h2 th:text = "${albumDto.title}"></h2>
       <td th:text="${albumDto.name}"></td>
       <td th:text="${albumDto.img}"></td>
+    <td th:text="${albumDto.price}"></td>
+    <td th:text="${albumDto.regdate}"></td>
       <!--반복문으로 song -->
-    <!--
-      <td th:text="${album.songdex}"></td>
-      <td th:text="${album.song_name}"></td>
+    <tr th:each="songDto : ${albumDto.songs}">
+      <td th:text="${songDto.songdex}"></td>
+      <td th:text="${songDto.song_name}"></td>
 
-      -->
+    </tr>
 
     </h2>
     </tbody>

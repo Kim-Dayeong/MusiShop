@@ -16,11 +16,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -64,19 +66,32 @@ public class AlbumService {
 
     //읽기
     @Transactional
-    public AlbumDto getAlbum(Long id){
-        Optional<Album> albumWrapper = albumRepository.findById(id);
-        Album album = albumWrapper.get();
+    public AlbumDto getAlbumWithSongs(Long id){
+//        Optional<Album> albumWrapper = albumRepository.findById(id);
+//        Album album = albumWrapper.get();
 
-        AlbumDto albumDto = AlbumDto.builder()
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("album not found with id : " + id));
+            List<Song> songs = songRepository.findByAlbumId(album.getId());
+
+            List<SongDto> songDtos = songs.stream()
+                    .map(song -> SongDto.builder()
+                            .song_name(song.getSong_name())
+                            .songdex(song.getSongdex())
+                            .build())
+                    .collect(Collectors.toList());
+
+
+
+        return AlbumDto.builder()
                 .id(album.getId())
                 .title(album.getTitle())
                 .name(album.getName())
-                .regdate(album.getImg())
+                .price(album.getPrice())
                 .img(album.getImg())
+                .regdate(album.getRegdate())
+                .songs(songDtos)
                 .build();
-
-        return albumDto;
 
     }
 
