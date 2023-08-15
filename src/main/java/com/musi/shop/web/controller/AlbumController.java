@@ -3,18 +3,17 @@ package com.musi.shop.web.controller;
 import com.musi.shop.web.Service.AlbumService;
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.web.dto.AlbumDto;
+import com.musi.shop.web.web.dto.AlbumSongRequest;
 import com.musi.shop.web.web.dto.SongDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,14 +65,21 @@ public class AlbumController {
     }
 
     //쓰기
-    @PostMapping("/album/add")
-    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
+//    @PostMapping("/album/add")
+//    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
+//
+//        albumService.write(albumDto,songDtos);
+//        return "redirect:/";
+//    }
 
-        albumService.write(albumDto,songDtos);
+    @PostMapping("/album/add")
+    public String albumWrite(@ModelAttribute AlbumDto albumDto, List<SongDto> songDtos) {
+
+        // Process albumDto and its songs
+        albumService.write(albumDto, songDtos);
+
         return "redirect:/";
     }
-
-
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")
     public String albumView(@PathVariable("no") Long id, Model model){

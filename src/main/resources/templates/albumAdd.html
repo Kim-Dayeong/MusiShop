@@ -12,7 +12,8 @@
 <body>
 <h1>앨범 등록 페이지</h1>
 
-<form th:action="@{/album/add}" method="post" th:object="${albumDto}">
+<!-- 앨범 등록 폼 -->
+<form th:object="${albumDto}" th:action="@{/album/add}" method="post">
     <!-- 앨범 필드 입력 -->
     <input type="text" th:field="*{title}">
     <input type="text" th:field="*{name}">
@@ -20,9 +21,48 @@
     <input type="text" th:field="*{img}">
     <input type="text" th:field="*{regdate}">
 
-    <!-- 음악 필드 입력 -->
-    <input type="number" th:field="*{songdex}">
-    <input type="text" th:field="*{song_name}">
+    <!-- 노래 폼 추가 버튼 -->
+    <button type="button" id="addSongForm">Add Song</button>
+
+    <!-- 동적으로 추가되는 노래 폼을 담을 컨테이너 -->
+    <div id="songFormsContainer"></div>
+
+    <!-- 제출 버튼 -->
+    <button type="submit">Submit</button>
+
+
+<!-- 노래 폼 템플릿 -->
+<script type="text/template" id="songFormTemplate">
+    <div class="song-form">
+        <input type="text" name="songDtos[__INDEX__].song_name" placeholder="Song Name">
+        <input type="number" name="songDtos[__INDEX__].songdex" placeholder="Song Index">
+        <button type="button" class="remove-song-form">Remove</button>
+    </div>
+</script>
+
 </form>
+
+<script>
+    $(document).ready(function() {
+        // 노래 폼 추가 버튼 클릭 시
+        $('#addSongForm').click(function() {
+            var songFormTemplate = $('#songFormTemplate').html();
+            var songFormsContainer = $('#songFormsContainer');
+            var newIndex = songFormsContainer.children().length;
+
+            // 노래 폼 템플릿을 동적으로 생성하여 추가
+            var songFormHtml = songFormTemplate.replace(/__INDEX__/g, newIndex);
+            songFormsContainer.append(songFormHtml);
+        });
+
+        // 동적으로 추가한 노래 폼의 삭제 버튼 클릭 시
+        $(document).on('click', '.remove-song-form', function() {
+            $(this).closest('.song-form').remove();
+        });
+
+    });
+</script>
+
 </body>
+
 </html>
