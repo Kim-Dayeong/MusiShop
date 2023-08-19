@@ -15,7 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -60,8 +63,10 @@ public class AlbumController {
     //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
     @GetMapping("/album/add")
     public String showAlbumForm(Model model) {
-        model.addAttribute("albumDto", new AlbumDto());
-        return "albumAdd.html";
+        AlbumDto albumdto = new AlbumDto();
+        albumdto.setSongs(new ArrayList<>());
+        model.addAttribute("albumDto", albumdto);
+        return "albumAdd";
     }
 
     //쓰기
@@ -72,14 +77,33 @@ public class AlbumController {
 //        return "redirect:/";
 //    }
 
+//    @PostMapping("/album/add")
+//    public String albumWrite(@ModelAttribute AlbumDto albumDto, List<SongDto> songDtos) {
+//
+//        // Process albumDto and its songs
+//        albumService.write(albumDto, songDtos);
+//
+//        return "redirect:/";
+//    }
+
     @PostMapping("/album/add")
-    public String albumWrite(@ModelAttribute AlbumDto albumDto, List<SongDto> songDtos) {
 
-        // Process albumDto and its songs
-        albumService.write(albumDto, songDtos);
+    public String albumWrite( @RequestBody AlbumDto albumdto){
+        System.out.println(albumdto.toString());
 
-        return "redirect:/";
+        List<SongDto> songDtos = new ArrayList<>();
+        for(SongDto songDto : albumdto.getSongs()){
+            System.out.println(songDto.toString());
+            songDtos.add(songDto);
+        }
+
+        albumService.write(albumdto, songDtos);
+
+
+            return "redirect:/";
     }
+
+
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")
     public String albumView(@PathVariable("no") Long id, Model model){

@@ -14,12 +14,6 @@
 
 <!-- 앨범 등록 폼 -->
 <form th:object="${albumDto}" th:action="@{/album/add}" method="post">
-    <!-- 앨범 필드 입력 -->
-    <input type="text" th:field="*{title}">
-    <input type="text" th:field="*{name}">
-    <input type="number" th:field="*{price}">
-    <input type="text" th:field="*{img}">
-    <input type="text" th:field="*{regdate}">
 
     <!-- 노래 폼 추가 버튼 -->
     <button type="button" id="addSongForm">Add Song</button>
@@ -31,14 +25,14 @@
     <button type="submit">Submit</button>
 
 
-<!-- 노래 폼 템플릿 -->
-<script type="text/template" id="songFormTemplate">
-    <div class="song-form">
-        <input type="text" name="songDtos[__INDEX__].song_name" placeholder="Song Name">
-        <input type="number" name="songDtos[__INDEX__].songdex" placeholder="Song Index">
-        <button type="button" class="remove-song-form">Remove</button>
-    </div>
-</script>
+    <!-- 노래 폼 템플릿 -->
+    <script type="text/template" id="songFormTemplate">
+        <div class="song-form">
+            <input type="text" name="songDtos[__INDEX__].song_name" placeholder="Song Name">
+            <input type="number" name="songDtos[__INDEX__].songdex" placeholder="Song Index">
+            <button type="button" class="remove-song-form">Remove</button>
+        </div>
+    </script>
 
 </form>
 
@@ -62,6 +56,38 @@
 
     });
 </script>
+<script>
+//제출버튼 클릭 시
+$('#submit').click(function() {
+
+var songDataArray = [];
+$('.song-form').each(function() {
+var songName = $(this).find('.song-name').val();
+var songIndex = $(this).find('.song-index').val();
+songDataArray.push({ song_name: songName, songdex: songIndex });
+});
+
+var formData = {
+songDtos: songDataArray
+};
+
+$.ajax({
+type: 'POST',
+url: '/album/add',
+contentType: 'application/json',
+data: JSON.stringify(formData),
+success: function(response) {
+// 성공적으로 전송되었을 때 처리
+window.location.href = '/';
+},
+error: function(error) {
+// 전송 오류 처리
+console.error('Error:', error);
+}
+});
+});
+</script>
+
 
 </body>
 
