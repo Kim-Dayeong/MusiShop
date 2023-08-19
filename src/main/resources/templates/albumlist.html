@@ -24,6 +24,7 @@
         <thead>
         <tr>
             <th>글번호</th>
+            <th>이미지</th>
             <th>제목</th>
         </tr>
         </thead>
@@ -31,7 +32,10 @@
 
         <tr th:each = "board:${list}">
             <td th:text="${board.id}"></td>
-            <td th:text="${board.title}"></td>
+            <td th:text="${board.img}"></td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/album/view/{id}(id=${board.id})}"></a>
+            </td>
 
         </tr>
         </tbody>
