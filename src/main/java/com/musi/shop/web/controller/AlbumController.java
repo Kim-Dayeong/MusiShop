@@ -48,17 +48,9 @@ public class AlbumController {
         model.addAttribute("starttotal", starttotal);
         model.addAttribute("endtotal", endtotal);
 
-
         return "albumlist.html";
-
     }
 
-
-//    @GetMapping("/album/add")
-//    public String showAlbumForm(Model model) {
-//        model.addAttribute("albumDto", new AlbumDto());
-//        return "albumAdd.html";
-//    }
 
     //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
     @GetMapping("/album/add")
@@ -68,23 +60,6 @@ public class AlbumController {
         model.addAttribute("albumDto", albumdto);
         return "albumAdd";
     }
-
-    //쓰기
-//    @PostMapping("/album/add")
-//    public String albumWrite(AlbumDto albumDto, List<SongDto> songDtos){
-//
-//        albumService.write(albumDto,songDtos);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping("/album/add")
-//    public String albumWrite(@ModelAttribute AlbumDto albumDto, List<SongDto> songDtos) {
-//
-//        // Process albumDto and its songs
-//        albumService.write(albumDto, songDtos);
-//
-//        return "redirect:/";
-//    }
 
     @PostMapping("/album/add")
 
@@ -96,11 +71,8 @@ public class AlbumController {
             System.out.println(songDto.toString());
             songDtos.add(songDto);
         }
-
         albumService.write(albumdto, songDtos);
-
-
-            return "redirect:/";
+        return "redirect:/";
     }
 
 
