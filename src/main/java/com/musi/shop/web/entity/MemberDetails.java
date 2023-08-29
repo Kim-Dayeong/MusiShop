@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -13,18 +14,24 @@ public class MemberDetails implements UserDetails {
 
     private final Member member;
 
-    public MemberDetails(Member member) {
+    public MemberDetails(Member member){
         this.member = member;
     }
 
+    //유저 권한목록, 반환
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-
-        return Collections.singleton(
-                new SimpleGrantedAuthority(member.getRole())
-        );
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return member.getRole();
+            }
+        });
+        return collect;
     }
+
+
 
     @Override
     public String getPassword() {
