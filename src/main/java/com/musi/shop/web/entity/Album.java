@@ -24,6 +24,7 @@ public class Album {
     @Column
     private String title;
 
+
     @Column
     private String name;
 

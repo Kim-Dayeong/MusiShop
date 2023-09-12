@@ -69,6 +69,8 @@ public class Membercontroller {
             System.out.println("현재 사용자:" + memberDetails.getUsername());
             return "redirect:/";
         }
+
+        System.out.println("현재 사용자: 없음");
         return "redirect:/";
     }
 

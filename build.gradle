@@ -116,6 +116,9 @@ dependencies {
 
     implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 
+    // 타임리프에서 스프링시큐리티의 문법이나 형식을 지원하는 확장팩 라이브러리
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 
 }
 
