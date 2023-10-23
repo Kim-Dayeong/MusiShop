@@ -1,8 +1,13 @@
 package com.musi.shop.web.config;
 
+import com.musi.shop.web.config.auth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,8 +23,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@ConditionalOnDefaultWebSecurity
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 
 public class SecurityConfig  {
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
 
     @Bean
@@ -40,10 +49,11 @@ public class SecurityConfig  {
                 .antMatchers("/admin/").denyAll()
                 .antMatchers("/artist/**").access("hasRole('ROLE_ARTIST')") //아티스트 페이지
                 .antMatchers("/artist").access("hasRole('ROLE_ARTIST')")
+                .antMatchers("/album/add").authenticated() //인증된 사용자만 앨범추가 가능
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login") //로그인 페이지 설정
                 .loginProcessingUrl("/loginProc")
                 .defaultSuccessUrl("/")
                 .and()
@@ -53,6 +63,10 @@ public class SecurityConfig  {
                 .invalidateHttpSession(true)
                 .and()
                 .exceptionHandling().accessDeniedPage("/user/denied")//403 예외처리 핸들링
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)
                // .antMatchers("/members/login").permitAll()
                 //.antMatchers("/members/test").hasRole("USER")
                 //.anyRequest().authenticated()
@@ -61,6 +75,8 @@ public class SecurityConfig  {
         return http.build();
 
     }
+
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

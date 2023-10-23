@@ -22,7 +22,7 @@ public class Song {
 
     private int songdex;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ALBUM_ID")
     private Album album;
 

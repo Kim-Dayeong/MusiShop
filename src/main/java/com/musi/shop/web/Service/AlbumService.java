@@ -1,27 +1,27 @@
 package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.Album;
+import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.MemberDetails;
 import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.SongRepository;
-import com.musi.shop.web.response.AlbumListResponse;
 
 import com.musi.shop.web.web.dto.AlbumDto;
+import com.musi.shop.web.web.dto.MemberContext;
 import com.musi.shop.web.web.dto.SongDto;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
-
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -43,17 +43,34 @@ public class AlbumService {
 
     //쓰기
     @Transactional
-    public void write(AlbumDto albumDto, List<SongDto> songDtos){
+    public void write(AlbumDto albumDto
+            //,  MemberContext currentMember
+            ,
+                    Member member,
+                      List<SongDto> songDtos){
 
         //앨범
-        Album album = albumDto.toEntity();
-         albumRepository.save(album);
+//        Album album = albumDto.toEntity();
+//
+//        albumDto.setMember(member);
+//        albumRepository.save(albumDto.toEntity());
 
-         //음악
-//        Song song = songDto.toEntity();
-//        song.setAlbum(album);
-//        songRepository.save(song);
 
+        Album album = new Album();
+        album.setTitle(albumDto.getTitle());
+        album.setPrice(albumDto.getPrice());
+        album.setImg(albumDto.getImg());
+        album.setRegdate(albumDto.getRegdate());
+        album.setId(albumDto.getId());
+        album.setMember(member);
+
+
+
+//        if(currentMember != null){
+//            album.setName(currentMember.getName());
+//        }
+
+        //음악
         List<Song> songs = new ArrayList<>();
         for (SongDto songDto : songDtos){
             Song song = songDto.toEntity();
@@ -86,20 +103,18 @@ public class AlbumService {
         return AlbumDto.builder()
                 .id(album.getId())
                 .title(album.getTitle())
-                .name(album.getName())
+                //.name(album.getName())
                 .price(album.getPrice())
                 .img(album.getImg())
                 .regdate(album.getRegdate())
                 .songs(songDtos)
-                .build();
+               .build();
 
     }
 
 
 
-
-
-        //읽기
+    //읽기
 
 
 //    public List<AlbumListResponse> AlbumList() {

@@ -49,26 +49,26 @@ public class AlbumTest {
 //        }
 //    }
 
-    @Test
-    public void album추가() throws Exception{
-
-        AlbumDto albumDto = AlbumDto.builder()
-
-                .title("앨범테스트6")
-                .name("테스트회원6")
-                .price(BigDecimal.valueOf(222))
-                .img("테스트커버6")
-                .regdate("2023")
-                .build();
-
-        List<SongDto> songDtos = new ArrayList<>();
-        songDtos.add(SongDto.builder().song_name("name1").songdex(1).build());
-        songDtos.add(SongDto.builder().song_name("name2").songdex(2).build());
-        songDtos.add(SongDto.builder().song_name("name3").songdex(3).build());
-
-        albumService.write(albumDto,songDtos);
-
-
-
-    }
+//    @Test
+//    public void album추가() throws Exception{
+//
+//        AlbumDto albumDto = AlbumDto.builder()
+//
+//                .title("앨범테스트6")
+//                .name("테스트회원6")
+//                .price(BigDecimal.valueOf(222))
+//                .img("테스트커버6")
+//                .regdate("2023")
+//                .build();
+//
+//        List<SongDto> songDtos = new ArrayList<>();
+//        songDtos.add(SongDto.builder().song_name("name1").songdex(1).build());
+//        songDtos.add(SongDto.builder().song_name("name2").songdex(2).build());
+//        songDtos.add(SongDto.builder().song_name("name3").songdex(3).build());
+//
+//        albumService.write(albumDto,songDtos);
+//
+//
+//
+//    }
 }

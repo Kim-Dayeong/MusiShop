@@ -1,6 +1,7 @@
 package com.musi.shop.web.response;
 
 import com.musi.shop.web.entity.Album;
+import com.musi.shop.web.entity.Member;
 import lombok.*;
 
 import java.math.BigDecimal;

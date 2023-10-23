@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="Album")
+
 @Getter
 @Data
 public class Album {
@@ -21,14 +22,20 @@ public class Album {
     @Column(name = "ALBUM_ID")
     private Long id;
 
-    @Column
-    private String title;
-
 
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @Column
+    private String title;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId") // db에 user_id 컬럼명
+    private Member member;
+
+
+
+    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
     @OrderBy("songdex asc")
     private List<Song> songs = new ArrayList<>();
 
@@ -45,13 +52,14 @@ public class Album {
 
 
     @Builder
-    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate){
+    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate ){
         this.id = id;
         this.title = title;
         this.name = name;
         this.price = price;
         this.regdate = regdate;
         this.img = img;
+
     }
 
 

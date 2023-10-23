@@ -1,31 +1,36 @@
 package com.musi.shop.web.controller;
 
 import com.musi.shop.web.Service.AlbumService;
-import com.musi.shop.web.entity.Album;
-import com.musi.shop.web.web.dto.AlbumDto;
-import com.musi.shop.web.web.dto.AlbumSongRequest;
-import com.musi.shop.web.web.dto.SongDto;
+import com.musi.shop.web.Service.MemberAdapter;
+import com.musi.shop.web.Service.MemberDetailsService;
+import com.musi.shop.web.entity.*;
+import com.musi.shop.web.repository.AlbumRepository;
+import com.musi.shop.web.repository.MemberRepository;
+import com.musi.shop.web.repository.SongRepository;
+import com.musi.shop.web.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
+
 
 @Controller
 @RequiredArgsConstructor
 public class AlbumController {
 
    private final AlbumService albumService;
+   MemberRepository memberRepository;
+   SongRepository songRepository;
+   AlbumRepository albumRepository;
 
     @GetMapping("/album/list")
     public String albumList(Model model, @PageableDefault (page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
@@ -61,9 +66,15 @@ public class AlbumController {
         return "albumAdd";
     }
 
+
     @PostMapping("/album/add")
 
-    public String albumWrite( @RequestBody AlbumDto albumdto){
+    public String albumWrite(@RequestBody AlbumDto albumdto,
+//                            @AuthenticationPrincipal MemberContext memberContext
+                             @AuthenticationPrincipal MemberAdapter memberadapter
+            //,
+                             //@AuthenticationPrincipal MemberContext currentMember
+    ){
         System.out.println(albumdto.toString());
 
         List<SongDto> songDtos = new ArrayList<>();
@@ -71,10 +82,15 @@ public class AlbumController {
             System.out.println(songDto.toString());
             songDtos.add(songDto);
         }
-        albumService.write(albumdto, songDtos);
+     //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
+        albumService.write(albumdto
+                //, currentMember
+                ,memberadapter.getMember()
+               ,songDtos);
+
+
         return "redirect:/";
     }
-
 
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")

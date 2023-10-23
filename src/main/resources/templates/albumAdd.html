@@ -1,6 +1,7 @@
 <html lang="ko"
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <meta charset="UTF-8">
 <head>
@@ -14,8 +15,10 @@
 
 <form id="albumForm">
     <!-- 앨범 필드 입력 -->
+
+    <div >사용자 이름 : <span th:text=" @{${#authentication.principal.name}}"></span></div>
+
     <input type="text" name="title" placeholder="Title">
-    <input type="text" name="name" placeholder="Name">
     <input type="number" name="price" placeholder="Price">
     <input type="text" name="img" placeholder="Image URL">
     <input type="text" name="regdate" placeholder="Regdate">
