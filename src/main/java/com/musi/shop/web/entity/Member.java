@@ -56,9 +56,10 @@ public class Member {
         return this.role.getKey();
     }
 
-        public Member update(String nickname, String picture){
+        public Member update(String nickname, String picture, String provider){
         this.nickname = nickname;
         this.picture = picture;
+        this.provider = provider;
 
         return this;
     }
