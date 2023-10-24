@@ -5,6 +5,7 @@ package com.musi.shop.web.controller;
 
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.MemberDetails;
+import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class Membercontroller {
         String rawPassword = member.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);
-        member.setRole("ROLE_USER");
+        member.setRole(Role.USER);
         userRepository.save(member);
         return "redirect:/";
     }
@@ -50,7 +51,7 @@ public class Membercontroller {
         String rawPassword = member.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);
-        member.setRole("ROLE_ARTIST");
+        member.setRole(Role.ARTIST);
         userRepository.save(member);
         return "redirect:/";
     }

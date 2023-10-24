@@ -1,8 +1,6 @@
 package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.entity.MemberDetails;
-import com.musi.shop.web.entity.PrincipalDetail;
 import com.musi.shop.web.repository.MemberRepository;
 import com.musi.shop.web.web.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

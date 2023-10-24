@@ -1,6 +1,6 @@
 package com.musi.shop.web.config.auth.dto;
 
-import com.musi.shop.web.entity.OauthMember;
+import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,16 +11,16 @@ import java.util.Map;
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
-    private String name;
+    private String nickname;
     private String email;
     private String picture;
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes,String nameAttributeKey
-            ,String name,String email,String picture){
+            ,String nickname,String email,String picture){
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
-        this.name = name;
+        this.nickname = nickname;
         this.email = email;
         this.picture = picture;
     }
@@ -33,7 +33,7 @@ public class OAuthAttributes {
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
                                             Map<String, Object> attributes){
         return OAuthAttributes.builder()
-                .name((String) attributes.get("name"))
+                .nickname((String) attributes.get("nickname"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
@@ -41,9 +41,9 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public OauthMember toEntity(){
-        return OauthMember.builder()
-                .name(name)
+    public Member toEntity(){
+        return Member.builder()
+                .nickname(nickname)
                 .email(email)
                 .picture(picture)
                 .role(Role.GUEST)

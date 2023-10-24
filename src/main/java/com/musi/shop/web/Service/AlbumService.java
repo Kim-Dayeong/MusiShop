@@ -44,16 +44,16 @@ public class AlbumService {
     //쓰기
     @Transactional
     public void write(AlbumDto albumDto
-            //,  MemberContext currentMember
+            ,  MemberContext currentMember
             ,
-                    Member member,
+                //    Member member,
                       List<SongDto> songDtos){
 
         //앨범
 //        Album album = albumDto.toEntity();
 //
 //        albumDto.setMember(member);
-//        albumRepository.save(albumDto.toEntity());
+
 
 
         Album album = new Album();
@@ -62,7 +62,9 @@ public class AlbumService {
         album.setImg(albumDto.getImg());
         album.setRegdate(albumDto.getRegdate());
         album.setId(albumDto.getId());
-        album.setMember(member);
+     //   album.setMember(member);
+
+      albumRepository.save(album);
 
 
 

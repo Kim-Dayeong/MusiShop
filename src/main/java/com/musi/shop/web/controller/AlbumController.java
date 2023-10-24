@@ -28,9 +28,7 @@ import java.util.*;
 public class AlbumController {
 
    private final AlbumService albumService;
-   MemberRepository memberRepository;
-   SongRepository songRepository;
-   AlbumRepository albumRepository;
+
 
     @GetMapping("/album/list")
     public String albumList(Model model, @PageableDefault (page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
@@ -71,9 +69,9 @@ public class AlbumController {
 
     public String albumWrite(@RequestBody AlbumDto albumdto,
 //                            @AuthenticationPrincipal MemberContext memberContext
-                             @AuthenticationPrincipal MemberAdapter memberadapter
+                            // @AuthenticationPrincipal MemberAdapter memberadapter
             //,
-                             //@AuthenticationPrincipal MemberContext currentMember
+                             @AuthenticationPrincipal MemberContext currentMember
     ){
         System.out.println(albumdto.toString());
 
@@ -84,8 +82,8 @@ public class AlbumController {
         }
      //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
         albumService.write(albumdto
-                //, currentMember
-                ,memberadapter.getMember()
+                , currentMember
+               // ,memberadapter.getMember()
                ,songDtos);
 
 

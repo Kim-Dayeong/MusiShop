@@ -2,8 +2,8 @@ package com.musi.shop.web.config.auth;
 
 import com.musi.shop.web.config.auth.dto.OAuthAttributes;
 import com.musi.shop.web.config.auth.dto.SessionUser;
-import com.musi.shop.web.entity.OauthMember;
-import com.musi.shop.web.repository.OauthMemberRepository;
+import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -21,7 +21,7 @@ import java.util.Collections;
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest,OAuth2User> {
 
-    private final OauthMemberRepository oauthMemberRepository;
+    private final MemberRepository memberRepository;
     private final HttpSession httpSession;
 
     @Override
@@ -40,23 +40,22 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes
                 .of(registrationId, userNameAttributeName,oAuth2User.getAttributes());
 
-        OauthMember oauthMember = saveOrUpdate(attributes);
+        Member member = saveOrUpdate(attributes);
 
-        httpSession.setAttribute("user", new SessionUser(oauthMember));
+        httpSession.setAttribute("user", new SessionUser(member));
 
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(oauthMember.getRoleKey())),
+                Collections.singleton(new SimpleGrantedAuthority(member.getRoleKey())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
 
 
     }
-    private OauthMember saveOrUpdate(OAuthAttributes attributes){
-        OauthMember oauthMember = oauthMemberRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes
-                        .getName(), attributes.getPicture()))
+    private Member saveOrUpdate(OAuthAttributes attributes){
+        Member member = memberRepository.findByEmail(attributes.getEmail())
+                .map(entity -> entity.update(attributes.getNickname(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
 
-        return oauthMemberRepository.save(oauthMember);
+        return memberRepository.save(member);
     }
 }

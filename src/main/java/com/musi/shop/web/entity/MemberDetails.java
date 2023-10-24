@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import static java.lang.String.valueOf;
+
 @Data
 public class MemberDetails implements UserDetails {
 
@@ -25,7 +27,7 @@ public class MemberDetails implements UserDetails {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return member.getRole();
+                return valueOf(member.getRole());
             }
         });
         return collect;
