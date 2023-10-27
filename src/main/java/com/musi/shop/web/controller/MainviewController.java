@@ -33,7 +33,7 @@ public class MainviewController {
         return "homeView.html";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/userlogin")
     public ModelAndView loginForm() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login.html");

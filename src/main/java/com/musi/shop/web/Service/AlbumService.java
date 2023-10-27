@@ -5,6 +5,7 @@ import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.MemberDetails;
 import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
+import com.musi.shop.web.repository.MemberRepository;
 import com.musi.shop.web.repository.SongRepository;
 
 import com.musi.shop.web.web.dto.AlbumDto;
@@ -22,6 +23,7 @@ import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -33,6 +35,7 @@ public class AlbumService {
 
     private final AlbumRepository albumRepository;
     private final SongRepository songRepository;
+    private final MemberRepository memberRepository;
 
 
     //페이징
@@ -47,7 +50,8 @@ public class AlbumService {
             ,  MemberContext currentMember
             ,
                 //    Member member,
-                      List<SongDto> songDtos){
+                      List<SongDto> songDtos
+    ,Album album, String username){
 
         //앨범
 //        Album album = albumDto.toEntity();
@@ -56,13 +60,23 @@ public class AlbumService {
 
 
 
-        Album album = new Album();
-        album.setTitle(albumDto.getTitle());
-        album.setPrice(albumDto.getPrice());
-        album.setImg(albumDto.getImg());
-        album.setRegdate(albumDto.getRegdate());
-        album.setId(albumDto.getId());
-     //   album.setMember(member);
+
+
+        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+        if (memberOptional.isPresent()) {
+
+            album.setTitle(albumDto.getTitle());
+            album.setPrice(albumDto.getPrice());
+            album.setImg(albumDto.getImg());
+            album.setRegdate(albumDto.getRegdate());
+            album.setId(albumDto.getId());
+            Member member = memberOptional.get();
+            album.setMember(member);
+        }else{
+            System.out.println("사용자 null albumService");
+
+        }
+
 
       albumRepository.save(album);
 

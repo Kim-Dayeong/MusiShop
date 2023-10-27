@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,10 +69,12 @@ public class AlbumController {
     @PostMapping("/album/add")
 
     public String albumWrite(@RequestBody AlbumDto albumdto,
-//                            @AuthenticationPrincipal MemberContext memberContext
-                            // @AuthenticationPrincipal MemberAdapter memberadapter
-            //,
-                             @AuthenticationPrincipal MemberContext currentMember
+       @AuthenticationPrincipal MemberContext memberContext,
+                            @AuthenticationPrincipal MemberAdapter memberadapter,
+
+                             @AuthenticationPrincipal MemberContext currentMember,
+                             Album album,
+                             Authentication authentication
     ){
         System.out.println(albumdto.toString());
 
@@ -80,11 +83,15 @@ public class AlbumController {
             System.out.println(songDto.toString());
             songDtos.add(songDto);
         }
+
+        String username = authentication.getName();
+        String test = currentMember.getUsername();
+        System.out.println("!!!!!!!!!!!!!유저네임"+test);
      //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
         albumService.write(albumdto
                 , currentMember
-               // ,memberadapter.getMember()
-               ,songDtos);
+               ,songDtos
+        , album,username);
 
 
         return "redirect:/";
