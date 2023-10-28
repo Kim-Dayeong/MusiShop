@@ -3,8 +3,8 @@ package com.musi.shop.web.controller;
 
 
 
+import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.entity.MemberDetails;
 import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -64,10 +64,10 @@ public class Membercontroller {
 
     //로그인 세션 확인, 회원정보 확인
     @GetMapping("/userinfo")
-    public String userInfo(HttpSession session, @AuthenticationPrincipal MemberDetails memberDetails){
+    public String userInfo(HttpSession session, @AuthenticationPrincipal PrincipalDetail principalDetail){
 
-        if(memberDetails != null){
-            System.out.println("현재 사용자:" + memberDetails.getUsername());
+        if(principalDetail != null){
+            System.out.println("현재 사용자:" + principalDetail.getUsername());
             return "redirect:/";
         }
 

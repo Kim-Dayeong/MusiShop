@@ -1,8 +1,10 @@
 package com.musi.shop.web.Service;
 
+import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.Member;
+
 import com.musi.shop.web.repository.MemberRepository;
-import com.musi.shop.web.web.dto.MemberContext;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,33 +17,46 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+
 public class MemberDetailsService implements UserDetailsService {
     @Autowired
    private MemberRepository memberRepository;
-    private final HttpSession session;
+
+
+
+
+    public MemberDetailsService(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Member> memberEntityOptional = memberRepository.findByUsername(username);
+
+        Member member = memberEntityOptional.orElseThrow(() -> new UsernameNotFoundException("사용자가 존재하지 않습니다: " + username));
+        return new PrincipalDetail(member);
+    }
 
 
-        Member member = memberRepository.findByUsername(username).get();
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("member"));
-
+//        Member member = memberRepository.findByUsername(username).get();
+//
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority("member"));
+//
 //        Member member = memberRepository.findByUsername(username).orElseThrow(() ->
 //                new UsernameNotFoundException("사용자가 존재하지 않습니다."));
 
         /** 시큐리티 세션에 유저 정보 저장**/
        // return new MemberAdapter(member);
-         new MemberAdapter(member);
-
-        return new MemberContext(member, authorities);
+//         new MemberAdapter(member);
+//
+//        return new MemberContext(member, authorities);
 
 
     }
-}
+

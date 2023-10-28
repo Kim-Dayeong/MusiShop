@@ -13,11 +13,13 @@ public class PrincipalDetail implements UserDetails, OAuth2User {
 
     private Member member;
     private Map<String,Object> attributes;
+    //String username;
 
 
     //form 로그인
     public PrincipalDetail(Member member){
         this.member = member;
+
     }
 
     //OAuth 로그인
@@ -25,6 +27,11 @@ public class PrincipalDetail implements UserDetails, OAuth2User {
         this.member = member;
         this.attributes = attributes;
     }
+
+//    public PrincipalDetail(String username) {
+//        this.username = username;
+//    }
+
 
     //OAuth2User 메소드
     @Override
@@ -34,21 +41,23 @@ public class PrincipalDetail implements UserDetails, OAuth2User {
 
     @Override
    public String getName() {
-        return null;
+        return member.getNickname();
     }
 
     //form로그인
+@Override
+public String getUsername(){
+        return member.getUsername();
+}
 
-    @Override
     public String getPassword() {
         return member.getPassword();
     }
 
-    @Override
-    public String getUsername() {
-        return member.getUsername();
-        //return(member.getUsername());
-    }
+//    @Override
+//    public String getUsername() {
+//        return username;
+//    }
 
     @Override
     public boolean isAccountNonExpired() { //계정 만료 여부 true:만료x

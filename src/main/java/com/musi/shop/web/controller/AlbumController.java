@@ -1,8 +1,8 @@
 package com.musi.shop.web.controller;
 
 import com.musi.shop.web.Service.AlbumService;
-import com.musi.shop.web.Service.MemberAdapter;
 import com.musi.shop.web.Service.MemberDetailsService;
+import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.*;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.MemberRepository;
@@ -69,10 +69,11 @@ public class AlbumController {
     @PostMapping("/album/add")
 
     public String albumWrite(@RequestBody AlbumDto albumdto,
-       @AuthenticationPrincipal MemberContext memberContext,
-                            @AuthenticationPrincipal MemberAdapter memberadapter,
 
-                             @AuthenticationPrincipal MemberContext currentMember,
+
+
+//                             @AuthenticationPrincipal MemberContext currentMember,
+                             @AuthenticationPrincipal PrincipalDetail principalDetail,
                              Album album,
                              Authentication authentication
     ){
@@ -84,12 +85,11 @@ public class AlbumController {
             songDtos.add(songDto);
         }
 
-        String username = authentication.getName();
-        String test = currentMember.getUsername();
-        System.out.println("!!!!!!!!!!!!!유저네임"+test);
+        String username = principalDetail.getUsername();
+
+        System.out.println("!!!!!!!!!!!!!유저네임"+username);
      //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
         albumService.write(albumdto
-                , currentMember
                ,songDtos
         , album,username);
 

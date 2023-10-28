@@ -2,14 +2,14 @@ package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.Album;
 import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.entity.MemberDetails;
+
 import com.musi.shop.web.entity.Song;
 import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.MemberRepository;
 import com.musi.shop.web.repository.SongRepository;
 
 import com.musi.shop.web.web.dto.AlbumDto;
-import com.musi.shop.web.web.dto.MemberContext;
+
 import com.musi.shop.web.web.dto.SongDto;
 import lombok.RequiredArgsConstructor;
 
@@ -47,19 +47,13 @@ public class AlbumService {
     //쓰기
     @Transactional
     public void write(AlbumDto albumDto
-            ,  MemberContext currentMember
-            ,
-                //    Member member,
-                      List<SongDto> songDtos
+            ,List<SongDto> songDtos
     ,Album album, String username){
 
         //앨범
 //        Album album = albumDto.toEntity();
 //
 //        albumDto.setMember(member);
-
-
-
 
 
         Optional<Member> memberOptional = memberRepository.findByUsername(username);
