@@ -69,13 +69,9 @@ public class AlbumController {
     @PostMapping("/album/add")
 
     public String albumWrite(@RequestBody AlbumDto albumdto,
-
-
-
-//                             @AuthenticationPrincipal MemberContext currentMember,
                              @AuthenticationPrincipal PrincipalDetail principalDetail,
-                             Album album,
-                             Authentication authentication
+                             Album album
+
     ){
         System.out.println(albumdto.toString());
 
@@ -86,12 +82,13 @@ public class AlbumController {
         }
 
         String username = principalDetail.getUsername();
+        String nickname = principalDetail.getName();
 
-        System.out.println("!!!!!!!!!!!!!유저네임"+username);
+        System.out.println("!!!!!!!!!!!!!유저네임"+nickname);
      //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
         albumService.write(albumdto
                ,songDtos
-        , album,username);
+        , album,username, nickname);
 
 
         return "redirect:/";

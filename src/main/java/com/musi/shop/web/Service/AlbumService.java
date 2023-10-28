@@ -48,7 +48,7 @@ public class AlbumService {
     @Transactional
     public void write(AlbumDto albumDto
             ,List<SongDto> songDtos
-    ,Album album, String username){
+    ,Album album, String username, String nickname){
 
         //앨범
 //        Album album = albumDto.toEntity();
@@ -64,6 +64,7 @@ public class AlbumService {
             album.setImg(albumDto.getImg());
             album.setRegdate(albumDto.getRegdate());
             album.setId(albumDto.getId());
+            album.setName(nickname);
             Member member = memberOptional.get();
             album.setMember(member);
         }else{
