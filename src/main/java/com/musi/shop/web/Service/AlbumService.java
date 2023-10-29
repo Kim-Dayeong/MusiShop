@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -51,10 +51,6 @@ public class AlbumService {
     ,Album album, String username, String nickname){
 
         //앨범
-//        Album album = albumDto.toEntity();
-//
-//        albumDto.setMember(member);
-
 
         Optional<Member> memberOptional = memberRepository.findByUsername(username);
         if (memberOptional.isPresent()) {
@@ -69,17 +65,8 @@ public class AlbumService {
             album.setMember(member);
         }else{
             System.out.println("사용자 null albumService");
-
         }
-
-
       albumRepository.save(album);
-
-
-
-//        if(currentMember != null){
-//            album.setName(currentMember.getName());
-//        }
 
         //음악
         List<Song> songs = new ArrayList<>();

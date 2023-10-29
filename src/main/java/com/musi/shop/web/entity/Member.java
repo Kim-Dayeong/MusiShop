@@ -6,15 +6,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Data
 @Entity(name = "Member")
@@ -36,6 +33,14 @@ public class Member {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    @OneToMany(mappedBy = "member")
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "member")
+    private List<Album> albums;
+
+
 
 
     //private LocalDateTime last_login_time;

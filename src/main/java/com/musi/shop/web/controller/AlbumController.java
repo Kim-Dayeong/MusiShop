@@ -70,9 +70,7 @@ public class AlbumController {
 
     public String albumWrite(@RequestBody AlbumDto albumdto,
                              @AuthenticationPrincipal PrincipalDetail principalDetail,
-                             Album album
-
-    ){
+                             Album album){
         System.out.println(albumdto.toString());
 
         List<SongDto> songDtos = new ArrayList<>();
@@ -83,12 +81,7 @@ public class AlbumController {
 
         String username = principalDetail.getUsername();
         String nickname = principalDetail.getName();
-
-        System.out.println("!!!!!!!!!!!!!유저네임"+nickname);
-     //  System.out.println("!!!!!앨범서비스:"+memberadapter.getMember());
-        albumService.write(albumdto
-               ,songDtos
-        , album,username, nickname);
+        albumService.write(albumdto,songDtos, album,username, nickname);
 
 
         return "redirect:/";

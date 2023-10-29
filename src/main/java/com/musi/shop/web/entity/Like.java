@@ -17,7 +17,7 @@ public class Like {
     private Boolean Like;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private Member member;
 
 }
