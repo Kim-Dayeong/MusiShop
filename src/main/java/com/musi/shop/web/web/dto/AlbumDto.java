@@ -19,11 +19,12 @@ public class AlbumDto {
 
     private Long id;
     private String title;
-    //private String name;
+    private String name;
     private BigDecimal price;
     private String img;
     private String regdate;
     private List<SongDto> songs;
+    private List<AlbumDto> albumsList;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
@@ -36,7 +37,7 @@ public class AlbumDto {
         Album build = Album.builder()
                 .id(id)
                 .title(title)
-               // .name(name)
+               .name(name)
                 .regdate(regdate)
                 .price(price)
                 .img(img)
@@ -46,10 +47,10 @@ public class AlbumDto {
     }
 
     @Builder
-    public AlbumDto(Long id, String title,  BigDecimal price, String img, String regdate, List<SongDto> songs, Member member){
+    public AlbumDto(Long id, String title, String name,  BigDecimal price, String img, String regdate, List<SongDto> songs, Member member){
         this.id = id;
         this.title = title;
-      //  this.name = name;
+       this.name = name;
         this.price = price;
         this.regdate = regdate;
         this.img = img;

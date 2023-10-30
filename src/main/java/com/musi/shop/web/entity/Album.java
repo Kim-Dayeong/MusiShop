@@ -24,7 +24,7 @@ public class Album {
 
 
     @Column
-    private String name;
+    private String name; //member의 nickname
 
     @Column
     private String title;

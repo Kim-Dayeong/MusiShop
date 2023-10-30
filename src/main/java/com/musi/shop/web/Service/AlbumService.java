@@ -82,8 +82,7 @@ public class AlbumService {
     //읽기
     @Transactional
     public AlbumDto getAlbumWithSongs(Long id){
-//        Optional<Album> albumWrapper = albumRepository.findById(id);
-//        Album album = albumWrapper.get();
+
 
         Album album = albumRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("album not found with id : " + id));
@@ -101,7 +100,7 @@ public class AlbumService {
         return AlbumDto.builder()
                 .id(album.getId())
                 .title(album.getTitle())
-                //.name(album.getName())
+                .name(album.getName())
                 .price(album.getPrice())
                 .img(album.getImg())
                 .regdate(album.getRegdate())
