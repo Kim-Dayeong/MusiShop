@@ -11,11 +11,15 @@
 
 <body>
 <h1>아티스트 페이지</h1>
-
-
+<tbody>
 <tr th:each="album : ${albumDto.albumsList}">
-  <td th:text="${album.title}"></td>
+  <td>
+    <a th:text="${album.title}" th:href="@{/album/view/{id}(id=${album.id})}"></a>
+  </td>
   <td th:text="${album.img}"></td>
 </tr>
+</tbody>
+
+
 </body>
 </html>

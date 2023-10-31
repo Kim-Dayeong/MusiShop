@@ -33,6 +33,9 @@ public class Album {
     @JoinColumn(name = "userId") // db에 user_id 컬럼명
     private Member member;
 
+    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
+    private List<Like> likes = new ArrayList<>();
+
 
 
     @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)

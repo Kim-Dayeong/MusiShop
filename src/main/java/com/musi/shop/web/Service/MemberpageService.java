@@ -33,6 +33,7 @@ public class MemberpageService {
                     AlbumDto albumDto = new AlbumDto();
                     albumDto.setTitle(album.getTitle());
                     albumDto.setImg(album.getImg());
+                    albumDto.setId(album.getId());
                     return albumDto;
                 })
                 .collect(Collectors.toList());
