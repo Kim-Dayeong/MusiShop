@@ -3,7 +3,6 @@ package com.musi.shop.web.entity;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,6 +18,7 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
     private Long id;
 
     private String nickname;
@@ -34,12 +34,13 @@ public class Member {
     @CreationTimestamp
     private Timestamp createDate;
 
-    @OneToMany(mappedBy = "member")
-    private List<Like> likes;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "heartId")
+    private Heart heart;
 
-    @OneToMany(mappedBy = "member")
-    private List<Album> albums;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "albumId")
+    private Album album;
 
 
 

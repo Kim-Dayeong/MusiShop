@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @ToString
@@ -19,8 +21,11 @@ public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ALBUM_ID")
+    @Column(name = "albumId")
     private Long id;
+
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
+    private int heartcnt;
 
 
     @Column
@@ -34,13 +39,12 @@ public class Album {
     private Member member;
 
     @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
-    private List<Like> likes = new ArrayList<>();
-
+    private Set<Heart> hearts = new HashSet<>();
 
 
     @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
     @OrderBy("songdex asc")
-    private List<Song> songs = new ArrayList<>();
+    private Set<Song> songs = new HashSet<>();
 
 
     @Column
@@ -55,13 +59,14 @@ public class Album {
 
 
     @Builder
-    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate ){
+    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate , int heartcnt){
         this.id = id;
         this.title = title;
         this.name = name;
         this.price = price;
         this.regdate = regdate;
         this.img = img;
+        this.heartcnt = heartcnt;
 
     }
 

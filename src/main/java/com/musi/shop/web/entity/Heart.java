@@ -4,33 +4,42 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import java.math.BigDecimal;
-
 import static javax.persistence.FetchType.LAZY;
 
 @Data
-@Entity(name = "Like")
+@Entity(name = "Heart")
 @NoArgsConstructor
 @Getter
-
-public class Like {
+@Setter
+public class Heart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "likeId")
+    @Column(name = "heartId")
     private Long id;
 
 //    private Boolean Like;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private Member member;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "albumId")
     private Album album;
 
     public void setAlbum(Album album) {
         this.album = album;
     }
+
+    public static Heart toLike(Member member, Album album){
+        Heart heart = new Heart();
+        heart.setMember(member);
+        heart.setAlbum(album);
+
+        return heart;
+    }
+
+
+
 }

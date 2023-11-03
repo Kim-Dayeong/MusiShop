@@ -1,27 +1,26 @@
 package com.musi.shop.web.Service;
 
 import com.musi.shop.web.entity.Album;
-import com.musi.shop.web.entity.Like;
+import com.musi.shop.web.entity.Heart;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.repository.AlbumRepository;
-import com.musi.shop.web.repository.LikeRepository;
+import com.musi.shop.web.repository.HeartRepository;
 import com.musi.shop.web.repository.MemberRepository;
-import com.musi.shop.web.web.dto.LikeDto;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
-public class LikeService {
+public class HeartService {
 
     private final MemberRepository memberRepository;
     private final AlbumRepository albumRepository;
-    private final LikeRepository likeRepository;
+    private final HeartRepository heartRepository;
 
 
 
@@ -33,17 +32,17 @@ public class LikeService {
         Album album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new NotFoundException("Could not found member id : " + albumId));
 
-        Optional<Like> existingLike = likeRepository.findByAlbumIdAndUserId(albumId,memberId);
+        Optional<Heart> existingLike = heartRepository.findByAlbumIdAndMemberId(albumId,memberId);
 
         if(existingLike.isPresent()) {
             // 이미 좋아요 상태인 경우 좋아요 삭제
-            likeRepository.delete(existingLike.get());
+            heartRepository.delete(existingLike.get());
         }else {
             //좋아요 하지 않은 경우 좋아요 추가
-            Like newLike = new Like();
+            Heart newLike = new Heart();
             newLike.setAlbum(album);
             newLike.setMember(member);
-            likeRepository.save(newLike);
+            heartRepository.save(newLike);
 
         }
 

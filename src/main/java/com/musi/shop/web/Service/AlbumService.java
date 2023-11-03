@@ -63,6 +63,7 @@ public class AlbumService {
             album.setName(nickname);
             Member member = memberOptional.get();
             album.setMember(member);
+           // album.setHeartcnt();
         }else{
             System.out.println("사용자 null albumService");
         }

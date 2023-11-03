@@ -57,4 +57,15 @@ public class RepositoryTest {
 
     }
 
-}
+    @Test
+    public void testFindAlbumByalbumId() {
+
+        Optional<Album> album = Optional.of(new Album());
+
+        album = albumRepository.findById(1L);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+album);
+
+    }
+    }
+
+
