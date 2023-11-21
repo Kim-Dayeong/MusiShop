@@ -1,6 +1,7 @@
 package com.musi.shop.web.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -18,7 +19,6 @@ public class Heart {
     @Column(name = "heartId")
     private Long id;
 
-//    private Boolean Like;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")

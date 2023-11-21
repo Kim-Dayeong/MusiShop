@@ -1,6 +1,7 @@
 package com.musi.shop.web.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,8 +25,8 @@ public class Album {
     @Column(name = "albumId")
     private Long id;
 
-    @Column(columnDefinition = "INTEGER DEFAULT 0")
-    private int heartcnt;
+    @Column(columnDefinition = "BIGINT DEFAULT 0")
+    private Long heartcnt;
 
 
     @Column
@@ -59,7 +60,7 @@ public class Album {
 
 
     @Builder
-    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate , int heartcnt){
+    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate , long heartcnt){
         this.id = id;
         this.title = title;
         this.name = name;
