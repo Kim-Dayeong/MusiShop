@@ -28,18 +28,29 @@ public class Heart {
     @JoinColumn(name = "albumId")
     private Album album;
 
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
+    @Column(nullable = false)
+    private boolean status; //true = 추가 , false = 취소
 
-    public static Heart toLike(Member member, Album album){
-        Heart heart = new Heart();
-        heart.setMember(member);
-        heart.setAlbum(album);
+//    public void setAlbum(Album album) {
+//        this.album = album;
+//    }
+//
+//    public static Heart toLike(Member member, Album album){
+//        Heart heart = new Heart();
+//        heart.setMember(member);
+//        heart.setAlbum(album);
+//
+//        return heart;
+//    }
 
-        return heart;
-    }
+public Heart(Album album, Member member){
+    this.album = album;
+    this.member = member;
+    this.status = true;
+}
 
-
-
+public void unHeartAlbum(Album album){
+    this.status = false;
+    album.setHeartcnt(album.getHeartcnt()-1);
+}
 }
