@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -37,6 +38,8 @@ public class HeartAlbum {
         this.member = member;
         this.status = true;
     }
+
+
 
     public void unHeartAlbum(Album album){
         this.status = false;
