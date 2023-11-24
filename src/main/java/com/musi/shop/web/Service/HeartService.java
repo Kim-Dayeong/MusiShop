@@ -9,6 +9,7 @@ import com.musi.shop.web.repository.AlbumRepository;
 import com.musi.shop.web.repository.HeartAlbumRepository;
 import com.musi.shop.web.repository.HeartRepository;
 import com.musi.shop.web.repository.MemberRepository;
+import com.musi.shop.web.web.dto.AlbumDto;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityNotFoundException;
@@ -39,6 +40,7 @@ public class HeartService {
 
         Member member = (memberRepository.findByUsername(principalDetail.getUsername())
                 .orElseThrow(() -> new EntityNotFoundException("Member not found")));
+
 
         if(heartRepository.findByAlbumIdAndMemberId(album, (member)) == null){
             // 좋아요 누른적 없으면 heartAlbum 생성후 좋아요 처리

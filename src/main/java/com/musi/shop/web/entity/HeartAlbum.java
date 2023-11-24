@@ -2,7 +2,6 @@ package com.musi.shop.web.entity;
 
 
 import lombok.*;
-import org.hibernate.annotations.Entity;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Data
 @Builder
-@Entity
+@Entity(name = "HeartAlbum")
 public class HeartAlbum {
 
     @Id

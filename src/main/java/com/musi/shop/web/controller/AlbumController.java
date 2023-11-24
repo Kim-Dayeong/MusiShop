@@ -97,5 +97,13 @@ public class AlbumController {
         return"albumview.html";
     }
 
+    @GetMapping("/album/hearttest")
+    public String albumView( Model model){
+
+
+
+        return"heart.html";
+    }
+
 
 }

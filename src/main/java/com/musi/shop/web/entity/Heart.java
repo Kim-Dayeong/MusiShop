@@ -12,6 +12,7 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class Heart {
 
     @Id

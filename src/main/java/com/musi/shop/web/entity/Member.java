@@ -3,6 +3,7 @@ package com.musi.shop.web.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @Entity(name = "Member")
 @NoArgsConstructor
+@Getter
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

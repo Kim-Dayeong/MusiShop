@@ -15,8 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="Album")
-
 @Getter
+@Setter
 @Data
 public class Album {
 
