@@ -39,11 +39,11 @@ public class Album {
     @JoinColumn(name = "userId") // db에 user_id 컬럼명
     private Member member;
 
-    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
     private Set<Heart> hearts = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
     @OrderBy("songdex asc")
     private Set<Song> songs = new HashSet<>();
 
@@ -70,8 +70,6 @@ public class Album {
         this.heartcnt = heartcnt;
 
     }
-
-
 
 
 

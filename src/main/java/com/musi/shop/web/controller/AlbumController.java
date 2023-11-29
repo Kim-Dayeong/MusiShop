@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 
@@ -66,41 +67,41 @@ public class AlbumController {
     }
 
 
-    @PostMapping("/album/add")
+//    @PostMapping("/album/add")
 
-    public String albumWrite(@RequestBody AlbumDto albumdto,
-                             @AuthenticationPrincipal PrincipalDetail principalDetail,
-                             Album album){
-        System.out.println(albumdto.toString());
-
-        List<SongDto> songDtos = new ArrayList<>();
-        for(SongDto songDto : albumdto.getSongs()){
-            System.out.println(songDto.toString());
-            songDtos.add(songDto);
-        }
-
-        String username = principalDetail.getUsername();
-        String nickname = principalDetail.getName();
-        albumService.write(albumdto,songDtos, album,username, nickname);
-
-
-        return "redirect:/";
-    }
+//    public String albumWrite(@RequestBody AlbumDto albumdto,
+//                             @AuthenticationPrincipal PrincipalDetail principalDetail,
+//                             Album album){
+//        System.out.println(albumdto.toString());
+//
+//        List<SongDto> songDtos = new ArrayList<>();
+//        for(SongDto songDto : albumdto.getSongs()){
+//            System.out.println(songDto.toString());
+//            songDtos.add(songDto);
+//        }
+//
+//        String username = principalDetail.getUsername();
+//        String nickname = principalDetail.getName();
+//        albumService.write(albumdto,songDtos, album,username, nickname);
+//
+//
+//        return "redirect:/";
+//    }
 
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")
-    public String albumView(@PathVariable("no") Long id, Model model){
+    public String viewAlbum(@PathVariable("no") Long id, Model model){
+        System.out.println("!!!!!!!!!!!!!!!!!!!"+id);
         AlbumDto albumDto = albumService.getAlbumWithSongs(id);
 
         model.addAttribute("albumDto", albumDto);
 
+
         return"albumview.html";
     }
-
-    @GetMapping("/album/hearttest")
-    public String albumView( Model model){
-
-
+    @GetMapping("/album/hearttest/{no}")
+    public String Detail(@PathVariable("no") Long no, Model model){
+        System.out.println("!!!!!!!!!!!!!!!!!!!"+no);
 
         return"heart.html";
     }

@@ -1,22 +1,18 @@
 package com.musi.shop.web.web.dto;
 
 import com.musi.shop.web.entity.Album;
-import com.musi.shop.web.entity.Heart;
-import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.entity.Song;
+
 import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class AlbumDto {
 
     private Long id;

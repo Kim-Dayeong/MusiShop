@@ -45,59 +45,54 @@ public class AlbumService {
 
 
     //쓰기
-    @Transactional
-    public void write(AlbumDto albumDto
-            ,List<SongDto> songDtos
-    ,Album album, String username, String nickname){
+//    @Transactional
+//    public void write(AlbumDto albumDto
+//            ,List<SongDto> songDtos
+//    ,Album album, String username, String nickname){
+//
+//        //앨범
+//
+//        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+//        if (memberOptional.isPresent()) {
+//
+//            album.setTitle(albumDto.getTitle());
+//            album.setPrice(albumDto.getPrice());
+//            album.setImg(albumDto.getImg());
+//            album.setRegdate(albumDto.getRegdate());
+//            album.setId(albumDto.getId());
+//            album.setName(nickname);
+//            Member member = memberOptional.get();
+//            album.setMember(member);
+//           // album.setHeartcnt();
+//        }else{
+//            System.out.println("사용자 null albumService");
+//        }
+//      albumRepository.save(album);
+//
+//        //음악
+//        List<Song> songs = new ArrayList<>();
+//        for (SongDto songDto : songDtos){
+//            Song song = songDto.toEntity();
+//            song.setAlbum(album);
+//            songs.add(song);
+//        }
+//        songRepository.saveAll(songs);
+//
 
-        //앨범
-
-        Optional<Member> memberOptional = memberRepository.findByUsername(username);
-        if (memberOptional.isPresent()) {
-
-            album.setTitle(albumDto.getTitle());
-            album.setPrice(albumDto.getPrice());
-            album.setImg(albumDto.getImg());
-            album.setRegdate(albumDto.getRegdate());
-            album.setId(albumDto.getId());
-            album.setName(nickname);
-            Member member = memberOptional.get();
-            album.setMember(member);
-           // album.setHeartcnt();
-        }else{
-            System.out.println("사용자 null albumService");
-        }
-      albumRepository.save(album);
-
-        //음악
-        List<Song> songs = new ArrayList<>();
-        for (SongDto songDto : songDtos){
-            Song song = songDto.toEntity();
-            song.setAlbum(album);
-            songs.add(song);
-        }
-        songRepository.saveAll(songs);
-
-
-
-    }
+//
+//    }
 
     //읽기
+    //수정 전 코드
     @Transactional
     public AlbumDto getAlbumWithSongs(Long id){
-
-
         Album album = albumRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("album not found with id : " + id));
-            List<Song> songs = songRepository.findByAlbumId(album.getId());
+            List<Song> songs = songRepository.findByAlbumId(id);
 
             List<SongDto> songDtos = songs.stream()
-                    .map(song -> SongDto.builder()
-                            .song_name(song.getSong_name())
-                            .songdex(song.getSongdex())
-                            .build())
+                    .map(SongDto::newWithoutAlbum)
                     .collect(Collectors.toList());
-
 
 
         return AlbumDto.builder()
@@ -114,32 +109,6 @@ public class AlbumService {
 
 
 
-    //읽기
-
-
-//    public List<AlbumListResponse> AlbumList() {
-//        List<Album> album = albumRepository.findAll();
-//        List<AlbumListResponse> albumList = new ArrayList<>();
-//
-//        for (Album a : album) {
-//            AlbumListResponse list =AlbumListResponse.builder()
-//                    .id(a.getId())
-//                    .name(a.getName())
-//                    .title(a.getTitle())
-//                    .img(a.getImg())
-//                    .regdate(a.getRegdate())
-//                    .price(a.getPrice())
-//                    .build();
-//
-//
-//            albumList.add(list);
-//        }
-//        System.out.println("!!!!"+albumList.get(0).toString());
-//        System.out.println(albumList.get(1).toString());
-//        System.out.println(albumList.get(2).toString());
-//
-//        return albumList;
-//    }
     }
 
 

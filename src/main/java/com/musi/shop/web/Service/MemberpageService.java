@@ -40,7 +40,7 @@ public class MemberpageService {
 
         //AlbumDto 목록을 AlbumDto 객체로 묶어서 반환
         AlbumDto albumlist = new AlbumDto();
-       albumlist.setAlbumsList(albumDtos);
+//       albumlist.setAlbumsList(albumDtos);
        return albumlist;
     }
 
