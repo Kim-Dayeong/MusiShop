@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
-@Data
 @Entity(name = "Heart")
 @NoArgsConstructor
 @Getter

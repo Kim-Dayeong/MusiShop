@@ -31,8 +31,10 @@ public class HeartController {
          String result = heartService.HeartAlbum(id);
          //result 값 ajax에담아 보내기
 
+
+
          Map<String, String> response = new HashMap<>();
-         response.put("status", result);
+         response.put("status", "success");
 
          return ResponseEntity.ok(response);
      }catch (Exception e){

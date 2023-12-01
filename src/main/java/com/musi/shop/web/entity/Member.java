@@ -13,10 +13,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
-@Data
+
 @Entity(name = "Member")
 @NoArgsConstructor
-@Getter
+@Data
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +36,13 @@ public class Member {
     @CreationTimestamp
     private Timestamp createDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "heartId")
-    private Heart heart;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "heartId")
+//    private Heart heart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "albumId")
-    private Album album;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "albumId")
+//    private Album album;
 
 
 

@@ -18,6 +18,7 @@ public class SongDto {
     private String song_name;
     private int songdex;
 
+    private Album album;
     private AlbumDto albumdto;
 
 
@@ -43,15 +44,15 @@ public class SongDto {
 //
 
     //dto -> entity
-//    public Song toEntity() {
-//        Song songs = Song.builder()
-//                .id(id)
-//                .song_name(song_name)
-//                .songdex(songdex)
-//               .album(album)
-//                .build();
-//        return songs;
-//    }
+    public Song toEntity() {
+        Song songs = Song.builder()
+                .id(id)
+                .song_name(song_name)
+                .songdex(songdex)
+               .album(album)
+                .build();
+        return songs;
+    }
 
     // AlbumDto 대신 Album 엔터티의 일부 정보만 담도록 변경
     public static SongDto newWithoutAlbum(Song song) {

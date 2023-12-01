@@ -21,6 +21,7 @@ public class AlbumDto {
     private BigDecimal price;
     private String img;
     private String regdate;
+    private Long heartcnt;
     private List<SongDto> songs;
     private List<HeartDto> hearts;
 
@@ -32,13 +33,14 @@ public class AlbumDto {
         this.price = album.getPrice();
         this.img = album.getImg();
         this.regdate = album.getRegdate();
+        this.heartcnt = album.getHeartcnt();
 
         if (album.getSongs() != null){ // song 엔티티 리스트 -> songdto 리스트
             this.songs = album.getSongs().stream().map(SongDto::new).collect(Collectors.toList());
         }
 
-        if (album.getHearts() != null) {
-            this.hearts = album.getHearts().stream().map(HeartDto::new).collect(Collectors.toList());
-        }
+//        if (album.getHearts() != null) {
+//            this.hearts = album.getHearts().stream().map(HeartDto::new).collect(Collectors.toList());
+//        }
     }
 }

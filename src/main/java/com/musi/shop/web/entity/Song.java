@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

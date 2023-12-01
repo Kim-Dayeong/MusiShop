@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface HeartRepository extends JpaRepository<Heart, Integer> {
 
-    Optional<Heart> findByAlbumIdAndMemberId(Album album, Member member);
+    Heart findByAlbumIdAndMemberId(Album album, Member member);
 }

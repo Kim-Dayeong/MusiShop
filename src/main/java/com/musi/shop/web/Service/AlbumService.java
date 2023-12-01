@@ -45,42 +45,42 @@ public class AlbumService {
 
 
     //쓰기
-//    @Transactional
-//    public void write(AlbumDto albumDto
-//            ,List<SongDto> songDtos
-//    ,Album album, String username, String nickname){
-//
-//        //앨범
-//
-//        Optional<Member> memberOptional = memberRepository.findByUsername(username);
-//        if (memberOptional.isPresent()) {
-//
-//            album.setTitle(albumDto.getTitle());
-//            album.setPrice(albumDto.getPrice());
-//            album.setImg(albumDto.getImg());
-//            album.setRegdate(albumDto.getRegdate());
-//            album.setId(albumDto.getId());
-//            album.setName(nickname);
-//            Member member = memberOptional.get();
-//            album.setMember(member);
-//           // album.setHeartcnt();
-//        }else{
-//            System.out.println("사용자 null albumService");
-//        }
-//      albumRepository.save(album);
-//
-//        //음악
-//        List<Song> songs = new ArrayList<>();
-//        for (SongDto songDto : songDtos){
-//            Song song = songDto.toEntity();
-//            song.setAlbum(album);
-//            songs.add(song);
-//        }
-//        songRepository.saveAll(songs);
-//
+    @Transactional
+    public void write(AlbumDto albumDto
+            ,List<SongDto> songDtos
+    ,Album album, String username, String nickname){
 
-//
-//    }
+        //앨범
+
+        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+        if (memberOptional.isPresent()) {
+
+            album.setTitle(albumDto.getTitle());
+            album.setPrice(albumDto.getPrice());
+            album.setImg(albumDto.getImg());
+            album.setRegdate(albumDto.getRegdate());
+            album.setId(albumDto.getId());
+            album.setName(nickname);
+            Member member = memberOptional.get();
+            album.setMember(member);
+            album.setHeartcnt(0L);
+        }else{
+            System.out.println("사용자 null albumService");
+        }
+      albumRepository.save(album);
+
+        //음악
+        List<Song> songs = new ArrayList<>();
+        for (SongDto songDto : songDtos){
+            Song song = songDto.toEntity();
+            song.setAlbum(album);
+            songs.add(song);
+        }
+        songRepository.saveAll(songs);
+
+
+
+    }
 
     //읽기
     //수정 전 코드

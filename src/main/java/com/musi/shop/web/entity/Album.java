@@ -11,13 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="Album")
 @Getter
 @Setter
-@Data
 public class Album {
 
     @Id
@@ -25,7 +23,7 @@ public class Album {
     @Column(name = "albumId")
     private Long id;
 
-    @Column(columnDefinition = "BIGINT DEFAULT 0")
+    @Column
     private Long heartcnt;
 
 
@@ -39,8 +37,8 @@ public class Album {
     @JoinColumn(name = "userId") // db에 user_id 컬럼명
     private Member member;
 
-    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
-    private Set<Heart> hearts = new HashSet<>();
+//    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
+//    private Set<Heart> hearts = new HashSet<>();
 
 
     @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)

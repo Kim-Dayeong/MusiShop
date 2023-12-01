@@ -41,30 +41,31 @@
 <script>
   $(document).ready(function() {
     $("#likeButton").click(function() {
-      var albumId = 504;  // 좋아요 처리할 앨범의 ID, 동적으로 설정 필요
+      var albumId = 506;  // 좋아요 처리할 앨범의 ID, 동적으로 설정 필요
       console.log("클릭!!!!!!!!!!!!!!!!!!")
       alert("클릭!!");
       $.ajax({
         type: "POST",
         url: "/albums/" + albumId,
         success: function(response) {
+          var status = response.status;
 
-          alert(response);
-          //     if (response.status === "success") {
-          //         // 좋아요 처리가 성공한 경우
-          //         alert("좋아요 처리가 성공했습니다.");
-          //     } else {
-          //         // 좋아요 처리가 실패한 경우
-          //         alert("좋아요 처리 중에 오류가 발생했습니다.");
-          //     }
+          if (status === 'success') {
+            alert('좋아요 완료');
+
+          }else{
+          alert('좋아요 처리 중 예외 발생');}
         },
-        error: function(error) {
-          alert("좋아요 처리 중에 예외가 발생했습니다.");
-        }
 
+        error: function (error){
+        alert('서버 통신 중 오류가 발생했습니다');
+        }
       });
     });
   });
+
+
+
 </script>
 </body>
 </html>

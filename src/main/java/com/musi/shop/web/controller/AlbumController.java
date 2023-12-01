@@ -56,7 +56,6 @@ public class AlbumController {
         return "albumlist.html";
     }
 
-
     //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
     @GetMapping("/album/add")
     public String showAlbumForm(Model model) {
@@ -67,44 +66,44 @@ public class AlbumController {
     }
 
 
-//    @PostMapping("/album/add")
+    @PostMapping("/album/add")
 
-//    public String albumWrite(@RequestBody AlbumDto albumdto,
-//                             @AuthenticationPrincipal PrincipalDetail principalDetail,
-//                             Album album){
-//        System.out.println(albumdto.toString());
-//
-//        List<SongDto> songDtos = new ArrayList<>();
-//        for(SongDto songDto : albumdto.getSongs()){
-//            System.out.println(songDto.toString());
-//            songDtos.add(songDto);
-//        }
-//
-//        String username = principalDetail.getUsername();
-//        String nickname = principalDetail.getName();
-//        albumService.write(albumdto,songDtos, album,username, nickname);
-//
-//
-//        return "redirect:/";
-//    }
+    public String albumWrite(@RequestBody AlbumDto albumdto,
+                             @AuthenticationPrincipal PrincipalDetail principalDetail,
+                             Album album){
+        System.out.println(albumdto.toString());
+
+        List<SongDto> songDtos = new ArrayList<>();
+        for(SongDto songDto : albumdto.getSongs()){
+            System.out.println(songDto.toString());
+            songDtos.add(songDto);
+        }
+
+        String username = principalDetail.getUsername();
+        String nickname = principalDetail.getName();
+        albumService.write(albumdto,songDtos, album,username, nickname);
+
+
+        return "redirect:/";
+    }
 
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")
-    public String viewAlbum(@PathVariable("no") Long id, Model model){
-        System.out.println("!!!!!!!!!!!!!!!!!!!"+id);
-        AlbumDto albumDto = albumService.getAlbumWithSongs(id);
+    public String viewAlbum(@PathVariable("no") Long no, Model model){
+        System.out.println("!!!!!!!!!!!!!!!!!!!"+no);
+        AlbumDto albumDto = albumService.getAlbumWithSongs(no);
 
         model.addAttribute("albumDto", albumDto);
 
-
         return"albumview.html";
     }
-    @GetMapping("/album/hearttest/{no}")
-    public String Detail(@PathVariable("no") Long no, Model model){
-        System.out.println("!!!!!!!!!!!!!!!!!!!"+no);
 
-        return"heart.html";
-    }
+//    @PostMapping("/albums/{albumid}")
+//    public String Detail(@PathVariable("albumid") Long albumid, Model model){
+//        System.out.println("!!!!@@@@!!!!!albumid!!!!!!!@@@@!!!!"+albumid);
+//
+//        return"heart.html";
+//    }
 
 
 }
