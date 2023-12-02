@@ -1,9 +1,9 @@
 package com.musi.shop.web;
 
-import com.musi.shop.web.entity.Album;
+import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.repository.AlbumRepository;
-import com.musi.shop.web.repository.MemberRepository;
+import com.musi.shop.web.repository.album.AlbumRepository;
+import com.musi.shop.web.repository.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

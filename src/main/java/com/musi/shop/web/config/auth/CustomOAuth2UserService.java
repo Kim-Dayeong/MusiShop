@@ -3,7 +3,7 @@ package com.musi.shop.web.config.auth;
 import com.musi.shop.web.config.auth.dto.OAuthAttributes;
 import com.musi.shop.web.config.auth.dto.SessionUser;
 import com.musi.shop.web.entity.Member;
-import com.musi.shop.web.repository.MemberRepository;
+import com.musi.shop.web.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
