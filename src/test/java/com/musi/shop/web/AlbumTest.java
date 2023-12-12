@@ -6,7 +6,7 @@ import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.album.AlbumRepository;
 import com.musi.shop.web.repository.song.SongRepository;
-import com.musi.shop.web.web.dto.Album.AlbumDto;
+import com.musi.shop.web.web.dto.album.AlbumDto;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
