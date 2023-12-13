@@ -2,7 +2,7 @@ package com.musi.shop.web.controller.member;
 
 
 import com.musi.shop.web.service.member.MemberpageService;
-import com.musi.shop.web.web.dto.album.AlbumDto;
+import com.musi.shop.web.dto.album.AlbumDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

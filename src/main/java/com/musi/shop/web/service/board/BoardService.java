@@ -5,8 +5,7 @@ import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.repository.board.BoardReporitory;
 import com.musi.shop.web.repository.comment.CommentRepository;
 import com.musi.shop.web.repository.member.MemberRepository;
-import com.musi.shop.web.web.dto.board.BoardRequestDto;
-import com.musi.shop.web.web.dto.board.BoardResponseDto;
+import com.musi.shop.web.dto.board.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +29,7 @@ public class BoardService {
 
     BoardResponseDto boardResponseDto;
 
-    public BoardRequestDto findById(Long id){
-        Board board = boardReporitory.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("게시글이 존재하지 않습니다 id : " + id));
 
-        return
-    }
 
     public Board createBoard(String title, String content, Long memberId) {
         // 회원 조회
@@ -65,5 +59,17 @@ public class BoardService {
     }
 
     //Read
+
+    public BoardResponseDto BoardRead(Long id){
+        Board board = boardReporitory.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다. id : " + id));
+        return BoardResponseDto.builder()
+                .id(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .member(board.getMember())
+               // .comments(board.getComments())
+                .build();
+    }
 
 }

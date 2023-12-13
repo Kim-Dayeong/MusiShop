@@ -1,6 +1,6 @@
-package com.musi.shop.web.web.dto.album;
+package com.musi.shop.web.dto.album;
 
-import com.musi.shop.web.web.dto.song.SongDto;
+import com.musi.shop.web.dto.song.SongDto;
 import lombok.Getter;
 import lombok.Setter;
 

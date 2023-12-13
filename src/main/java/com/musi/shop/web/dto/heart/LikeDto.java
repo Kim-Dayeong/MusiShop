@@ -1,4 +1,4 @@
-package com.musi.shop.web.web.dto.heart;
+package com.musi.shop.web.dto.heart;
 
 //@Getter
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)

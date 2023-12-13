@@ -1,16 +1,15 @@
-package com.musi.shop.web.web.dto.board;
+package com.musi.shop.web.dto.board;
 
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
-import com.musi.shop.web.web.dto.comment.CommentRequestDto;
+import com.musi.shop.web.dto.comment.CommentRequestDto;
 import lombok.*;
 
 import java.util.List;
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BoardResponseDto {
 
     private Long id;

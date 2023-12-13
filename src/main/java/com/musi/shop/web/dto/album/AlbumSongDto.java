@@ -1,4 +1,4 @@
-package com.musi.shop.web.web.dto.album;
+package com.musi.shop.web.dto.album;
 
 
 import com.musi.shop.web.entity.album.Album;

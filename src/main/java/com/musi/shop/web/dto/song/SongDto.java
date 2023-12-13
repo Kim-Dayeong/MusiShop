@@ -1,8 +1,8 @@
-package com.musi.shop.web.web.dto.song;
+package com.musi.shop.web.dto.song;
 
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.song.Song;
-import com.musi.shop.web.web.dto.album.AlbumDto;
+import com.musi.shop.web.dto.album.AlbumDto;
 import groovy.transform.builder.Builder;
 import lombok.*;
 

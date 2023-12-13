@@ -1,9 +1,9 @@
-package com.musi.shop.web.web.dto.album;
+package com.musi.shop.web.dto.album;
 
+import com.musi.shop.web.dto.heart.HeartDto;
+import com.musi.shop.web.dto.song.SongDto;
 import com.musi.shop.web.entity.album.Album;
 
-import com.musi.shop.web.web.dto.heart.HeartDto;
-import com.musi.shop.web.web.dto.song.SongDto;
 import lombok.*;
 
 import java.math.BigDecimal;

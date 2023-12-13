@@ -1,4 +1,4 @@
-package com.musi.shop.web.web.dto.heart;
+package com.musi.shop.web.dto.heart;
 
 import com.musi.shop.web.entity.album.Heart;
 import lombok.Getter;

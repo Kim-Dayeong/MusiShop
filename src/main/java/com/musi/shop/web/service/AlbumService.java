@@ -8,9 +8,9 @@ import com.musi.shop.web.repository.album.AlbumRepository;
 import com.musi.shop.web.repository.member.MemberRepository;
 import com.musi.shop.web.repository.song.SongRepository;
 
-import com.musi.shop.web.web.dto.album.AlbumDto;
+import com.musi.shop.web.dto.album.AlbumDto;
 
-import com.musi.shop.web.web.dto.song.SongDto;
+import com.musi.shop.web.dto.song.SongDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;

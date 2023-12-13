@@ -1,4 +1,4 @@
-package com.musi.shop.web.response;
+package com.musi.shop.web.dto.album;
 
 import com.musi.shop.web.entity.album.Album;
 import lombok.*;
