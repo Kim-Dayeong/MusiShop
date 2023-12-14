@@ -1,5 +1,6 @@
 package com.musi.shop.web.service.board;
 
+import com.musi.shop.web.dto.board.BoardRequestDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.repository.board.BoardReporitory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,13 +33,24 @@ public class BoardService {
 
 
 
-    public Board createBoard(String title, String content, Long memberId) {
-        // 회원 조회
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다."));
+    public void createBoard(BoardRequestDto boardRequestDto, String username, String nickname, Board board) {
 
-        // 게시글 생성
-        Board board = new Board(title, content, member);
+        //String title, String content, Long memberId
+
+        board.setId(boardResponseDto.getId());
+        board.setMember(boardRequestDto.getMember());
+        board.setContent(board.getContent());
+        board.setTitle(board.getTitle());
+        board.setCreateDate(board.getCreateDate());
+       // board.setBookmark(board.getBookmark());
+        //board.setLiked(board.getLiked());
+        //board.setView(board.getView());
+       // board.setComments(board.setComments());
+
+        // 회원 조회
+        Optional<Member> memberOptional = memberRepository.findById(boardRequestDto.getMember().getId());
+        Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다."));
+
 
         // 게시글 저장
         Board savedBoard = boardReporitory.save(board);
@@ -48,7 +61,6 @@ public class BoardService {
         // 게시글과 연관된 이미지 초기화 (이미지가 필요하다면 활성화)
         // savedBoard.getImages().size();
 
-        return savedBoard;
 
     }
 

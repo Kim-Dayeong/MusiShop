@@ -1,7 +1,9 @@
 package com.musi.shop.web.controller.board;
 
 import com.musi.shop.web.config.PrincipalDetail;
+import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.entity.album.Album;
+import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.service.board.BoardService;
 import com.musi.shop.web.dto.board.BoardRequestDto;
 import lombok.*;
@@ -23,7 +25,7 @@ public class BoardController {
 
     @GetMapping("/board/read/{id}")
     public String read(@PathVariable Long id, Model model){
-        BoardRequestDto dto = boardService.BoardRead(id);
+        BoardResponseDto dto = boardService.BoardRead(id);
         boardService.updateView(id); // 조회수
         model.addAttribute("boards", dto);
 
@@ -41,8 +43,11 @@ public class BoardController {
     @PostMapping("/board/write")
     public String writeBoardPost(@RequestBody BoardRequestDto boardRequestDto,
                                  @AuthenticationPrincipal PrincipalDetail principalDetail,
-                                 Album album){
-        boardRequestDto
+                                 Board board){
+
+        String username = principalDetail.getUsername();
+        String nickname = principalDetail.getName();
+        boardService.createBoard(boardRequestDto,username, nickname, board);
     }
 
 }
