@@ -12,22 +12,23 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-public class BoardRequestDto {
+public class BoardRequestDto { //create
 
     private Long id;
     private String title;
     private String content;
-    private Member member;
-    private List<CommentRequestDto> comments;
+   // private Member member;
+   // private List<CommentRequestDto> comments;
 
     //dto -> entity
     public Board toEntity() {
         Board board = Board.builder()
                 .id(id)
                 .content(content)
+                .title(title)
                 //.createDate(createDate)
                // .modifiedDate
-                .member(member)
+               // .member(member)
                 .build();
 
         return board;

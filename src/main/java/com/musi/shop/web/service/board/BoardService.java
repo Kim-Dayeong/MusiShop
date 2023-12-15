@@ -29,7 +29,7 @@ public class BoardService {
     @Autowired
     private CommentRepository commentRepository;
 
-    BoardResponseDto boardResponseDto;
+
 
 
 
@@ -37,30 +37,31 @@ public class BoardService {
 
         //String title, String content, Long memberId
 
-        board.setId(boardResponseDto.getId());
-        board.setMember(boardRequestDto.getMember());
-        board.setContent(board.getContent());
-        board.setTitle(board.getTitle());
-        board.setCreateDate(board.getCreateDate());
+        board.setId(boardRequestDto.getId());
+        //board.setMember(boardRequestDto.getMember());
+        board.setContent(boardRequestDto.getContent());
+        board.setTitle(boardRequestDto.getTitle());
+
+
+        Optional<Member> memberOptional = memberRepository.findByUsername(username); //username으로 member 검색
+        Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException());
+        board.setMember(member);
+
+
+       // board.setCreateDate(boardRequestDto.getCreateDate());
        // board.setBookmark(board.getBookmark());
         //board.setLiked(board.getLiked());
         //board.setView(board.getView());
        // board.setComments(board.setComments());
 
-        // 회원 조회
-        Optional<Member> memberOptional = memberRepository.findById(boardRequestDto.getMember().getId());
-        Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다."));
-
-
         // 게시글 저장
         Board savedBoard = boardReporitory.save(board);
 
         // 게시글과 연관된 댓글 초기화 (댓글이 EAGER로 설정되어 있으므로 여기서 초기화)
-        savedBoard.getComments().size();
+        //savedBoard.getComments().size();
 
         // 게시글과 연관된 이미지 초기화 (이미지가 필요하다면 활성화)
         // savedBoard.getImages().size();
-
 
     }
 

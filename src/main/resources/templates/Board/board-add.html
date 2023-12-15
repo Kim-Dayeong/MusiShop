@@ -1,24 +1,22 @@
 <html lang="ko"
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <meta charset="UTF-8">
 <head>
-    <meta charset="UTF-8">
-    <title>게시글 등록 페이지</title>
+
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-<h1>게시글 등록 페이지</h1>
+<h1>게시판 글 등록</h1>
+<hr/>
 
-<form id="boardForm">
-    <input type="text" name="title" placeholder="제목">
-    <input type="text" name="content" placeholder="내용">
+<form action="/board/write" method="post">
+    <input type="text" name="title" placeholder="제목"/> <br/>
+    <input type="text" name="content" placeholder="내용"/> <br/>
+    <button>등록</button>
 </form>
-
-<button type="button" class="boardForm">등록</button>
-
 </body>
 </html>
