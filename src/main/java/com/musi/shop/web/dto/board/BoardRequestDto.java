@@ -1,11 +1,7 @@
 package com.musi.shop.web.dto.board;
 
-import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
-import com.musi.shop.web.dto.comment.CommentRequestDto;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

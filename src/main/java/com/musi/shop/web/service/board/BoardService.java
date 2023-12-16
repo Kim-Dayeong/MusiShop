@@ -72,17 +72,37 @@ public class BoardService {
     }
 
     //Read
+//    public BoardResponseDto BoardRead(Long id){
+//        Board board = boardReporitory.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다. id : " + id));
+//       Member member = board.getMember();
+//        return BoardResponseDto
+//
+//
+//    }
 
-    public BoardResponseDto BoardRead(Long id){
-        Board board = boardReporitory.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다. id : " + id));
-        return BoardResponseDto.builder()
-                .id(board.getId())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .member(board.getMember())
-               // .comments(board.getComments())
+    public BoardResponseDto BoardDetail(Long id){
+        Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        BoardResponseDto result = BoardResponseDto.builder()
+                .board(board)
                 .build();
+
+        return result;
+    }
+
+    // Update
+
+    public Long updateBoard(Long id, BoardRequestDto boardRequestDto){
+        Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+       board.update(boardRequestDto.getTitle(), boardRequestDto.getContent());
+    boardReporitory.save(board);
+        return board.getId();
+    }
+
+    // Delete
+    public void deleteBoard(Long id){
+        Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        boardReporitory.delete(board);
     }
 
 }

@@ -1,0 +1,31 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+    <meta charset="UTF-8">
+    <head>
+
+    <title>게시글</title>
+</head>
+<body>
+
+<div class="layout">
+
+    <table>
+        <tbody>
+        <h2 th:text = "${boards.title}"></h2>
+        <h2 th:text = "${boards.content}"></h2>
+        <h2 th:text = "${boards.nickname}"></h2>
+        <h2 th:text = "${boards.view}"></h2>
+
+        </tbody>
+
+    </table>
+
+
+    <a th:href="@{/board/update/{id}(id=${boards.id})}">수정</a>
+    <a th:href="@{/board/delete/{id}(id=${boards.id})}">삭제</a>
+</div>
+
+</body>
+</html>
