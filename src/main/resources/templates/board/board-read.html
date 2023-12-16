@@ -6,6 +6,7 @@
     <head>
 
     <title>게시글</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -24,8 +25,42 @@
 
 
     <a th:href="@{/board/update/{id}(id=${boards.id})}">수정</a>
-    <a th:href="@{/board/delete/{id}(id=${boards.id})}">삭제</a>
+<!--    <a th:href="@{/board/delete/{id}(id=${boards.id})}"class="delete-button">삭제</a>-->
+    <button id="deleteButton" data-id="${board.id}">게시글 삭제</button>
+    <button id="bookmarkButton" data-id="${board.id}">북마크</button>
 </div>
 
+
+<!-- Ajax 스크립트 -->
+<script th:inline="javascript">
+    $(document).ready(function() {
+        // 삭제 버튼 클릭 시
+        $("#deleteButton").click(function() {
+            var boardId = $(this).data("id");
+
+            // Ajax 요청
+            $.ajax({
+                type: "GET",
+                url: "/board/delete/" + boardId,
+                success: function(response) {
+                    // 성공 시 결과를 alert로 표시
+                    alert(response.message);
+                },
+                error: function(xhr, status, error) {
+                    // 에러 시 결과를 alert로 표시
+                    if (status === 403) {
+                        alert("Forbidden");
+                    } else if (status === 404) {
+                        alert("Not Found");
+                    } else if (status === 401) {
+                        alert("Unauthorized");
+                    } else {
+                        alert("Error"+status);
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

@@ -33,9 +33,7 @@ public class BoardService {
 
 
 
-    public void createBoard(BoardRequestDto boardRequestDto, String username, String nickname, Board board) {
-
-        //String title, String content, Long memberId
+    public void createBoard(BoardRequestDto boardRequestDto, String username, Board board) {
 
         board.setId(boardRequestDto.getId());
         //board.setMember(boardRequestDto.getMember());
@@ -46,13 +44,6 @@ public class BoardService {
         Optional<Member> memberOptional = memberRepository.findByUsername(username); //username으로 member 검색
         Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException());
         board.setMember(member);
-
-
-       // board.setCreateDate(boardRequestDto.getCreateDate());
-       // board.setBookmark(board.getBookmark());
-        //board.setLiked(board.getLiked());
-        //board.setView(board.getView());
-       // board.setComments(board.setComments());
 
         // 게시글 저장
         Board savedBoard = boardReporitory.save(board);
@@ -71,16 +62,7 @@ public class BoardService {
         return boardReporitory.updateView(id);
     }
 
-    //Read
-//    public BoardResponseDto BoardRead(Long id){
-//        Board board = boardReporitory.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다. id : " + id));
-//       Member member = board.getMember();
-//        return BoardResponseDto
-//
-//
-//    }
-
+    // Read
     public BoardResponseDto BoardDetail(Long id){
         Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
         BoardResponseDto result = BoardResponseDto.builder()
@@ -90,8 +72,8 @@ public class BoardService {
         return result;
     }
 
-    // Update
 
+    // Update
     public Long updateBoard(Long id, BoardRequestDto boardRequestDto){
         Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
        board.update(boardRequestDto.getTitle(), boardRequestDto.getContent());
