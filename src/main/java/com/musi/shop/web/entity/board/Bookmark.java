@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -28,12 +28,12 @@ public class Bookmark {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-    @Column(nullable = false)
-    private boolean status; // true = 좋아요, false = 좋아요 취소
+//    @Column(nullable = false)
+//    private boolean status; // true = 좋아요, false = 좋아요 취소
 
     public Bookmark(Board board, Member member) {
         this.board = board;
         this.member = member;
-        this.status = true;
+//        this.status = true;
     }
 }

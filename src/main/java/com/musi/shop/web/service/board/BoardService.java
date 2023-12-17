@@ -1,6 +1,7 @@
 package com.musi.shop.web.service.board;
 
 import com.musi.shop.web.dto.board.BoardRequestDto;
+import com.musi.shop.web.dto.member.MemberDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.repository.board.BoardReporitory;
@@ -28,7 +29,6 @@ public class BoardService {
 
     @Autowired
     private CommentRepository commentRepository;
-
 
 
 

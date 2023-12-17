@@ -32,11 +32,13 @@
 
 
 <!-- Ajax 스크립트 -->
+<!-- Ajax 스크립트 -->
 <script th:inline="javascript">
     $(document).ready(function() {
         // 삭제 버튼 클릭 시
         $("#deleteButton").click(function() {
-            var boardId = $(this).data("id");
+            // var boardId = $(this).data("id");
+            var boardId =7;
 
             // Ajax 요청
             $.ajax({
@@ -44,7 +46,11 @@
                 url: "/board/delete/" + boardId,
                 success: function(response) {
                     // 성공 시 결과를 alert로 표시
-                    alert(response.message);
+                    if (response.success) {
+                        alert("게시글 삭제 성공");
+                    } else {
+                        alert("게시글 삭제 실패: " + response.message);
+                    }
                 },
                 error: function(xhr, status, error) {
                     // 에러 시 결과를 alert로 표시
@@ -55,8 +61,36 @@
                     } else if (status === 401) {
                         alert("Unauthorized");
                     } else {
-                        alert("Error"+status);
+                        alert("에러가 발생했습니다. Status: " + status);
                     }
+                }
+            });
+        });
+    });
+</script>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        // 북마크 토글 버튼 클릭 시
+        $("#bookmarkButton").click(function() {
+            // var boardId = $(this).data("id");
+            var boardId = 6;
+
+            // Ajax 요청
+            $.ajax({
+                type: "GET",
+                url: "/board/bookmark/" + boardId,
+                success: function(response) {
+                    // 성공 시 결과를 alert로 표시 또는 다른 작업을 수행할 수 있습니다.
+                    if (response.success) {
+                        alert("북마크가 설정되었습니다.");
+                    } else {
+                        alert("북마크가 해제되었습니다.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 에러 시 결과를 alert로 표시 또는 다른 작업을 수행할 수 있습니다.
+                    alert("에러가 발생했습니다." + error + "status!!!!" + status);
                 }
             });
         });
