@@ -28,12 +28,10 @@ public class Bookmark {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-//    @Column(nullable = false)
-//    private boolean status; // true = 좋아요, false = 좋아요 취소
 
     public Bookmark(Board board, Member member) {
         this.board = board;
         this.member = member;
-//        this.status = true;
+
     }
 }

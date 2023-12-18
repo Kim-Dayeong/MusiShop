@@ -3,6 +3,7 @@ package com.musi.shop.web.service.board;
 import com.musi.shop.web.dto.board.BoardRequestDto;
 import com.musi.shop.web.dto.member.MemberDto;
 import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.repository.board.BoardReporitory;
 import com.musi.shop.web.repository.comment.CommentRepository;
@@ -10,6 +11,8 @@ import com.musi.shop.web.repository.member.MemberRepository;
 import com.musi.shop.web.dto.board.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -85,6 +88,11 @@ public class BoardService {
     public void deleteBoard(Long id){
         Board board = boardReporitory.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
         boardReporitory.delete(board);
+    }
+
+    //페이징
+    public Page<Board> boardList(Pageable pageable) {
+        return boardReporitory.findAll(pageable);
     }
 
 }

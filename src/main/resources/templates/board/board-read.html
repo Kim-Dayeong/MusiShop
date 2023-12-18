@@ -25,46 +25,35 @@
 
 
     <a th:href="@{/board/update/{id}(id=${boards.id})}">수정</a>
-<!--    <a th:href="@{/board/delete/{id}(id=${boards.id})}"class="delete-button">삭제</a>-->
     <button id="deleteButton" data-id="${board.id}">게시글 삭제</button>
     <button id="bookmarkButton" data-id="${board.id}">북마크</button>
 </div>
 
 
 <!-- Ajax 스크립트 -->
-<!-- Ajax 스크립트 -->
+
 <script th:inline="javascript">
     $(document).ready(function() {
         // 삭제 버튼 클릭 시
         $("#deleteButton").click(function() {
-            // var boardId = $(this).data("id");
-            var boardId =7;
 
-            // Ajax 요청
+            var boardId = [[${boards.id}]];
+
             $.ajax({
                 type: "GET",
                 url: "/board/delete/" + boardId,
-                success: function(response) {
-                    // 성공 시 결과를 alert로 표시
-                    if (response.success) {
-                        alert("게시글 삭제 성공");
-                    } else {
-                        alert("게시글 삭제 실패: " + response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // 에러 시 결과를 alert로 표시
-                    if (status === 403) {
-                        alert("Forbidden");
-                    } else if (status === 404) {
-                        alert("Not Found");
-                    } else if (status === 401) {
-                        alert("Unauthorized");
-                    } else {
-                        alert("에러가 발생했습니다. Status: " + status);
-                    }
+
+            }).done((res) => {
+                if(res.data == true){ // 삭제 완료
+                    alert(res.msg);
+                    window.location.replace("/");
+                } else {
+                    alert(res.msg);
                 }
-            });
+            }).fail((err) => {
+                console.log('상태코드 200 밖에 없어서 실행 안됨')
+                alert("예외 에러 발생",err);
+            })
         });
     });
 </script>
@@ -72,29 +61,28 @@
 <script th:inline="javascript">
     $(document).ready(function() {
         // 북마크 토글 버튼 클릭 시
-        $("#bookmarkButton").click(function() {
-            // var boardId = $(this).data("id");
-            var boardId = 6;
+        $("#bookmarkButton").click(function () {
+
+            var boardId = [[${boards.id}]];
 
             // Ajax 요청
             $.ajax({
                 type: "GET",
-                url: "/board/bookmark/" + boardId,
-                success: function(response) {
-                    // 성공 시 결과를 alert로 표시 또는 다른 작업을 수행할 수 있습니다.
-                    if (response.success) {
-                        alert("북마크가 설정되었습니다.");
-                    } else {
-                        alert("북마크가 해제되었습니다.");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // 에러 시 결과를 alert로 표시 또는 다른 작업을 수행할 수 있습니다.
-                    alert("에러가 발생했습니다." + error + "status!!!!" + status);
+                url: "/board/bookmark/" + boardId
+            }).done((res) => {
+                if(res.data == true){ // 북마크 추가
+                    alert(res.msg);
+                }else{ // 북마크 해제
+                    alert(res.msg);
                 }
-            });
-        });
-    });
+
+            }).fail((err) => {
+                console.log('북마크 에러 발생')
+                alert("에러 발생",err);
+            })
+        })
+    })
+
 </script>
 </body>
 </html>

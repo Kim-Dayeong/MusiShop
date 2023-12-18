@@ -1,14 +1,21 @@
 package com.musi.shop.web.controller.board;
 
 import com.musi.shop.web.config.PrincipalDetail;
+import com.musi.shop.web.dto.ResponseDto;
 import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.repository.board.BoardReporitory;
 import com.musi.shop.web.service.board.BoardService;
 import com.musi.shop.web.dto.board.BoardRequestDto;
+import com.musi.shop.web.service.board.BookmarkService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,6 +35,7 @@ import java.util.Optional;
 public class BoardController {
 
     private final BoardService boardService;
+    private final BookmarkService bookmarkService;
 
     @Autowired
     private BoardReporitory boardReporitory;
@@ -82,41 +90,76 @@ public class BoardController {
     // Delete
     @GetMapping("/board/delete/{id}")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>>  deleteBoardPost(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetail principalDetail
-    , RedirectAttributes redirectAttributes) {
+    public ResponseDto<?> deleteBoardPost(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetail principalDetail
+    ) {
 
-        Map<String, Object> response = new HashMap<>();
+        Integer statusCode = HttpStatus.OK.value();
+
         // 게시글 ID로 해당 게시글 가져오기
         Optional<Board> optionalBoard = boardReporitory.findById(id);
 
         // 게시글이 존재하지 않으면 에러 응답
         if (optionalBoard.isEmpty()) {
-            response.put("success", false);
-            response.put("message", "게시글이 존재하지 않습니다.");
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+            return new ResponseDto<>(-1, "게시글이 존재하지 않습니다", null);
         }
 
         // 로그인 안된 상태일때
         if (principalDetail == null || !principalDetail.isAccountNonExpired()) {
-            response.put("success", false);
-            response.put("message", "인증되지 않은 사용자입니다.");
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+            return new ResponseDto<>(-1, "인증되지 않은 사용자 입니다", null);
         }
 
         // 로그인한 사용자와 게시글 작성자가 다르면 권한 오류 응답
         Member boardMember = optionalBoard.get().getMember();
         if (boardMember == null || !Objects.equals(principalDetail.getUsername(), boardMember.getUsername())) {
-            response.put("success", false);
-            response.put("message", "해당 게시글에 대한 권한이 없습니다.");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+            return new ResponseDto<>(-1, "작성자 아이디가 일치하지 않습니다", null);
         }
-
 
         // 게시글 삭제
         boardService.deleteBoard(id);
+        return new ResponseDto<>(1,"삭제되었습니다", true);
 
-        // 성공 응답
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 페이징
+    @GetMapping("/board/list")
+    public String albumList(Model model, @PageableDefault(page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+
+
+        Page<Board> list = boardService.boardList(pageable);
+
+        //페이지 블럭 처리
+        int nowPage = list.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage -3, 1);
+        int endPage = Math.min(nowPage + 3, list.getTotalPages());
+        int starttotal = 0;
+        int endtotal = list.getTotalPages()-1;
+
+        model.addAttribute("list", list);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("starttotal", starttotal);
+        model.addAttribute("endtotal", endtotal);
+
+        return "albumlist.html";
+    }
+
+    @GetMapping("/board/bookmark/{id}")
+    @ResponseBody
+    public  ResponseDto<?> bookmark(@PathVariable("id") Long id,
+                            @AuthenticationPrincipal PrincipalDetail principalDetail) {
+
+        Board board = bookmarkService.findBoard(id);
+        Member member = bookmarkService.findMember(principalDetail.getUsername());
+
+        if (bookmarkService.bookmarking(board,member)){ // true
+            return new ResponseDto<>(1, "북마크 추가 되었습니다", true);
+        }
+        return new ResponseDto<>(1, "북마크 해제 되었습니다", false);
+
     }
 
 }
+
+

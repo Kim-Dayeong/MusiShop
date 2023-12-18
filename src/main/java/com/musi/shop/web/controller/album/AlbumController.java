@@ -93,12 +93,5 @@ public class AlbumController {
         return"albumview.html";
     }
 
-//    @PostMapping("/albums/{albumid}")
-//    public String Detail(@PathVariable("albumid") Long albumid, Model model){
-//        System.out.println("!!!!@@@@!!!!!albumid!!!!!!!@@@@!!!!"+albumid);
-//
-//        return"heart.html";
-//    }
-
 
 }
