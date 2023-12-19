@@ -1,0 +1,22 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<meta charset="UTF-8">
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>커뮤니티 글 등록</h1>
+<hr/>
+
+<form action="/commu/write/{id}" method="post">
+    <input type="text" name="title" placeholder="제목"/> <br/>
+    <input type="text" name="content" placeholder="내용"/> <br/>
+    <button>등록</button>
+</form>
+</body>
+</html>

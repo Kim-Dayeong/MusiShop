@@ -142,7 +142,7 @@ public class BoardController {
         model.addAttribute("starttotal", starttotal);
         model.addAttribute("endtotal", endtotal);
 
-        return "albumlist.html";
+        return "board/board-list";
     }
 
     @GetMapping("/board/bookmark/{id}")

@@ -1,6 +1,7 @@
 package com.musi.shop.web.entity.album;
 
 import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.song.Song;
 import lombok.*;
 
@@ -35,6 +36,10 @@ public class Album {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId") // db에 user_id 컬럼명
     private Member member;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "channel_Id")
+    private Channel channel;
 
 //    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
 //    private Set<Heart> hearts = new HashSet<>();

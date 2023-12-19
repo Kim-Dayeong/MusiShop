@@ -1,6 +1,7 @@
 package com.musi.shop.web.entity;
 
 
+import com.musi.shop.web.entity.channel.Channel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -47,6 +48,9 @@ public class Member {
 
 
     //private LocalDateTime last_login_time;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Channel channel;
 
     @Builder
     public Member(String username, String password, String nickname, String email, Role role, String providerId, String provider, String picture){

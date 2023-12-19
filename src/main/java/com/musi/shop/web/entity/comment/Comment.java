@@ -47,6 +47,10 @@ public class Comment extends BaseTimeEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Board board;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "comu_Id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Community community;
 
     public Comment(final String content, final Member member, final Board board) {
         this.content = content;

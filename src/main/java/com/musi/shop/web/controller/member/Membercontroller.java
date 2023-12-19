@@ -7,6 +7,8 @@ import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.repository.member.MemberRepository;
+import com.musi.shop.web.service.member.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
+@RequiredArgsConstructor
 public class Membercontroller {
 
     @Autowired
@@ -25,6 +28,9 @@ public class Membercontroller {
 
     @Autowired
     MemberRepository userRepository;
+
+    private final MemberService memberService;
+
 
 
 
@@ -46,11 +52,9 @@ public class Membercontroller {
     //아티스트 회원가입
     @PostMapping("/ArtjoinProc")
     public String ArtjoinProc(Member member){
-        String rawPassword = member.getPassword();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        member.setPassword(encPassword);
-        member.setRole(Role.ARTIST);
-        userRepository.save(member);
+
+        memberService.ArtMemberJoin(member);
+
         return "redirect:/";
     }
 
