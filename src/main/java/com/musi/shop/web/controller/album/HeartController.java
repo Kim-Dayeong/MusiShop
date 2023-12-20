@@ -1,7 +1,7 @@
 package com.musi.shop.web.controller.album;
 
 
-import com.musi.shop.web.service.HeartService;
+import com.musi.shop.web.service.heart.HeartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

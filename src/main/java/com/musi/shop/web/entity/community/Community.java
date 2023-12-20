@@ -14,22 +14,23 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity(name = "Community")
 public class Community {
 
     @Id
     @Column(name = "comu_Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 커뮤니티 게시글의 id
 
 
     @OneToOne(mappedBy = "community",fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_Id")
-    private Channel channel;
+    private Channel channel; // 채널 카테고리
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
@@ -73,6 +74,7 @@ public class Community {
         this.member = member;
         this.liked = 0;
         this.bookmark = 0;
+
     }
 
 }

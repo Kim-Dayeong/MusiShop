@@ -1,6 +1,6 @@
 package com.musi.shop.web.controller.album;
 
-import com.musi.shop.web.service.AlbumService;
+import com.musi.shop.web.service.album.AlbumService;
 import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.dto.album.AlbumDto;

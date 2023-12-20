@@ -1,6 +1,6 @@
 package com.musi.shop.web;
 
-import com.musi.shop.web.service.AlbumService;
+import com.musi.shop.web.service.album.AlbumService;
 import com.musi.shop.web.controller.album.AlbumController;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.song.Song;

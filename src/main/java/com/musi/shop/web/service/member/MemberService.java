@@ -4,9 +4,11 @@ import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.channel.Channel;
+import com.musi.shop.web.entity.community.Community;
 import com.musi.shop.web.repository.album.AlbumRepository;
 import com.musi.shop.web.dto.album.AlbumDto;
 import com.musi.shop.web.repository.channel.ChannelRepository;
+import com.musi.shop.web.repository.community.CommunityRepository;
 import com.musi.shop.web.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class MemberService {
     private final ChannelRepository channelRepository;
 
     @Autowired
+    private final CommunityRepository communityRepository;
+
+    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
@@ -41,12 +46,14 @@ public class MemberService {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);
         member.setRole(Role.ARTIST);
-            Channel channel = new Channel(); //아티스트 유저 채널 생성
+            Channel channel = new Channel(); // 아티스트 유저 채널 생성
             channel.setMember(member);
             member.setChannel(channel);
 
             channelRepository.save(channel);
             memberRepository.save(member);
+
+
         }
 
 

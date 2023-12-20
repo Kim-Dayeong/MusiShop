@@ -1,6 +1,6 @@
 package com.musi.shop.web.controller.view;
 
-import com.musi.shop.web.service.AlbumService;
+import com.musi.shop.web.service.album.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

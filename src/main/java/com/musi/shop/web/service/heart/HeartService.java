@@ -1,4 +1,4 @@
-package com.musi.shop.web.service;
+package com.musi.shop.web.service.heart;
 
 import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.entity.album.Album;

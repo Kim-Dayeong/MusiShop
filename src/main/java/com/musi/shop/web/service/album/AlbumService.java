@@ -1,4 +1,4 @@
-package com.musi.shop.web.service;
+package com.musi.shop.web.service.album;
 
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.Member;
