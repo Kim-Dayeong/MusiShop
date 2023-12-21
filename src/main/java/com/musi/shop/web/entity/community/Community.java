@@ -5,6 +5,7 @@ import com.musi.shop.web.entity.Member;
 
 import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.comment.Comment;
+import com.musi.shop.web.entity.time.BaseTimeEntity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -20,7 +21,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity(name = "Community")
-public class Community {
+public class Community extends BaseTimeEntity {
 
     @Id
     @Column(name = "comu_Id")
@@ -28,14 +29,15 @@ public class Community {
     private Long id; // 커뮤니티 게시글의 id
 
 
-    @OneToOne(mappedBy = "community",fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_Id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_Id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Channel channel; // 채널 카테고리
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Member member;
+    private Member member; // 게시글 작성자
 
     @Column(nullable = false)
     private String title;

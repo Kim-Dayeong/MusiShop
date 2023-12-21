@@ -12,12 +12,14 @@
 <body>
 <h1>커뮤니티 글 등록</h1>
 <hr/>
-<!-- 채널 아이디 뿌려주기 -->
 
-<form action="/commu/write/{id}" method="post">
+<form action="/commu/{id}/write" method="post" th:action="@{/commu/{id}/write(id=${id})}">
+
+
     <input type="text" name="title" placeholder="제목"/> <br/>
     <input type="text" name="content" placeholder="내용"/> <br/>
-    <!-- 채널 아이디 받아오기 -->
+    <h2 th:text = "${id}"></h2>
+
     <button>등록</button>
 </form>
 </body>

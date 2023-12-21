@@ -1,7 +1,10 @@
 package com.musi.shop.web.service.community;
 
+import com.musi.shop.web.dto.board.BoardResponseDto;
+import com.musi.shop.web.dto.channel.ChannelDto;
 import com.musi.shop.web.dto.community.CommunityRequestDto;
 import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.community.Community;
 import com.musi.shop.web.repository.channel.ChannelRepository;
@@ -28,7 +31,7 @@ public class CommunityService {
     @Autowired
     private ChannelRepository channelRepository;
 
-    // create
+    // write
     public void createCommunity(CommunityRequestDto communityRequestDto, String username,
                                 Community community,Long id ){
 
@@ -47,4 +50,16 @@ public class CommunityService {
         communityRepository.save(community);
 
     }
+
+    // write
+
+//    public ChannelDto ChannelResponse(Long id){
+//        Channel channel = channelRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채널입니다."));
+//       ChannelDto result = ChannelDto.builder()
+//               .channel(channel)
+//                .build();
+//
+//
+//        return result;
+//    }
 }

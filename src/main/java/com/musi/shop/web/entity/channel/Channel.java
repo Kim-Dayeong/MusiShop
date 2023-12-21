@@ -24,7 +24,4 @@ public class Channel {
     @OneToOne(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comu_Id")
-    private Community community;
 }
