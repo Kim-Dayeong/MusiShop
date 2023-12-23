@@ -33,9 +33,9 @@ public class Album {
     @Column
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId") // db에 user_id 컬럼명
-    private Member member;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "userId") // db에 user_id 컬럼명
+//    private Member member;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "channel_Id")

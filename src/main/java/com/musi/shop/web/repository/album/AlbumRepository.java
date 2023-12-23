@@ -12,8 +12,8 @@ import java.util.List;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Long> {
-    @Query("SELECT a FROM Album a WHERE a.member.id = :userId")
-    List<Album> findAlbumByUserId(@Param("userId") Long userId); //userid 와 조인해 album 검색
+    @Query("SELECT a FROM Album a WHERE a.channel.id = :channelId")
+    List<Album> findAlbumByChannelId(@Param("channelId") Long userId); //channelid 와 조인해 album 검색
 
 
 }

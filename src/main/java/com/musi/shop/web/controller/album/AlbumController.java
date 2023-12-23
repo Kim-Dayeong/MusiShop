@@ -48,7 +48,7 @@ public class AlbumController {
         model.addAttribute("starttotal", starttotal);
         model.addAttribute("endtotal", endtotal);
 
-        return "albumlist.html";
+        return "album/albumlist";
     }
 
     //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
@@ -57,7 +57,7 @@ public class AlbumController {
         AlbumDto albumdto = new AlbumDto();
         albumdto.setSongs(new ArrayList<>());
         model.addAttribute("albumDto", albumdto);
-        return "albumAdd";
+        return "album/album-add";
     }
 
 
@@ -74,7 +74,7 @@ public class AlbumController {
             songDtos.add(songDto);
         }
 
-        String username = principalDetail.getUsername();
+      String username = principalDetail.getUsername();
         String nickname = principalDetail.getName();
         albumService.write(albumdto,songDtos, album,username, nickname);
 
@@ -90,7 +90,7 @@ public class AlbumController {
 
         model.addAttribute("albumDto", albumDto);
 
-        return"albumview.html";
+        return"/album/albumview";
     }
 
 

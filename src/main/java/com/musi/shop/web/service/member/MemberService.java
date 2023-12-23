@@ -61,9 +61,9 @@ public class MemberService {
 
     //앨범 제목,커버 받아오기
     @Transactional
-    public AlbumDto getAlbumtitle(Long id) {
+    public AlbumDto getAlbumtitle(Long channelId) {
 
-        List<Album> albums = albumRepository.findAlbumByUserId(id);
+        List<Album> albums = albumRepository.findAlbumByChannelId(channelId);
 
         //앨범에서 title , image 받아서 내보내기
         List<AlbumDto> albumDtos =

@@ -3,8 +3,10 @@ package com.musi.shop.web.service.album;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.Member;
 
+import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.album.AlbumRepository;
+import com.musi.shop.web.repository.channel.ChannelRepository;
 import com.musi.shop.web.repository.member.MemberRepository;
 import com.musi.shop.web.repository.song.SongRepository;
 
@@ -36,6 +38,7 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
     private final SongRepository songRepository;
     private final MemberRepository memberRepository;
+    private final ChannelRepository channelRepository;
 
 
     //페이징
@@ -52,8 +55,10 @@ public class AlbumService {
 
         //앨범
 
-        Optional<Member> memberOptional = memberRepository.findByUsername(username);
-        if (memberOptional.isPresent()) {
+       Long channelId = memberRepository.findChannelIdByUsername(username);
+        Optional<Channel> channelOptional = channelRepository.findById(channelId); //채널 아이디로 검색
+
+        if (channelOptional.isPresent()) {
 
             album.setTitle(albumDto.getTitle());
             album.setPrice(albumDto.getPrice());
@@ -61,9 +66,10 @@ public class AlbumService {
             album.setRegdate(albumDto.getRegdate());
             album.setId(albumDto.getId());
             album.setName(nickname);
-            Member member = memberOptional.get();
-            album.setMember(member);
+            Channel channel = channelOptional.get();
+            album.setChannel(channel);
             album.setHeartcnt(0L);
+
         }else{
             System.out.println("사용자 null albumService");
         }
