@@ -57,8 +57,6 @@ public class MemberService {
         }
 
 
-
-
     //앨범 제목,커버 받아오기
     @Transactional
     public AlbumDto getAlbumtitle(Long channelId) {

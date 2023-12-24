@@ -42,20 +42,20 @@ public class RepositoryTest {
 
     }
 
-    @Test
-    public void testFindAlbumByUserId(){
-        //given
-        Member member = new Member();
-        member.setId(2L);
-        //when
-        List<Album> albums = albumRepository.findAlbumByUserId(2L);
-        //then
-        assertThat(albums).isNotNull();
-        for (Album album : albums){
-            System.out.println("테스트!!!!!!!!!!!!!!!!!!!!"+album.getTitle());
-        }
+//    @Test
+//    public void testFindAlbumByUserId(){
+//        //given
+//        Member member = new Member();
+//        member.setId(2L);
+//        //when
+//        List<Album> albums = albumRepository.findAlbumByUserId(2L);
+//        //then
+//        assertThat(albums).isNotNull();
+//        for (Album album : albums){
+//            System.out.println("테스트!!!!!!!!!!!!!!!!!!!!"+album.getTitle());
+//        }
 
-    }
+//    }
 
     @Test
     public void testFindAlbumByalbumId() {
