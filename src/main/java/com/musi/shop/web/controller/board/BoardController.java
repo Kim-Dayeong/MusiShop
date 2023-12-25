@@ -3,6 +3,7 @@ package com.musi.shop.web.controller.board;
 import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.dto.ResponseDto;
 import com.musi.shop.web.dto.board.BoardResponseDto;
+import com.musi.shop.web.dto.comment.CommentResponseDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.board.Board;
@@ -10,6 +11,7 @@ import com.musi.shop.web.repository.board.BoardReporitory;
 import com.musi.shop.web.service.board.BoardService;
 import com.musi.shop.web.dto.board.BoardRequestDto;
 import com.musi.shop.web.service.board.BookmarkService;
+import com.musi.shop.web.service.comment.CommentService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final BookmarkService bookmarkService;
+    private final CommentService commentService;
 
     @Autowired
     private BoardReporitory boardReporitory;
@@ -44,8 +47,10 @@ public class BoardController {
     @GetMapping("/board/read/{id}")
     public String read(@PathVariable Long id, Model model){
         BoardResponseDto dto = boardService.BoardDetail(id);
+        CommentResponseDto commentdto = commentService.
         boardService.updateView(id); // 조회수
         model.addAttribute("boards", dto);
+        model.addAttribute("comments",);
 
         return "/board/board-read";
     }

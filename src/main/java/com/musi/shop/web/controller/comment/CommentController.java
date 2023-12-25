@@ -17,6 +17,9 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    // read
+
+
     // write
 
     @PostMapping("/board/{id}/comment")

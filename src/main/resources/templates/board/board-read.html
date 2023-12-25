@@ -18,10 +18,26 @@
         <h2 th:text = "${boards.content}"></h2>
         <h2 th:text = "${boards.nickname}"></h2>
         <h2 th:text = "${boards.view}"></h2>
+        <h2 th:text = "${boards.id}"></h2>
 
         </tbody>
 
     </table>
+
+
+    <form action="/board/{id}/comment" method="post" th:action="@{'/board/' + ${id} + '/comment'}">
+     <input type="text" name="content" placeholder="내용"/> <br/>
+     <button>등록</button>
+ </form>
+
+    <table>
+        <tbody>
+        <h4 th:text = "${}"></h4>
+
+        </tbody>
+
+    </table>
+
 
 
     <a th:href="@{/board/update/{id}(id=${boards.id})}">수정</a>

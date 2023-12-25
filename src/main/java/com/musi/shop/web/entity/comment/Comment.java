@@ -41,7 +41,6 @@ public class Comment extends BaseTimeEntity {
     private LocalDateTime modifiedDate;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
