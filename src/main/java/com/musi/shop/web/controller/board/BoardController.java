@@ -26,10 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -47,10 +44,10 @@ public class BoardController {
     @GetMapping("/board/read/{id}")
     public String read(@PathVariable Long id, Model model){
         BoardResponseDto dto = boardService.BoardDetail(id);
-        CommentResponseDto commentdto = commentService.
-        boardService.updateView(id); // 조회수
+        List<CommentResponseDto> comments = commentService.readComment(id);
+                boardService.updateView(id); // 조회수
         model.addAttribute("boards", dto);
-        model.addAttribute("comments",);
+        model.addAttribute("comments", comments);
 
         return "/board/board-read";
     }

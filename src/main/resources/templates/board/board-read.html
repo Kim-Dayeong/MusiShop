@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <head>
 
+        <style>
+            .comment-box {
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 10px 0;
+            }
+        </style>
+
     <title>게시글</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -30,13 +38,6 @@
      <button>등록</button>
  </form>
 
-    <table>
-        <tbody>
-        <h4 th:text = "${}"></h4>
-
-        </tbody>
-
-    </table>
 
 
 
@@ -45,6 +46,14 @@
     <button id="bookmarkButton" data-id="${board.id}">북마크</button>
 </div>
 
+<div th:each="i : ${comments}" class="comment-box">
+    <div>
+        <p>Username: <span th:text="${i.username}"></span></p>
+        <p>Nickname: <span th:text="${i.nickname}"></span></p>
+        <p>Content: <span th:text="${i.content}"></span></p>
+        <p>Create Date: <span th:text="${i.createDate}"></span></p>
+    </div>
+</div>
 
 <!-- Ajax 스크립트 -->
 

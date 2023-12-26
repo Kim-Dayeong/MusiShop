@@ -1,7 +1,9 @@
 package com.musi.shop.web.service.comment;
 
 import com.musi.shop.web.config.PrincipalDetail;
+import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.dto.comment.CommentRequestDto;
+import com.musi.shop.web.dto.comment.CommentResponseDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.comment.Comment;
@@ -14,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.OrderBy;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +43,16 @@ public class CommentService {
                 .build();
         commentRepository.save(result);
         return result.getId();
+    }
+
+    // read
+    public List<CommentResponseDto>  readComment(Long BoardId){ //boardId로 comment 읽어오기
+        List<Comment> comments = commentRepository.findByBoardId(BoardId);
+
+       return comments.stream() .map(comment -> CommentResponseDto.builder()
+               .comment(comment)
+               .build())
+               .collect(Collectors.toList());
     }
 
 
