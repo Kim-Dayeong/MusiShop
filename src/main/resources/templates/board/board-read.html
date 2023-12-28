@@ -2,19 +2,19 @@
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 >
-    <meta charset="UTF-8">
-    <head>
+<meta charset="UTF-8">
+<head>
 
-        <style>
-            .comment-box {
-                border: 1px solid #ccc;
-                padding: 10px;
-                margin: 10px 0;
-            }
-        </style>
+    <style>
+        .comment-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
 
     <title>게시글</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -34,9 +34,9 @@
 
 
     <form action="/board/{id}/comment" method="post" th:action="@{'/board/' + ${id} + '/comment'}">
-     <input type="text" name="content" placeholder="내용"/> <br/>
-     <button>등록</button>
- </form>
+        <input type="text" name="content" placeholder="내용"/> <br/>
+        <button>등록</button>
+    </form>
 
 
 

@@ -16,7 +16,23 @@ import java.time.LocalDateTime;
 @Builder
 public class CommentRequestDto {
 
+    private Long id;
     private String content;
+
+    private Board board;
+
+    // dto -> entity
+    public Comment toEntity() {
+        Comment comment = Comment.builder()
+                .id(id)
+                .content(content)
+                .board(board)
+                .build();
+
+        return comment;
+    }
+
+
 
 
 }

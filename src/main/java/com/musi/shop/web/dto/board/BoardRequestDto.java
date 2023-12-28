@@ -1,6 +1,7 @@
 package com.musi.shop.web.dto.board;
 
 import com.musi.shop.web.entity.board.Board;
+import com.musi.shop.web.entity.comment.Comment;
 import lombok.*;
 
 @Data
@@ -13,6 +14,8 @@ public class BoardRequestDto { //create
     private Long id;
     private String title;
     private String content;
+
+
    // private Member member;
    // private List<CommentRequestDto> comments;
 
@@ -22,6 +25,7 @@ public class BoardRequestDto { //create
                 .id(id)
                 .content(content)
                 .title(title)
+
                 //.createDate(createDate)
                // .modifiedDate
                // .member(member)

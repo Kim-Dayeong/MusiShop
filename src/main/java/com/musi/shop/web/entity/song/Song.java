@@ -1,7 +1,11 @@
 package com.musi.shop.web.entity.song;
 
 import com.musi.shop.web.entity.album.Album;
+import com.musi.shop.web.entity.board.Board;
+import com.musi.shop.web.entity.playlist.Playlist;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import javax.persistence.*;
@@ -16,9 +20,8 @@ public class Song {
     @Column(name="SONG_ID")
     private Long id;
 
-    private String song_name;
+    private String songname;
 
-   // private int albumid;
 
     private int songdex;
 
@@ -26,15 +29,17 @@ public class Song {
     @JoinColumn(name = "ALBUM_ID")
     private Album album;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "playlist_ID")
+    private Playlist playlist;
     public void updateAlbum(Album album){
         this.album = album;
     }
 
     @Builder
-    public Song(Long id, String song_name, int songdex,Album album){
+    public Song(Long id, String songname, int songdex,Album album){
         this.id = id;
-        this.song_name = song_name;
+        this.songname = songname;
         this.songdex = songdex;
         this.album = album;
     }

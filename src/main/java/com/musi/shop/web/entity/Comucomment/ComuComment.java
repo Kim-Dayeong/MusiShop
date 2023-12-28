@@ -1,9 +1,9 @@
-package com.musi.shop.web.entity.comment;
+package com.musi.shop.web.entity.Comucomment;
 
 
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
-import com.musi.shop.web.entity.time.BaseTimeEntity;
+import com.musi.shop.web.entity.community.Community;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -12,16 +12,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-@Entity(name = "Comment")
-public class Comment extends BaseTimeEntity {
+@Entity(name = "ComuComment")
+public class ComuComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,15 +42,15 @@ public class Comment extends BaseTimeEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardId", nullable = false)
+    @JoinColumn(name = "comu_Id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Board board;
+    private Community community;
 
 
-
-    public Comment(final String content, final Member member, final Board board) {
+    public ComuComment(final String content, final Member member, final Community community) {
         this.content = content;
         this.member = member;
-        this.board = board;
+        this.community = community;
     }
+
 }

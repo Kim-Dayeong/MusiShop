@@ -40,12 +40,12 @@ public class BoardController {
     @Autowired
     private BoardReporitory boardReporitory;
 
-// Read
+    // Read
     @GetMapping("/board/read/{id}")
     public String read(@PathVariable Long id, Model model){
         BoardResponseDto dto = boardService.BoardDetail(id);
         List<CommentResponseDto> comments = commentService.readComment(id);
-                boardService.updateView(id); // 조회수
+        boardService.updateView(id); // 조회수
         model.addAttribute("boards", dto);
         model.addAttribute("comments", comments);
 

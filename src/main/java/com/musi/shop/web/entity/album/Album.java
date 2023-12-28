@@ -45,8 +45,8 @@ public class Album {
 //    private Set<Heart> hearts = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY)
-    @OrderBy("songdex asc")
+    @OneToMany(mappedBy = "album",fetch = FetchType.LAZY,  cascade = CascadeType.REMOVE)
+    @OrderBy("songdex asc") // 정렬
     private Set<Song> songs = new HashSet<>();
 
 
