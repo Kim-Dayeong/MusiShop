@@ -14,7 +14,7 @@ import lombok.*;
 public class SongDto {
 
     private Long id;
-    private String song_name;
+    private String songname;
     private int songdex;
 
     private Album album;
@@ -24,7 +24,7 @@ public class SongDto {
 
     public SongDto(Song song) { // 엔터티 -> DTO
         this.id = song.getId();
-        this.song_name = song.getSong_name();
+        this.songname = song.getSongname();
         this.songdex = song.getSongdex();
 
         //albumdto 대신 album엔티티의 일부만
@@ -46,7 +46,7 @@ public class SongDto {
     public Song toEntity() {
         Song songs = Song.builder()
                 .id(id)
-                .song_name(song_name)
+                .songname(songname)
                 .songdex(songdex)
                .album(album)
                 .build();
@@ -57,7 +57,7 @@ public class SongDto {
     public static SongDto newWithoutAlbum(Song song) {
         SongDto songDto = new SongDto();
         songDto.setId(song.getId());
-        songDto.setSong_name(song.getSong_name());
+        songDto.setSongname(song.getSongname());
         songDto.setSongdex(song.getSongdex());
         return songDto;
     }

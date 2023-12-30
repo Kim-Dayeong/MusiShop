@@ -37,11 +37,12 @@ public class Song {
     }
 
     @Builder
-    public Song(Long id, String songname, int songdex,Album album){
+    public Song(Long id, String songname, int songdex,Album album, Playlist playlist){
         this.id = id;
         this.songname = songname;
         this.songdex = songdex;
         this.album = album;
+        this.playlist = playlist;
     }
 
 
