@@ -1,11 +1,14 @@
 package com.musi.shop.web.service.playlist;
 
 
+import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.dto.playlist.PlaylistCreateDto;
 import com.musi.shop.web.dto.playlist.PlaylistRequestDto;
 import com.musi.shop.web.dto.playlist.PlaylistResponseDto;
 import com.musi.shop.web.dto.song.SongDto;
 import com.musi.shop.web.dto.song.SongPlayDto;
+import com.musi.shop.web.entity.Member;
+import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.playlist.Playlist;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.member.MemberRepository;
@@ -35,12 +38,31 @@ public class PlaylistService {
     @Autowired
     private PlaylistRepository playlistRepository;
 
+    // 플레이리스트 목록 보기
+    public  List<Playlist> PlaylistView(Long id){
+        List<Playlist> playlists = playlistRepository.findByMemberId(id);
+
+        return playlists;
+    }
+
+    // 플레이 리스트 보기
+    public PlaylistResponseDto PlaylistDetail(Long id){
+        Playlist playlist = playlistRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 플레이리스트입니다."));
+       PlaylistResponseDto result = PlaylistResponseDto.builder()
+                .playlist(playlist)
+                .build();
+
+        return result;
+    }
+
+
     // 플레이 리스트 생성
-    public void createPlaylist(PlaylistCreateDto playlistCreateDto){
+    public void createPlaylist(Long id, PlaylistCreateDto playlistCreateDto){
         Playlist playlist = new Playlist();
-        playlist.setMember(playlistCreateDto.getMember());
+        Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당하는 사용자가 없습니다."));
+        playlist.setMember(member);
         playlist.setCreateDate(playlistCreateDto.getCreateDate());
-        playlist.setTitle(playlist.getTitle());
+        playlist.setTitle(playlistCreateDto.getTitle());
         playlistRepository.save(playlist);
     }
 
