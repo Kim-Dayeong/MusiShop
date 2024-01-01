@@ -1,18 +1,24 @@
 package com.musi.shop.web.controller.playlist;
 
 
+import com.musi.shop.web.config.PrincipalDetail;
 import com.musi.shop.web.dto.playlist.PlaylistCreateDto;
 import com.musi.shop.web.dto.playlist.PlaylistRequestDto;
 import com.musi.shop.web.dto.playlist.PlaylistResponseDto;
 import com.musi.shop.web.entity.playlist.Playlist;
 import com.musi.shop.web.service.playlist.PlaylistService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,7 +27,7 @@ public class PlaylistController {
 
     private final PlaylistService playlistService;
 
-    // 플레이리스트 추가
+    // 플레이리스트 생성
     @PostMapping("/playlist/{id}/add")
     public String playlistAdd(@PathVariable Long id, //userid
                               PlaylistCreateDto playlistCreateDto) {
@@ -42,26 +48,39 @@ public class PlaylistController {
 
 
     // 플레이리스트 디테일 보기
-//    @GetMapping("{id}/playlist/detail") //id-> 플레이리스트 id
-//    public String playlistDetail(@PathVariable Long id, Model model){
-//        PlaylistResponseDto dto = playlistService.PlaylistView(id);
-//        return id + "/playlist/playlist-detail";
-//
-//    }
+    @GetMapping("/playlist/detail/{id}") //id-> 플레이리스트 id
+    public String playlistDetail(@PathVariable Long id, Model model){
+      PlaylistResponseDto dto = playlistService.PlaylistDetail(id);
+       model.addAttribute("dtos",dto);
+        return "/playlist/playlist-detail";
+
+    }
 
     // 플레이리스트 수정
-    @GetMapping("{id}/playlist/update")
-    public String getPlaylistModift(@PathVariable Long id, Model model){
-        model.addAttribute("id", id);
+    @GetMapping("playlist/update/") //songid
+    public String postPlaylistModify(@RequestParam Long songid,
+                                     Model model, @AuthenticationPrincipal PrincipalDetail principalDetail
+            , HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
+        session.setAttribute("songid", songid);
         return "/playlist/playlist-modify";
+    }
+
+    @GetMapping("/playlist/modify/") //songid + listid
+    public String getPlaylistUpdate(@RequestParam Long listid,
+    HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        Long songid = (Long) session.getAttribute("songid");
+
+       playlistService.updatePlaylist(listid, songid);
+       session.invalidate();
+        return "redirect:/playlist/view/";
 
     }
 
-    @PostMapping("{id}/playlist/update")
-    public String postPlaylistModify(@PathVariable Long id){
-
-        return id + "/playlist/view/";
-    }
 
 
 

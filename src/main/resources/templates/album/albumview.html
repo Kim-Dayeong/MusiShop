@@ -26,8 +26,9 @@
       <!--반복문으로 song -->
     <tr th:each="songDto : ${albumDto.songs}">
       <td th:text="${songDto.songdex}"></td>
-      <td th:text="${songDto.song_name}"></td>
-
+      <td th:text="${songDto.songname}"></td>
+<!--      <td><a th:text="추가" th:href="@{/playlist/update/{id}(id=${songDto.id})}"></a></td>-->
+      <td><a th:text="추가" th:href="@{/playlist/update/(songid=${songDto.id})}"></a></td>
     </tr>
 
     </h2>

@@ -11,6 +11,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<div class="layout">
+
+    <table>
+        <thead>
+        <tr>
+            <th>playlist</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="playlist : ${playlists}">
+
+            <td>
+                <a th:text="${playlist.title}" th:href="@{/playlist/modify/(listid=${playlist.id})}"></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
 
 </body>
 </html>

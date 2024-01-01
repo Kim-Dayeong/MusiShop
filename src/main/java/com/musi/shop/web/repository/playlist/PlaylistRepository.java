@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     List<Playlist> findByMemberId(Long memberId);
+    List<Playlist> findByMember_Username(String username);
 }

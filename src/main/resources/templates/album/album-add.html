@@ -36,7 +36,7 @@
 <!-- 노래 폼 템플릿 -->
 <script type="text/template" id="songFormTemplate">
     <div class="song-form">
-        <input type="text" name="songs[__INDEX__].song_name" placeholder="Song Name">
+        <input type="text" name="songs[__INDEX__].songname" placeholder="Song Name">
         <input type="number" name="songs[__INDEX__].songdex" placeholder="Song Index">
         <button type="button" class="remove-song-form">Remove</button>
     </div>
@@ -73,7 +73,7 @@
 
             $('.song-form').each(function(index) {
                 var songData = {
-                    song_name: $(this).find('input[name="songs[' + index + '].song_name"]').val(),
+                    songname: $(this).find('input[name="songs[' + index + '].songname"]').val(),
                     songdex: parseInt($(this).find('input[name="songs[' + index + '].songdex"]').val())
                 };
                 albumData.songs.push(songData);

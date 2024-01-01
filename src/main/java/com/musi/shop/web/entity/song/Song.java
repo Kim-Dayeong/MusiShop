@@ -20,13 +20,14 @@ public class Song {
     @Column(name="SONG_ID")
     private Long id;
 
+    @Column(nullable = false)
     private String songname;
 
 
     private int songdex;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ALBUM_ID")
+    @JoinColumn(name = "ALBUM_ID", nullable = false)
     private Album album;
 
     @ManyToOne(fetch = FetchType.LAZY)

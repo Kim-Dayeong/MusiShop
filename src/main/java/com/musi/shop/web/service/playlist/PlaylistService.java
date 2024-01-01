@@ -39,8 +39,15 @@ public class PlaylistService {
     private PlaylistRepository playlistRepository;
 
     // 플레이리스트 목록 보기
-    public  List<Playlist> PlaylistView(Long id){
-        List<Playlist> playlists = playlistRepository.findByMemberId(id);
+    public  List<Playlist> PlaylistView(Long memberid){
+        List<Playlist> playlists = playlistRepository.findByMemberId(memberid);
+
+        return playlists;
+    }
+
+    // 플레이리스트 목록 보기 (username)
+    public  List<Playlist> PlaylistView(String username){
+        List<Playlist> playlists = playlistRepository.findByMember_Username(username);
 
         return playlists;
     }
@@ -70,6 +77,7 @@ public class PlaylistService {
     public void updatePlaylist(Long playlistId,Long songId){
 
         Playlist playlist = playlistRepository.findById(playlistId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 플레이리스트 입니다."));
+        System.out.println("!!!sffdsfsdfdsfds!!!"+songId);
         Song song = songRepository.findById(songId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 음악입니다."));
         playlist.getSongs().add(song); // song 추가
 

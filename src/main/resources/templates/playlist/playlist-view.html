@@ -10,41 +10,36 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <h2>플레이리스트 view 페이지</h2>
 
-<tbody>
-<tr th:each="playlist : ${playlists}">
-    <td th:text="${playlist.id}"></td>
-    <td th:text="${playlist.title}"></td>
-</tr>
-</tbody>
+
+<h3>플레이 리스트 추가</h3>
 
 <form action="/playlist/{id}/add" method="post" th:action="@{'/playlist/' + ${id} + '/add'}">
     <input type="text" name="title" placeholder="제목"/> <br/>
     <button>등록</button>
 </form>
 
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        $("#saveButton").click(function() {-->
-<!--            var title = $("#titleInput").val();  // title 변수 정의-->
+<div class="layout">
+    <table>
+        <thead>
+        <tr>
+            <th>playlist</th>
+        </tr>
+        </thead>
+        <tbody>
 
-<!--            // Ajax 호출-->
-<!--            $.ajax({-->
-<!--                type: "POST",-->
-<!--                url: "/playlist/add/" + encodeURIComponent("${id}"),-->
-<!--                data: {title: title},-->
-<!--                success: function (response) {-->
-<!--                    alert("플레이리스트가 생성되었습니다.");-->
-<!--                    window.location.replace("/");-->
-<!--                    console.log(response);-->
-<!--                },-->
-<!--                error: function (error) {-->
-<!--                    alert("에러가 발생했습니다.");-->
-<!--                    console.error(error);-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+        <tr th:each="playlist : ${playlists}">
+
+            <td>
+                <a th:text="${playlist.title}" th:href="@{/playlist/detail/{id}(id=${playlist.id})}"></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
 
 </body>
 </html>

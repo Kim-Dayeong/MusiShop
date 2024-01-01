@@ -90,7 +90,7 @@ public class AlbumController {
 
         model.addAttribute("albumDto", albumDto);
 
-        return"/album/albumview";
+        return"album/albumview";
     }
 
 

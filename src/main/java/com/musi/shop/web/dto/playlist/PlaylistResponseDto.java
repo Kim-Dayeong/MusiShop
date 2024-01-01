@@ -5,11 +5,18 @@ import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.playlist.Playlist;
 import com.musi.shop.web.entity.song.Song;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class PlaylistResponseDto {
 
     private Long id;
