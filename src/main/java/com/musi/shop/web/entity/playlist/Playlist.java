@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -48,6 +49,15 @@ public class Playlist extends BaseTimeEntity {
     public void update(String title) {
         this.title = title;
 
+    }
+
+    // 음악 추가
+    public void addSong(Song song) {
+        if (songs == null) {
+            songs = new HashSet<>();
+        }
+        songs.add(song);
+        song.setPlaylist(this);
     }
 
 }

@@ -77,9 +77,9 @@ public class PlaylistService {
     public void updatePlaylist(Long playlistId,Long songId){
 
         Playlist playlist = playlistRepository.findById(playlistId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 플레이리스트 입니다."));
-        System.out.println("!!!sffdsfsdfdsfds!!!"+songId);
+
         Song song = songRepository.findById(songId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 음악입니다."));
-        playlist.getSongs().add(song); // song 추가
+       playlist.addSong(song); // song 추가
 
         playlistRepository.save(playlist);
 

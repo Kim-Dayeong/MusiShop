@@ -37,6 +37,10 @@ public class Song {
         this.album = album;
     }
 
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
+    }
+
     @Builder
     public Song(Long id, String songname, int songdex,Album album, Playlist playlist){
         this.id = id;

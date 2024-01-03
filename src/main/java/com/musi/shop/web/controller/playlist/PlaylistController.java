@@ -52,7 +52,7 @@ public class PlaylistController {
     public String playlistDetail(@PathVariable Long id, Model model){
       PlaylistResponseDto dto = playlistService.PlaylistDetail(id);
        model.addAttribute("dtos",dto);
-        return "/playlist/playlist-detail";
+        return  "/playlist/playlist-detail";
 
     }
 
