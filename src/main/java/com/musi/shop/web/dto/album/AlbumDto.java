@@ -37,9 +37,10 @@ public class AlbumDto {
         this.regdate = album.getRegdate();
         this.heartcnt = album.getHeartcnt();
 
-        if (album.getSongs() != null){ // song 엔티티 리스트 -> songdto 리스트
-            this.songs = album.getSongs().stream().map(SongDto::new).collect(Collectors.toList());
+        if (album.getSongs() != null) {
+            this.songs = album.getSongs().stream().map(song -> new SongDto(song, false)).collect(Collectors.toList());
         }
+
 
 //        if (album.getHearts() != null) {
 //            this.hearts = album.getHearts().stream().map(HeartDto::new).collect(Collectors.toList());

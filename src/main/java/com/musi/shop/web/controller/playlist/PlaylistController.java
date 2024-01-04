@@ -63,21 +63,22 @@ public class PlaylistController {
             , HttpServletRequest request){
 
         HttpSession session = request.getSession();
-        model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
+       // model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
         session.setAttribute("songid", songid);
         return "/playlist/playlist-modify";
     }
 
     @GetMapping("/playlist/modify/") //songid + listid
     public String getPlaylistUpdate(@RequestParam Long listid,
-    HttpServletRequest request){
+    HttpServletRequest request, Model model){
 
         HttpSession session = request.getSession();
         Long songid = (Long) session.getAttribute("songid");
 
+        model.addAttribute("dto",playlistService.PlaylistView(listid));
        playlistService.updatePlaylist(listid, songid);
        session.invalidate();
-        return "redirect:/playlist/view/";
+        return "redirect:/playlist/playlist-view/";
 
     }
 

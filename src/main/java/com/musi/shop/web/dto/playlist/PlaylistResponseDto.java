@@ -21,7 +21,7 @@ public class PlaylistResponseDto {
 
     private Long id;
     private String title;
-    private List<SongDto> songs;
+    private Set<SongDto> songs;
 
 
     @Builder
@@ -29,8 +29,8 @@ public class PlaylistResponseDto {
         this.id = playlist.getId();
         this.title = playlist.getTitle();
 
-        if (playlist.getSongs() != null){ // song 엔티티 리스트 -> songdto 리스트
-            this.songs = playlist.getSongs().stream().map(SongDto::new).collect(Collectors.toList());
+        if (playlist.getSongs() != null) {
+            this.songs = playlist.getSongs().stream().map(song -> new SongDto(song, false)).collect(Collectors.toSet());
         }
     }
 }

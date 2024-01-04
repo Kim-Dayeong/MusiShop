@@ -21,17 +21,23 @@ public class SongDto {
     private AlbumDto albumdto;
 
 
-
-    public SongDto(Song song) { // 엔터티 -> DTO
+    @Builder
+    public SongDto(Song song, boolean includeAlbum) { // 엔터티 -> DTO
         this.id = song.getId();
         this.songname = song.getSongname();
         this.songdex = song.getSongdex();
 
-        //albumdto 대신 album엔티티의 일부만
-        if (song.getAlbum() != null){
+        if (includeAlbum && song.getAlbum() != null) {
             this.albumdto = new AlbumDto(song.getAlbum());
+
+//        //albumdto 대신 album엔티티의 일부만
+//        if (song.getAlbum() != null){
+//            this.albumdto = new AlbumDto(song.getAlbum());
+//        }
         }
     }
+
+
 
 //    @Builder
 //    public SongDto(Long id, String song_name, int songdex, Album album){
