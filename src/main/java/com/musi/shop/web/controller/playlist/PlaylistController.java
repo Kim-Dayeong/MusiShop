@@ -63,7 +63,7 @@ public class PlaylistController {
             , HttpServletRequest request){
 
         HttpSession session = request.getSession();
-       // model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
+       model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
         session.setAttribute("songid", songid);
         return "/playlist/playlist-modify";
     }
@@ -74,11 +74,11 @@ public class PlaylistController {
 
         HttpSession session = request.getSession();
         Long songid = (Long) session.getAttribute("songid");
+        playlistService.updatePlaylist(listid, songid);
+        model.addAttribute("dto",playlistService.PlaylistDetail(listid));
+       session.invalidate(); //  세션방식은 로그인까지 같이 풀어버림 , 수정
 
-        model.addAttribute("dto",playlistService.PlaylistView(listid));
-       playlistService.updatePlaylist(listid, songid);
-       session.invalidate();
-        return "redirect:/playlist/playlist-view/";
+        return "/playlist/playlist-detail";
 
     }
 

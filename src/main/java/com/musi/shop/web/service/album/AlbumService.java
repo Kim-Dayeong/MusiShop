@@ -1,8 +1,10 @@
 package com.musi.shop.web.service.album;
 
+import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.entity.Member;
 
+import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.album.AlbumRepository;
@@ -86,6 +88,11 @@ public class AlbumService {
 
 
 
+    }
+    // 조회수
+    @Transactional
+    public int updateView(Long id){
+        return albumRepository.updateView(id);
     }
 
     //읽기

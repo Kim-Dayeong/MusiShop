@@ -21,9 +21,9 @@
 <!--        </thead>-->
         <tbody>
 
-        <a th:text="${dtos.title}"></a>
+        <a th:text="${dto.title}"></a>
 
-        <tr th:each="song : ${dtos.songs}">
+        <tr th:each="song : ${dto.songs}">
 
             <td th:text="${song.songname}"></td>
 

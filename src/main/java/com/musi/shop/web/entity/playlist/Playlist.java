@@ -29,11 +29,8 @@ public class Playlist extends BaseTimeEntity {
     private Long id;
 
     private String title;
-    private int playIdex;
 
-    @OneToMany(mappedBy = "playlist", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc ")
-    private Set<Song> songs;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
@@ -44,6 +41,14 @@ public class Playlist extends BaseTimeEntity {
     @CreatedDate
     private LocalDateTime createDate;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "playlist_song",
+            joinColumns = @JoinColumn(name = "playlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id")
+    )
+    private Set<Song> musicSet = new HashSet<>();
+
 
     // 수정
     public void update(String title) {
@@ -51,13 +56,5 @@ public class Playlist extends BaseTimeEntity {
 
     }
 
-    // 음악 추가
-    public void addSong(Song song) {
-        if (songs == null) {
-            songs = new HashSet<>();
-        }
-        songs.add(song);
-        song.setPlaylist(this);
-    }
 
 }

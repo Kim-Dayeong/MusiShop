@@ -10,6 +10,7 @@ import com.musi.shop.web.dto.song.SongPlayDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.playlist.Playlist;
+import com.musi.shop.web.entity.playlist.PlaylistSong;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.member.MemberRepository;
 import com.musi.shop.web.repository.playlist.PlaylistRepository;
@@ -79,9 +80,13 @@ public class PlaylistService {
         Playlist playlist = playlistRepository.findById(playlistId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 플레이리스트 입니다."));
 
         Song song = songRepository.findById(songId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 음악입니다."));
-       playlist.addSong(song); // song 추가
+//       playlist.addSong(song); // song 추가
+
+        playlist.getMusicSet().add(song);
+        song.getPlaylistSet().add(playlist);
 
         playlistRepository.save(playlist);
+        songRepository.save(song);
 
     }
 

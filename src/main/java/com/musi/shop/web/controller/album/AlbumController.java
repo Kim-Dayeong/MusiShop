@@ -85,9 +85,9 @@ public class AlbumController {
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")
     public String viewAlbum(@PathVariable("no") Long no, Model model){
-        System.out.println("!!!!!!!!!!!!!!!!!!!"+no);
-        AlbumDto albumDto = albumService.getAlbumWithSongs(no);
 
+        AlbumDto albumDto = albumService.getAlbumWithSongs(no);
+        albumService.updateView(no);
         model.addAttribute("albumDto", albumDto);
 
         return"album/albumview";

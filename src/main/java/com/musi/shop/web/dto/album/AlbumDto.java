@@ -26,6 +26,7 @@ public class AlbumDto {
     private Long heartcnt;
     private List<SongDto> songs;
     private List<HeartDto> hearts;
+    private int view;
 
 
     public  AlbumDto (Album album){ //entity -> dto
@@ -36,6 +37,7 @@ public class AlbumDto {
         this.img = album.getImg();
         this.regdate = album.getRegdate();
         this.heartcnt = album.getHeartcnt();
+        this.view = album.getView();
 
         if (album.getSongs() != null) {
             this.songs = album.getSongs().stream().map(song -> new SongDto(song, false)).collect(Collectors.toList());

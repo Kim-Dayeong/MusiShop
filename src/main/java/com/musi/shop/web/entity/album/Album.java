@@ -49,6 +49,9 @@ public class Album {
     @OrderBy("songdex asc") // 정렬
     private Set<Song> songs = new HashSet<>();
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view; // 조회수
+
 
     @Column
     private BigDecimal price;
@@ -62,13 +65,14 @@ public class Album {
 
 
     @Builder
-    public Album(Long id,String title, String name, BigDecimal price, String img, String regdate , long heartcnt){
+    public Album(Long id,String title, int view, String name, BigDecimal price, String img, String regdate , long heartcnt){
         this.id = id;
         this.title = title;
         this.name = name;
         this.price = price;
         this.regdate = regdate;
         this.img = img;
+        this.view = view;
         this.heartcnt = heartcnt;
 
     }

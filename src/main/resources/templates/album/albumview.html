@@ -23,6 +23,7 @@
       <td th:text="${albumDto.img}"></td>
     <td th:text="${albumDto.price}"></td>
     <td th:text="${albumDto.regdate}"></td>
+    <td th:text = "${albumDto.view}"></td>
       <!--반복문으로 song -->
     <tr th:each="songDto : ${albumDto.songs}">
       <td th:text="${songDto.songdex}"></td>
@@ -42,7 +43,7 @@
 <script>
   $(document).ready(function() {
     $("#likeButton").click(function() {
-      var albumId = 506;  // 좋아요 처리할 앨범의 ID, 동적으로 설정 필요
+      var albumId =[[${albumDto.id}]];
       console.log("클릭!!!!!!!!!!!!!!!!!!")
       alert("클릭!!");
       $.ajax({

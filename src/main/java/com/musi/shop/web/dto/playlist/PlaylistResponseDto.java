@@ -29,8 +29,8 @@ public class PlaylistResponseDto {
         this.id = playlist.getId();
         this.title = playlist.getTitle();
 
-        if (playlist.getSongs() != null) {
-            this.songs = playlist.getSongs().stream().map(song -> new SongDto(song, false)).collect(Collectors.toSet());
+        if (playlist.getMusicSet() != null) {
+            this.songs = playlist.getMusicSet().stream().map(song -> new SongDto(song, false)).collect(Collectors.toSet());
         }
     }
 }
