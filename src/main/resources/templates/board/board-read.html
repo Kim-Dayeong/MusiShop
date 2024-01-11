@@ -4,6 +4,14 @@
 >
 <meta charset="UTF-8">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
 
     <style>
         .comment-box {
@@ -31,7 +39,10 @@
         </tbody>
 
     </table>
-
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
 
     <form action="/board/{id}/comment" method="post" th:action="@{'/board/' + ${id} + '/comment'}">
         <input type="text" name="content" placeholder="내용"/> <br/>
@@ -109,5 +120,12 @@
     })
 
 </script>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 </body>
+</html>
+
 </html>

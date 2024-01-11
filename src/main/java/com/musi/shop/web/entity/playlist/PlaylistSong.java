@@ -30,18 +30,7 @@ public class PlaylistSong {
         this.song = song;
     }
 
-//
-//    // 음악 추가
-//    public void addSong(Song song) {
-//        if (this.song == null) {
-//            this.song = song;
-//            song.setPlaylist(this);
-//        } else {
-//            // Handle multiple songs in the playlist (if needed)
-//            // This implementation assumes only one song per playlist
-//            throw new IllegalStateException("Playlist can have only one song.");
-//        }
-//    }
+
 
 
 }

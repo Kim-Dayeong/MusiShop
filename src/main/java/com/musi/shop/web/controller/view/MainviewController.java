@@ -41,7 +41,7 @@ public class MainviewController {
     @GetMapping(value = "/join")
     public ModelAndView userForm() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("join.html");
+        modelAndView.setViewName("/member/join-select.html");
 
         return modelAndView;
     }
