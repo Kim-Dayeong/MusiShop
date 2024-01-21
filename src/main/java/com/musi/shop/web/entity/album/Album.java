@@ -2,6 +2,7 @@ package com.musi.shop.web.entity.album;
 
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.channel.Channel;
+
 import com.musi.shop.web.entity.song.Song;
 import lombok.*;
 
@@ -61,6 +62,8 @@ public class Album {
 
     @Column
     private String regdate;
+
+
 
 
 

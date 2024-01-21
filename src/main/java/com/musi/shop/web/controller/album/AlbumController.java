@@ -15,7 +15,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -63,10 +66,28 @@ public class AlbumController {
 
     @PostMapping("/album/add")
 
-    public String albumWrite(@RequestBody AlbumDto albumdto,
-                             @AuthenticationPrincipal PrincipalDetail principalDetail,
-                             Album album){
+    public String albumWrite
+//            (@RequestBody AlbumDto albumdto,
+    (@RequestPart(value = "albumDto", required = true) AlbumDto albumdto,
+    @RequestPart(value = "image", required = true) MultipartFile img,
+     @AuthenticationPrincipal PrincipalDetail principalDetail,
+     Album album
+     ){
+//                             @AuthenticationPrincipal PrincipalDetail principalDetail,
+//                             Album album,
+//                             @RequestParam("img") MultipartFile img) throws Exception{
         System.out.println(albumdto.toString());
+
+        try{
+        // 앨범커버 등록
+        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/albumcover";
+        String fileName = UUID.randomUUID().toString() + "_" + img.getOriginalFilename();
+        File saveFile = new File(projectPath, fileName);
+        img.transferTo(saveFile);}catch (IOException e){
+            System.out.println(e);
+        }
+
+
 
         List<SongDto> songDtos = new ArrayList<>();
         for(SongDto songDto : albumdto.getSongs()){

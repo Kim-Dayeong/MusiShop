@@ -20,7 +20,7 @@
 
     <h2 th:text = "${albumDto.title}"></h2>
       <td th:text="${albumDto.name}"></td>
-      <td th:text="${albumDto.img}"></td>
+    <img th:src="${albumDto.img}" alt="Album Image" width="100">
     <td th:text="${albumDto.price}"></td>
     <td th:text="${albumDto.regdate}"></td>
     <td th:text = "${albumDto.view}"></td>

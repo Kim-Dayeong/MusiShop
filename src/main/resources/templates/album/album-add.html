@@ -13,15 +13,17 @@
 <body>
 <h1>앨범 등록 페이지</h1>
 
-<form id="albumForm">
+<form id="albumForm"enctype="multipart/form-data">
     <!-- 앨범 필드 입력 -->
 
     <div >사용자 이름 : <span th:text=" @{${#authentication.principal.name}}"></span></div>
 
     <input type="text" name="title" placeholder="Title">
     <input type="number" name="price" placeholder="Price">
-    <input type="text" name="img" placeholder="Image URL">
+
     <input type="text" name="regdate" placeholder="Regdate">
+    <input type="file" name="img">
+
 
     <!-- 노래 폼 추가 버튼 -->
     <button type="button" id="addSongForm">Add Song</button>
@@ -68,8 +70,12 @@
                 regdate: $('input[name="regdate"]').val(),
                 price: $('input[name="price"]').val(),
                 name: $('input[name="name"]').val(),
-                img: $('input[name="img"]').val()
+                // img: $('input[name="img"]').val()
             };
+            var formData = new FormData();
+            formData.append('albumData', JSON.stringify(albumData));
+            // 이미지 파일 추가
+            formData.append('img',$('#imgInput')[0].files[0]);
 
             $('.song-form').each(function(index) {
                 var songData = {
@@ -82,8 +88,12 @@
             $.ajax({
                 type: 'POST',
                 url: '/album/add',
-                contentType: 'application/json',
-                data: JSON.stringify(albumData),
+                // contentType: 'application/json',
+                // data: JSON.stringify(albumData),
+                data: formData,
+                contentType: false,
+                processData: false,
+
                 success: function(response) {
                     console.log('Success:', response);
                     // 리다이렉트
