@@ -8,7 +8,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -48,7 +50,7 @@ public class Album {
 
     @OneToMany(mappedBy = "album",fetch = FetchType.LAZY,  cascade = CascadeType.REMOVE)
     @OrderBy("songdex asc") // 정렬
-    private Set<Song> songs = new HashSet<>();
+    private List<Song> songs = new ArrayList<>();
 
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view; // 조회수

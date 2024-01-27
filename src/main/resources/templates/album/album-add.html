@@ -1,29 +1,28 @@
-<html lang="ko"
-      xmlns:th="http://thymeleaf.org"
-      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>앨범 등록 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>File and JSON Upload</title>
 </head>
 <body>
-<h1>앨범 등록 페이지</h1>
+<h2>앨범 등록 페이지</h2>
+<form id="jsonFileForm">
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required>
+    <br>
 
-<form id="albumForm"enctype="multipart/form-data">
-    <!-- 앨범 필드 입력 -->
+    <label for="price">가격:</label>
+    <input type="number" id="price" name="price" required>
+    <br>
 
-    <div >사용자 이름 : <span th:text=" @{${#authentication.principal.name}}"></span></div>
+    <label for="regdate">발행연도</label>
+    <input type="number" id="regdate" name="regdate" required>
+    <br>
 
-    <input type="text" name="title" placeholder="Title">
-    <input type="number" name="price" placeholder="Price">
-
-    <input type="text" name="regdate" placeholder="Regdate">
-    <input type="file" name="img">
-
+    <label for="image">커버 이미지:</label>
+    <input type="file" id="image" name="image" accept="image/*">
+    <br>
 
     <!-- 노래 폼 추가 버튼 -->
     <button type="button" id="addSongForm">Add Song</button>
@@ -31,8 +30,7 @@
     <!-- 동적으로 추가되는 노래 폼을 담을 컨테이너 -->
     <div id="songFormsContainer"></div>
 
-    <!-- 제출 버튼 -->
-    <button type="button" id="submitForm">Submit</button>
+    <button type="button" onclick="submitForm()">Submit</button>
 </form>
 
 <!-- 노래 폼 템플릿 -->
@@ -43,73 +41,210 @@
         <button type="button" class="remove-song-form">Remove</button>
     </div>
 </script>
-
 <script>
-    $(document).ready(function() {
-        // 노래 폼 추가 버튼 클릭 시
-        $('#addSongForm').click(function() {
-            var songFormTemplate = $('#songFormTemplate').html();
-            var songFormsContainer = $('#songFormsContainer');
-            var newIndex = songFormsContainer.children().length;
 
-            // 노래 폼 템플릿을 동적으로 생성하여 추가
-            var songFormHtml = songFormTemplate.replace(/__INDEX__/g, newIndex);
-            songFormsContainer.append(songFormHtml);
-        });
+    // 노래 폼 추가 버튼 클릭 시
+    $('#addSongForm').click(function () {
+        var songFormTemplate = $('#songFormTemplate').html();
+        var songFormsContainer = $('#songFormsContainer');
+        var newIndex = songFormsContainer.children().length;
 
-        // 동적으로 추가한 노래 폼의 삭제 버튼 클릭 시
-        $(document).on('click', '.remove-song-form', function() {
-            $(this).closest('.song-form').remove();
-        });
-
-        // 폼 제출 버튼 클릭 시
-        $('#submitForm').click(function() {
-            var albumData = {
-                songs: [],
-                title: $('input[name="title"]').val(),
-                regdate: $('input[name="regdate"]').val(),
-                price: $('input[name="price"]').val(),
-                name: $('input[name="name"]').val(),
-                // img: $('input[name="img"]').val()
-            };
-            var formData = new FormData();
-            formData.append('albumData', JSON.stringify(albumData));
-            // 이미지 파일 추가
-            formData.append('img',$('#imgInput')[0].files[0]);
-
-            $('.song-form').each(function(index) {
-                var songData = {
-                    songname: $(this).find('input[name="songs[' + index + '].songname"]').val(),
-                    songdex: parseInt($(this).find('input[name="songs[' + index + '].songdex"]').val())
-                };
-                albumData.songs.push(songData);
-            });
-
-            $.ajax({
-                type: 'POST',
-                url: '/album/add',
-                // contentType: 'application/json',
-                // data: JSON.stringify(albumData),
-                data: formData,
-                contentType: false,
-                processData: false,
-
-                success: function(response) {
-                    console.log('Success:', response);
-                    // 리다이렉트
-                    alert('앨범이 등록되었습니다.');
-                    location.href = '/album/list';
-                },
-                error: function(error) {
-                    console.log('Error:', error);
-                    alert('에러 발생');
-                    // 에러 처리
-                }
-            });
-        });
+        // 노래 폼 템플릿을 동적으로 생성하여 추가
+        var songFormHtml = songFormTemplate.replace(/__INDEX__/g, newIndex);
+        songFormsContainer.append(songFormHtml);
     });
+    // 동적으로 추가한 노래 폼의 삭제 버튼 클릭 시
+    $(document).on('click', '.remove-song-form', function () {
+        $(this).closest('.song-form').remove();
+    });
+
+    function submitForm() {
+        let formData = new FormData(document.getElementById('jsonFileForm'));
+
+        // 사용자 입력을 FormData에 직접 추가
+        formData.append("title", document.getElementById('title').value);
+        formData.append("price", document.getElementById('price').value);
+        formData.append("regdate", document.getElementById('regdate').value);
+
+        // albumDto를 JSON 형식으로 직렬화하여 FormData에 추가
+        let albumDto = {
+            title: document.getElementById('title').value,
+            price: document.getElementById('price').value,
+            regdate: document.getElementById('regdate').value,
+            songs: []
+        };
+
+        // 동적으로 추가된 노래 폼 데이터 수집
+        $('.song-form').each(function (index) {
+            var songData = {
+                songname: $(this).find('input[name="songs[' + index + '].songname"]').val(),
+                songdex: parseInt($(this).find('input[name="songs[' + index + '].songdex"]').val())
+            };
+
+            // 각 노래에 대한 데이터를 albumDto에 추가
+            albumDto.songs.push(songData);
+        });
+
+        // FormData에 albumDto를 추가
+        formData.append("albumDto", new Blob([JSON.stringify(albumDto)], { type: "application/json" }));
+        // 파일 추가
+        formData.append("image", document.getElementById('image').files[0]);
+
+        // Ajax를 사용하지 않고 직접 서버로 전송
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/album/add", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert('성공: ');
+            } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                console.error('에러 발생:', xhr.responseText);
+                alert('에러 발생' + xhr.responseText);
+            }
+        };
+        xhr.send(formData);
+    }
 </script>
 
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<html lang="ko"-->
+<!--      xmlns:th="http://thymeleaf.org"-->
+<!--      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
+<!--&gt;-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>앨범 등록 페이지</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>앨범 등록 페이지</h1>-->
+
+<!--<form id="albumForm"enctype="multipart/form-data">-->
+<!--    &lt;!&ndash; 앨범 필드 입력 &ndash;&gt;-->
+
+<!--    <div >사용자 이름 : <span th:text=" @{${#authentication.principal.name}}"></span></div>-->
+
+<!--    <input type="text" name="title" placeholder="Title">-->
+<!--    <input type="number" name="price" placeholder="Price">-->
+
+<!--    <input type="text" name="regdate" placeholder="Regdate">-->
+<!--    <input type="file" id="image" name="image" accept="image/*">-->
+
+
+<!--    &lt;!&ndash; 노래 폼 추가 버튼 &ndash;&gt;-->
+<!--    <button type="button" id="addSongForm">Add Song</button>-->
+
+<!--    &lt;!&ndash; 동적으로 추가되는 노래 폼을 담을 컨테이너 &ndash;&gt;-->
+<!--    <div id="songFormsContainer"></div>-->
+
+<!--    &lt;!&ndash; 제출 버튼 &ndash;&gt;-->
+<!--    <button type="button" id="submitForm">Submit</button>-->
+<!--</form>-->
+
+<!--&lt;!&ndash; 노래 폼 템플릿 &ndash;&gt;-->
+<!--<script type="text/template" id="songFormTemplate">-->
+<!--    <div class="song-form">-->
+<!--        <input type="text" name="songs[__INDEX__].songname" placeholder="Song Name">-->
+<!--        <input type="number" name="songs[__INDEX__].songdex" placeholder="Song Index">-->
+<!--        <button type="button" class="remove-song-form">Remove</button>-->
+<!--    </div>-->
+<!--</script>-->
+
+<!--<script>-->
+
+<!--    function submit() {-->
+
+<!--        var albumData = {-->
+<!--            songs: [],-->
+<!--            title: $('input[name="title"]').val(),-->
+<!--            regdate: $('input[name="regdate"]').val(),-->
+<!--            price: $('input[name="price"]').val(),-->
+<!--            name: $('input[name="name"]').val(),-->
+<!--            // img: $('input[name="img"]').val()-->
+<!--        };-->
+<!--        var formData = new FormData();-->
+<!--        formData.append('albumData', JSON.stringify(albumData));-->
+<!--        // 이미지 파일 추가-->
+<!--        formData.append('image',image);-->
+
+<!--        $('.song-form').each(function(index) {-->
+<!--            var songData = {-->
+<!--                songname: $(this).find('input[name="songs[' + index + '].songname"]').val(),-->
+<!--                songdex: parseInt($(this).find('input[name="songs[' + index + '].songdex"]').val())-->
+<!--            };-->
+<!--            albumData.songs.push(songData);-->
+<!--    }-->
+<!--    $(document).ready(function() {-->
+<!--        // 노래 폼 추가 버튼 클릭 시-->
+<!--        $('#addSongForm').click(function() {-->
+<!--            var songFormTemplate = $('#songFormTemplate').html();-->
+<!--            var songFormsContainer = $('#songFormsContainer');-->
+<!--            var newIndex = songFormsContainer.children().length;-->
+
+<!--            // 노래 폼 템플릿을 동적으로 생성하여 추가-->
+<!--            var songFormHtml = songFormTemplate.replace(/__INDEX__/g, newIndex);-->
+<!--            songFormsContainer.append(songFormHtml);-->
+<!--        });-->
+
+<!--        // 동적으로 추가한 노래 폼의 삭제 버튼 클릭 시-->
+<!--        $(document).on('click', '.remove-song-form', function() {-->
+<!--            $(this).closest('.song-form').remove();-->
+<!--        });-->
+
+<!--        // 폼 제출 버튼 클릭 시-->
+<!--        $('#submitForm').click(function() {-->
+
+<!--            });-->
+
+<!--            $.ajax({-->
+<!--                type: 'POST',-->
+<!--                url: '/album/add',-->
+<!--                // contentType: 'application/json',-->
+<!--                // data: JSON.stringify(albumData),-->
+<!--                data: formData,-->
+<!--                contentType: false,-->
+<!--                processData: false,-->
+
+<!--                success: function(response) {-->
+<!--                    console.log('Success:', response);-->
+<!--                    // 리다이렉트-->
+<!--                    alert('앨범이 등록되었습니다.');-->
+<!--                    location.href = '/album/list';-->
+<!--                },-->
+<!--                error: function(error) {-->
+<!--                    console.log('Error:', error);-->
+<!--                    alert('에러 발생');-->
+<!--                    // 에러 처리-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<!--</body>-->
+
+<!--</html>-->

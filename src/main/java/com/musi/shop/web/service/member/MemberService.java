@@ -69,7 +69,7 @@ public class MemberService {
                 .map(album -> {
                     AlbumDto albumDto = new AlbumDto();
                     albumDto.setTitle(album.getTitle());
-                    albumDto.setImg(album.getImg());
+//                    albumDto.setImg(album.getImg());
                     albumDto.setId(album.getId());
                     return albumDto;
                 })

@@ -19,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 
@@ -28,6 +31,8 @@ import java.util.*;
 public class AlbumController {
 
    private final AlbumService albumService;
+
+    private static final String UPLOAD_DIR = "/Users/kimdayeong/intelij/Musishop/src/main/resources/static/albumcover";
 
 
     @GetMapping("/album/list")
@@ -66,42 +71,41 @@ public class AlbumController {
 
     @PostMapping("/album/add")
 
-    public String albumWrite
-//            (@RequestBody AlbumDto albumdto,
-    (@RequestPart(value = "albumDto", required = true) AlbumDto albumdto,
-    @RequestPart(value = "image", required = true) MultipartFile img,
-     @AuthenticationPrincipal PrincipalDetail principalDetail,
-     Album album
-     ){
-//                             @AuthenticationPrincipal PrincipalDetail principalDetail,
-//                             Album album,
-//                             @RequestParam("img") MultipartFile img) throws Exception{
-        System.out.println(albumdto.toString());
+    public String albumWrite(
+            @RequestPart(value = "albumDto", required = true) AlbumDto albumDto,
+            @RequestPart(value = "image", required = true) MultipartFile image,
+            @AuthenticationPrincipal PrincipalDetail principalDetail,
+            Album album
+    ) {
+        try {
+            // Save the image file to the server
+            Path uploadPath = Path.of(UPLOAD_DIR);
+            Files.createDirectories(uploadPath);
 
-        try{
-        // 앨범커버 등록
-        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/albumcover";
-        String fileName = UUID.randomUUID().toString() + "_" + img.getOriginalFilename();
-        File saveFile = new File(projectPath, fileName);
-        img.transferTo(saveFile);}catch (IOException e){
-            System.out.println(e);
+            String originalFilename = image.getOriginalFilename();
+            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.'));
+
+            // Generate a unique filename with UUID
+            String uniqueFilename = UUID.randomUUID().toString() + fileExtension;
+
+            Path filePath = uploadPath.resolve(uniqueFilename);
+            Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Process AlbumDto data
+            System.out.println("Received AlbumDto: " + albumDto);
+
+
+
+
+            return "redirect:/album/list"; // Redirect to a success page or return the appropriate view
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            return ""; // Redirect to an error page or return the appropriate view
         }
-
-
-
-        List<SongDto> songDtos = new ArrayList<>();
-        for(SongDto songDto : albumdto.getSongs()){
-            System.out.println(songDto.toString());
-            songDtos.add(songDto);
-        }
-
-      String username = principalDetail.getUsername();
-        String nickname = principalDetail.getName();
-        albumService.write(albumdto,songDtos, album,username, nickname);
-
-
-        return "redirect:/";
     }
+
+
 
     //앨범 상세 페이지 조회
     @GetMapping("/album/view/{no}")

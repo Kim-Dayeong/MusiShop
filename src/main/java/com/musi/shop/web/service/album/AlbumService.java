@@ -64,7 +64,7 @@ public class AlbumService {
 
             album.setTitle(albumDto.getTitle());
             album.setPrice(albumDto.getPrice());
-            album.setImg(albumDto.getImg());
+//            album.setImg(albumDto.getImg());
             album.setRegdate(albumDto.getRegdate());
             album.setId(albumDto.getId());
             album.setName(nickname);
@@ -113,7 +113,7 @@ public class AlbumService {
                 .title(album.getTitle())
                 .name(album.getName())
                 .price(album.getPrice())
-                .img(album.getImg())
+//                .img(album.getImg())
                 .regdate(album.getRegdate())
                 .songs(songDtos)
                .build();

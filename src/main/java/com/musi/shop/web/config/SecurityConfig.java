@@ -49,7 +49,7 @@ public class SecurityConfig  {
                 .antMatchers("/admin/").denyAll()
                 .antMatchers("/artist/**").access("hasRole('ROLE_ARTIST')") //아티스트 페이지
                 .antMatchers("/artist").access("hasRole('ROLE_ARTIST')")
-                .antMatchers("/album/add").authenticated() //인증된 사용자만 앨범추가 가능
+//                .antMatchers("/album/add").authenticated() //인증된 사용자만 앨범추가 가능
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

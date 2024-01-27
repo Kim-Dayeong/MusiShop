@@ -21,7 +21,7 @@ public class AlbumDto {
     private String title;
     private String name;
     private BigDecimal price;
-    private String img;
+//    private String img;
     private String regdate;
     private Long heartcnt;
     private List<SongDto> songs;
@@ -34,7 +34,7 @@ public class AlbumDto {
         this.title = album.getTitle();
         this.name = album.getName();
         this.price = album.getPrice();
-        this.img = album.getImg();
+//        this.img = album.getImg();
         this.regdate = album.getRegdate();
         this.heartcnt = album.getHeartcnt();
         this.view = album.getView();
