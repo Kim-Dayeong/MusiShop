@@ -53,7 +53,7 @@ public class AlbumService {
     @Transactional
     public void write(AlbumDto albumDto
             ,List<SongDto> songDtos
-    ,Album album, String username, String nickname){
+    ,Album album, String username, String nickname, String img){
 
         //앨범
 
@@ -64,7 +64,7 @@ public class AlbumService {
 
             album.setTitle(albumDto.getTitle());
             album.setPrice(albumDto.getPrice());
-//            album.setImg(albumDto.getImg());
+            album.setImg(img);
             album.setRegdate(albumDto.getRegdate());
             album.setId(albumDto.getId());
             album.setName(nickname);
@@ -113,7 +113,7 @@ public class AlbumService {
                 .title(album.getTitle())
                 .name(album.getName())
                 .price(album.getPrice())
-//                .img(album.getImg())
+                .img(album.getImg())
                 .regdate(album.getRegdate())
                 .songs(songDtos)
                .build();

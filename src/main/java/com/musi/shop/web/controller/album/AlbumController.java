@@ -77,8 +77,17 @@ public class AlbumController {
             @AuthenticationPrincipal PrincipalDetail principalDetail,
             Album album
     ) {
+
+        List<SongDto> songDtos = new ArrayList<>();
+        for(SongDto songDto : albumDto.getSongs()){
+            System.out.println(songDto.toString());
+            songDtos.add(songDto);
+        }
+
+        String username = principalDetail.getUsername();
+        String nickname = principalDetail.getName();
+        // 이미지 파일 저장
         try {
-            // Save the image file to the server
             Path uploadPath = Path.of(UPLOAD_DIR);
             Files.createDirectories(uploadPath);
 
@@ -91,18 +100,22 @@ public class AlbumController {
             Path filePath = uploadPath.resolve(uniqueFilename);
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Process AlbumDto data
             System.out.println("Received AlbumDto: " + albumDto);
 
 
+            albumService.write(albumDto,songDtos, album,username, nickname,filePath.toString() );
 
-
-            return "redirect:/album/list"; // Redirect to a success page or return the appropriate view
+            return "redirect:/album/list";
         } catch (IOException e) {
             e.printStackTrace();
 
-            return ""; // Redirect to an error page or return the appropriate view
+            return "";
         }
+
+
+
+
+
     }
 
 
