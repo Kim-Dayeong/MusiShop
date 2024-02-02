@@ -1,73 +1,97 @@
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta charset="UTF-8">
-  <title>앨범 상세보기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 부트스트랩 CSS 파일 링크 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- jQuery 및 부트스트랩 JS 파일 링크 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- 추가로 사용하는 부트스트랩 CSS 파일 -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- jQuery 추가 -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>앨범 상세보기</title>
 </head>
 
 <body>
 
-<div class="layout">
-  <table>
-
+<div class="container">
+  <h2 th:text="${albumDto.title}"></h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <img th:src="@{'/albumcover/' + ${albumDto.img}}" class="img-fluid" alt="Album Cover">
+    </div>
+    <div class="col-md-6">
+      <table class="table">
+        <tbody>
+        <tr>
+          <th scope="row">가수</th>
+          <td th:text="${albumDto.name}"></td>
+        </tr>
+        <tr>
+          <th scope="row">가격</th>
+          <td th:text="${albumDto.price}"></td>
+        </tr>
+        <tr>
+          <th scope="row">발행연도</th>
+          <td th:text="${albumDto.regdate}"></td>
+        </tr>
+        <tr>
+          <th scope="row">조회수</th>
+          <td th:text="${albumDto.view}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <button id="likeButton" class="btn btn-primary">좋아요</button>
+    </div>
+  </div>
+  <!-- 반복문으로 song -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">곡 번호</th>
+      <th scope="col">곡 제목</th>
+      <th scope="col">플레이리스트</th>
+    </tr>
+    </thead>
     <tbody>
-
-    <h2 th:text = "${albumDto.title}"></h2>
-      <td th:text="${albumDto.name}"></td>
-    <img th:src="${albumDto.img}" alt="Album Image" width="100">
-    <td th:text="${albumDto.price}"></td>
-    <td th:text="${albumDto.regdate}"></td>
-    <td th:text = "${albumDto.view}"></td>
-      <!--반복문으로 song -->
     <tr th:each="songDto : ${albumDto.songs}">
       <td th:text="${songDto.songdex}"></td>
       <td th:text="${songDto.songname}"></td>
-<!--      <td><a th:text="추가" th:href="@{/playlist/update/{id}(id=${songDto.id})}"></a></td>-->
-      <td><a th:text="추가" th:href="@{/playlist/update/(songid=${songDto.id})}"></a></td>
+      <td><a class="btn btn-success" th:text="추가" th:href="@{/playlist/update/(songid=${songDto.id})}"></a></td>
     </tr>
-
-    </h2>
     </tbody>
   </table>
-
-  <button id="likeButton">좋아요</button>
-
-
 </div>
+
 <script>
-  $(document).ready(function() {
-    $("#likeButton").click(function() {
-      var albumId =[[${albumDto.id}]];
-      console.log("클릭!!!!!!!!!!!!!!!!!!")
-      alert("클릭!!");
+  $(document).ready(function () {
+    $("#likeButton").click(function () {
+      var albumId = [[${albumDto.id}]];
+      console.log("클릭!!!!!!!!!!!!!!!!!!");
+      alert("클릭");
       $.ajax({
         type: "POST",
         url: "/albums/" + albumId,
-        success: function(response) {
+        success: function (response) {
           var status = response.status;
 
           if (status === 'success') {
             alert('좋아요 완료');
-
-          }else{
-          alert('좋아요 처리 중 예외 발생');}
+          } else {
+            alert('좋아요 처리 중 예외 발생');
+          }
         },
-
-        error: function (error){
-        alert('서버 통신 중 오류가 발생했습니다');
+        error: function (error) {
+          alert('서버 통신 중 오류가 발생했습니다');
         }
       });
     });
   });
-
-
-
 </script>
 </body>
 </html>

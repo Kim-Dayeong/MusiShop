@@ -1,58 +1,64 @@
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>앨범 목록</title>
 </head>
 
-
 <style>
     .layout {
-        width: 500px;
+        width: 80%; /* 조절 가능 */
         margin: 0 auto;
         margin-top: 40px;
     }
 </style>
+
 <body>
 
 <div class="layout">
-    <table>
-        <thead>
-        <tr>
-            <th>글번호</th>
-            <th>이미지</th>
-            <th>제목</th>
-        </tr>
-        </thead>
-        <tbody>
+    <h1 class="display-4">앨범 목록</h1>
+    <hr/>
 
-        <tr th:each = "board:${list}">
-            <td th:text="${board.id}"></td>
-            <td th:text="${board.img}"></td>
-            <td>
-                <a th:text="${board.title}" th:href="@{/album/view/{id}(id=${board.id})}"></a>
-            </td>
+    <div class="card-columns">
+        <div th:each="album: ${list}" class="card">
+            <img th:src="@{'/albumcover/' + ${album.img}}" class="card-img-top" alt="앨범 이미지">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${album.title}"></h5>
+                <p class="card-text">앨범 설명 또는 기타 정보</p>
+                <a th:href="@{/album/view/{id}(id=${album.id})}" class="btn btn-primary">앨범 보기</a>
+            </div>
+        </div>
+    </div>
 
-        </tr>
-        </tbody>
-    </table>
-
-
-    <a th:href="@{/album/list?page=0}">첫 페이지</a>
-    <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/album/list(page=${page}-1)}" th:text ="${page}"></a>
-        <strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
-    </th:block>
-    <a th:href="@{/album/list(page=${endtotal})}">끝 페이지</a>
-
+    <nav aria-label="Page navigation">
+        <ul class="pagination mt-3">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/album/list?page=0}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+                <li class="page-item" th:classappend="${page == nowPage} ? 'active' : ''">
+                    <a class="page-link" th:href="@{/album/list(page=${page}-1)}" th:text="${page+1}"></a>
+                </li>
+            </th:block>
+            <li class="page-item">
+                <a class="page-link" th:href="@{/album/list(page=${endtotal})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </div>
 
 </body>
+
 </html>
-
-

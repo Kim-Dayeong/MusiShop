@@ -46,6 +46,14 @@ public class MainviewController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/userjoin")
+    public ModelAndView userjoin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/join.html");
+
+        return modelAndView;
+    }
+
     @GetMapping(value = "/artjoin")
     public ModelAndView artjoin() {
         ModelAndView modelAndView = new ModelAndView();

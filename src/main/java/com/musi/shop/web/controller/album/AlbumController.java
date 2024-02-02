@@ -31,8 +31,9 @@ import java.util.*;
 public class AlbumController {
 
    private final AlbumService albumService;
-
+// value 주입으로 수정
     private static final String UPLOAD_DIR = "/Users/kimdayeong/intelij/Musishop/src/main/resources/static/albumcover";
+//private static final String UPLOAD_DIR = "/Users/kimdayeong/Documents/albumcover";
 
 
     @GetMapping("/album/list")
@@ -59,7 +60,7 @@ public class AlbumController {
         return "album/albumlist";
     }
 
-    //앨범 추가 / 추후 아티스트 회원만 접근 가능하게 수정
+    //앨범 추가
     @GetMapping("/album/add")
     public String showAlbumForm(Model model) {
         AlbumDto albumdto = new AlbumDto();
@@ -103,7 +104,7 @@ public class AlbumController {
             System.out.println("Received AlbumDto: " + albumDto);
 
 
-            albumService.write(albumDto,songDtos, album,username, nickname,filePath.toString() );
+            albumService.write(albumDto,songDtos, album,username, nickname,uniqueFilename );
 
             return "redirect:/album/list";
         } catch (IOException e) {
