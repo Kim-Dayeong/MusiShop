@@ -80,17 +80,6 @@ public class Membercontroller {
 
 
 
-//    @PostMapping("/login")
-//    private TokenDto login(@RequestBody MemberLoginRequestDto memberLoginRequestDto){
-//        String email = memberLoginRequestDto.getEmail();
-//        String pwd = memberLoginRequestDto.getPwd();
-//        TokenDto tokenDto = memberService.login(email, pwd);
-//        return tokenDto;
-//    }
 
-//    @PostMapping("/test")
-//    public String test(){
-//        return "sucess";
-//    }
 
 }
