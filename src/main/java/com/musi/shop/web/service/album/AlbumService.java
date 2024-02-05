@@ -1,10 +1,8 @@
 package com.musi.shop.web.service.album;
 
-import com.musi.shop.web.dto.board.BoardResponseDto;
+import com.musi.shop.web.dao.AlbumMapper;
 import com.musi.shop.web.entity.album.Album;
-import com.musi.shop.web.entity.Member;
 
-import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.channel.Channel;
 import com.musi.shop.web.entity.song.Song;
 import com.musi.shop.web.repository.album.AlbumRepository;
@@ -41,6 +39,21 @@ public class AlbumService {
     private final SongRepository songRepository;
     private final MemberRepository memberRepository;
     private final ChannelRepository channelRepository;
+   private final AlbumMapper albumMapper;
+
+
+    // 최신 앨범 불러오기 (4개)
+    public List<Album> newAlbum(){
+
+        return albumMapper.findNewAlbum();
+    }
+
+
+    // 인기 앨범 불러오기
+    public Album bestAlbum(){
+        return  albumRepository.findTopByOrderByViewDesc();
+
+    }
 
 
     //페이징

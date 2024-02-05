@@ -1,0 +1,9 @@
+<mapper namespace="com.musi.shop.mapper.AlbumMapper">
+
+    <select id="findNewAlbum" resultType="com.musi.shop.web.entity.Album">
+        SELECT * FROM Album
+        ORDER BY albumId ASC
+        LIMIT 4
+    </select>
+
+</mapper>

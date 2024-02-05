@@ -1,5 +1,7 @@
 package com.musi.shop.web.controller.view;
 
+import com.musi.shop.web.dto.album.AlbumDto;
+import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.service.album.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -8,19 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 public class MainviewController {
 
     @Autowired
     private AlbumService albumService;
 
-    @RequestMapping("/")
-    public ModelAndView mainView() {
+    @GetMapping("/")
+    public String mainView(Model model) {
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index.html");
+        // 인기 앨범 불러오기
+        Album bestAlbum = albumService.bestAlbum();
+        System.out.println(bestAlbum);
 
-        return modelAndView;
+        // 최신 앨범 불러오기 (4개)
+        List<Album> albumList = albumService.newAlbum();
+        System.out.println(albumList);
+
+        model.addAttribute("albumDtoList", albumList);
+        model.addAttribute("bestAlbum", bestAlbum);
+
+        return "/index";
 
     }
 
@@ -78,12 +90,6 @@ public class MainviewController {
 
         return modelAndView;
     }
-//    @GetMapping(value = "/list")
-//    public ModelAndView albumlist() {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("albumlist.html");
-//
-//        return modelAndView;
-//    }
+
 
 }

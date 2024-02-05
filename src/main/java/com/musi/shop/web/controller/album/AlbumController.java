@@ -36,6 +36,8 @@ public class AlbumController {
 //private static final String UPLOAD_DIR = "/Users/kimdayeong/Documents/albumcover";
 
 
+
+
     @GetMapping("/album/list")
     public String albumList(Model model, @PageableDefault (page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
         //albumservice에서 생성한 리스트를 변수명 list로 반환
