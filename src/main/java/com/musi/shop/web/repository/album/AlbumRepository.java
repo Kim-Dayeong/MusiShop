@@ -20,11 +20,8 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     @Query("update Album b set b.view = b.view + 1 where b.id = :id")
     int updateView(Long id); // 조회수 증가
 
-    // 최신 앨범 4개 가져오기
-    @Query("SELECT a FROM Album a ORDER BY a.id ASC")
-    List<Album> findTop4ByOrderByAlbumIdAsc();
     // 조회수 가장 많은 앨범 1개 가져오기
-    @Query("SELECT a FROM Album a ORDER BY a.view DESC")
+    @Query("SELECT a FROM Album a ORDER BY a.view ")
     Album findTopByOrderByViewDesc();
 
 }

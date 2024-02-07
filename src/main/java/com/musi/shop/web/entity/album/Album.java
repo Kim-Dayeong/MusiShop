@@ -4,10 +4,13 @@ import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.channel.Channel;
 
 import com.musi.shop.web.entity.song.Song;
+import com.musi.shop.web.entity.time.BaseTimeEntity;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +22,7 @@ import java.util.Set;
 @Entity(name="Album")
 @Getter
 @Setter
-public class Album {
+public class Album extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +67,10 @@ public class Album {
 
     @Column
     private String regdate;
+
+    @Column
+    @CreatedDate
+    private LocalDateTime createdate;
 
 
 

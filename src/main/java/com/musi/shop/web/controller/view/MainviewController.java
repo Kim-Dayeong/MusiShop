@@ -4,6 +4,7 @@ import com.musi.shop.web.dto.album.AlbumDto;
 import com.musi.shop.web.entity.album.Album;
 import com.musi.shop.web.service.album.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,25 +13,35 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class MainviewController {
 
     @Autowired
     private AlbumService albumService;
 
+
+
     @GetMapping("/")
     public String mainView(Model model) {
 
         // 인기 앨범 불러오기
-        Album bestAlbum = albumService.bestAlbum();
-        System.out.println(bestAlbum);
+//        Album bestAlbum =  albumService.bestAlbum();
+//        System.out.println(bestAlbum);
 
         // 최신 앨범 불러오기 (4개)
         List<Album> albumList = albumService.newAlbum();
         System.out.println(albumList);
 
         model.addAttribute("albumDtoList", albumList);
-        model.addAttribute("bestAlbum", bestAlbum);
+        // 앨범 리스트 출력
+        for (Album album : albumList) {
+            System.out.println("Title: " + album.getTitle());
+            System.out.println("Image: " + album.getImg());
+            System.out.println("Release Date: " + album.getRegdate());
+            System.out.println();
+        }
+
+//       model.addAttribute("bestAlbum", bestAlbum);
 
         return "/index";
 

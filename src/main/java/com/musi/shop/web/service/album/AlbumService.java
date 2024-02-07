@@ -1,6 +1,6 @@
 package com.musi.shop.web.service.album;
 
-import com.musi.shop.web.dao.AlbumMapper;
+import com.musi.shop.web.mapper.AlbumMapper;
 import com.musi.shop.web.entity.album.Album;
 
 import com.musi.shop.web.entity.channel.Channel;
@@ -15,10 +15,14 @@ import com.musi.shop.web.dto.album.AlbumDto;
 import com.musi.shop.web.dto.song.SongDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -39,7 +43,13 @@ public class AlbumService {
     private final SongRepository songRepository;
     private final MemberRepository memberRepository;
     private final ChannelRepository channelRepository;
+    @Autowired
    private final AlbumMapper albumMapper;
+
+    @Autowired
+    PlatformTransactionManager manager;
+
+
 
 
     // 최신 앨범 불러오기 (4개)
