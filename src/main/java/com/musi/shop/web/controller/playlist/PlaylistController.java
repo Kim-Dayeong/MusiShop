@@ -9,6 +9,7 @@ import com.musi.shop.web.entity.playlist.Playlist;
 import com.musi.shop.web.service.playlist.PlaylistService;
 import javassist.compiler.Parser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ import java.util.List;
 public class PlaylistController {
 
     private final PlaylistService playlistService;
+
+
 
     // 플레이리스트 생성
     @PostMapping("/playlist/{id}/add")
@@ -60,14 +63,11 @@ public class PlaylistController {
     @GetMapping("playlist/update/") //songid
     public String postPlaylistModify(@RequestParam Long songid,
                                      Model model, @AuthenticationPrincipal PrincipalDetail principalDetail
-            , HttpServletResponse response){
+            , HttpServletResponse response, HttpSession httpSession){
 
 
+    httpSession.setAttribute("songid", songid); // 세션에 songid 저장
 
-        Cookie cookie = new Cookie("songid", songid.toString()); // 쿠키에 songid 저장
-        // 쿠키 만료 시간
-//        cookie.setMaxAge(60);
-        response.addCookie(cookie);
 
        model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
 
@@ -77,13 +77,15 @@ public class PlaylistController {
     @GetMapping("/playlist/modify/") //songid + listid
     public String getPlaylistUpdate(@RequestParam Long listid,
                                     HttpServletRequest request, Model model,
-                                    @CookieValue("songid") String songid){
+                                    HttpSession httpSession){
 
 
-        System.out.println("쿠키값!@!!!!!!" + songid);
 
-        playlistService.updatePlaylist(listid, Long.parseLong(songid));
+
+        playlistService.updatePlaylist(listid, (Long) httpSession.getAttribute("songid"));
         model.addAttribute("dto",playlistService.PlaylistDetail(listid));
+
+        httpSession.removeAttribute("songid"); // songid 삭제
 
         return "/playlist/playlist-detail";
 
