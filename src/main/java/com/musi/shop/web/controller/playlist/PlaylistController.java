@@ -7,17 +7,17 @@ import com.musi.shop.web.dto.playlist.PlaylistRequestDto;
 import com.musi.shop.web.dto.playlist.PlaylistResponseDto;
 import com.musi.shop.web.entity.playlist.Playlist;
 import com.musi.shop.web.service.playlist.PlaylistService;
+import javassist.compiler.Parser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -60,23 +60,30 @@ public class PlaylistController {
     @GetMapping("playlist/update/") //songid
     public String postPlaylistModify(@RequestParam Long songid,
                                      Model model, @AuthenticationPrincipal PrincipalDetail principalDetail
-            , HttpServletRequest request){
+            , HttpServletResponse response){
 
-        HttpSession session = request.getSession();
+
+
+        Cookie cookie = new Cookie("songid", songid.toString()); // 쿠키에 songid 저장
+        // 쿠키 만료 시간
+//        cookie.setMaxAge(60);
+        response.addCookie(cookie);
+
        model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
-        session.setAttribute("songid", songid);
+
         return "/playlist/playlist-modify";
     }
 
     @GetMapping("/playlist/modify/") //songid + listid
     public String getPlaylistUpdate(@RequestParam Long listid,
-    HttpServletRequest request, Model model){
+                                    HttpServletRequest request, Model model,
+                                    @CookieValue("songid") String songid){
 
-        HttpSession session = request.getSession();
-        Long songid = (Long) session.getAttribute("songid");
-        playlistService.updatePlaylist(listid, songid);
+
+        System.out.println("쿠키값!@!!!!!!" + songid);
+
+        playlistService.updatePlaylist(listid, Long.parseLong(songid));
         model.addAttribute("dto",playlistService.PlaylistDetail(listid));
-       session.invalidate(); //  세션방식은 로그인까지 같이 풀어버림 , 수정
 
         return "/playlist/playlist-detail";
 

@@ -9,6 +9,13 @@
         LIMIT 4
     </select>
 
+    <select id="bestAlbum" resultType="com.musi.shop.web.entity.album.Album">
+        SELECT *
+        FROM Album
+        ORDER BY view DESC
+            LIMIT 1
+    </select>
+
 
 
 </mapper>

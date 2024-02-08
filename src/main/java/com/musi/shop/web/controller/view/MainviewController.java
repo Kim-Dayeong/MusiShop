@@ -25,8 +25,8 @@ public class MainviewController {
     public String mainView(Model model) {
 
         // 인기 앨범 불러오기
-//        Album bestAlbum =  albumService.bestAlbum();
-//        System.out.println(bestAlbum);
+        Album bestAlbum =  albumService.bestAlbum();
+        System.out.println(bestAlbum);
 
         // 최신 앨범 불러오기 (4개)
         List<Album> albumList = albumService.newAlbum();
@@ -41,7 +41,7 @@ public class MainviewController {
             System.out.println();
         }
 
-//       model.addAttribute("bestAlbum", bestAlbum);
+       model.addAttribute("bestAlbum", bestAlbum);
 
         return "/index";
 

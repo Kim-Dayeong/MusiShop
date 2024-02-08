@@ -11,4 +11,6 @@ public interface AlbumMapper {
 
 
     List<Album> findNewAlbum();
+
+    Album bestAlbum();
 }

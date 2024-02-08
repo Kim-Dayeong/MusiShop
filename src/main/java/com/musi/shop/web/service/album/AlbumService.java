@@ -61,7 +61,7 @@ public class AlbumService {
 
     // 인기 앨범 불러오기
     public Album bestAlbum(){
-        return  albumRepository.findTopByOrderByViewDesc();
+        return albumMapper.bestAlbum();
 
     }
 
