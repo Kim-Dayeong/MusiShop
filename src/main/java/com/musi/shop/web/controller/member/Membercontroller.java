@@ -77,8 +77,36 @@ public class Membercontroller {
         return "redirect:/";
     }
 
+    @GetMapping("user/exit")
+    public String getUserexit(){
+        return "user/user-exit";
+    }
+
+    @PostMapping("/user/exit") // 회원 탈퇴
+    private String userExit(@AuthenticationPrincipal PrincipalDetail principalDetail){
+        if(principalDetail == null){
+            System.out.println("접근 불가");
+            return "redirect:/";
+        }
+        memberService.userExit(principalDetail.getUsername());
+
+        return "redirect:/logout";
+    }
 
 
+// 회원 수정
+    @PostMapping()
+    private String postUserupdate(@AuthenticationPrincipal PrincipalDetail principalDetail){
+
+        return
+    }
+
+    @GetMapping("/user/update")
+    private String getUserupdate(){
+
+        return "user/user-update";
+
+    }
 
 
 

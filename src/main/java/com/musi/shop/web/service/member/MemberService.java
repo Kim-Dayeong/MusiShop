@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,5 +82,21 @@ public class MemberService {
        return albumlist;
     }
 
+    // 회원 탈퇴
+    public void userExit(String username){
+        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+        Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException());
+
+        memberRepository.delete(member);
+
+    }
+
+    // 회원수정
+    public void userupdate(String username){
+        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+        Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException());
+
+
+    }
 
 }

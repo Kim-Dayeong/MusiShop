@@ -5,10 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>플레이리스트 디테일</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<h2>플레이리스트 디테일 페이지 </h2>
+<h2>플레이리스트 디테일 </h2>
 
 
 
@@ -17,9 +23,9 @@
 
         <tbody>
 
-        <a th:text="${dto.title}"></a>
+        <h2 th:text="${dtos.title}"></h2>
 
-        <tr th:each="song : ${dto.songs}">
+        <tr th:each="song : ${dtos.songs}">
 
             <td th:text="${song.songname}"></td>
 
