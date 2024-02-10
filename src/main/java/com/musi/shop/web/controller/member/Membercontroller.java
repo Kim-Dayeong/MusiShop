@@ -4,6 +4,7 @@ package com.musi.shop.web.controller.member;
 
 
 import com.musi.shop.web.config.PrincipalDetail;
+import com.musi.shop.web.dto.member.MemberUpdateDTO;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.repository.member.MemberRepository;
@@ -96,9 +97,11 @@ public class Membercontroller {
 
 // 회원 수정
     @PostMapping()
-    private String postUserupdate(@AuthenticationPrincipal PrincipalDetail principalDetail){
+    private String postUserupdate(@AuthenticationPrincipal PrincipalDetail principalDetail,
+                                  MemberUpdateDTO memberUpdateDTO){
+        memberService.userupdate(principalDetail.getUsername(),memberUpdateDTO);
 
-        return
+        return "redirect:/logout";
     }
 
     @GetMapping("/user/update")

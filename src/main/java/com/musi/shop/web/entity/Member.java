@@ -68,12 +68,14 @@ public class Member {
         return this.role.getKey();
     }
 
-        public Member update(String nickname, String picture, String provider){
+        public Member update(String nickname, String picture, String password){
         this.nickname = nickname;
         this.picture = picture;
-        this.provider = provider;
+        this.password = password;
 
         return this;
     }
+
+
 
 }

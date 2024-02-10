@@ -1,5 +1,6 @@
 package com.musi.shop.web.service.member;
 
+import com.musi.shop.web.dto.member.MemberUpdateDTO;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.Role;
 import com.musi.shop.web.entity.album.Album;
@@ -20,6 +21,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
@@ -92,10 +94,13 @@ public class MemberService {
     }
 
     // 회원수정
-    public void userupdate(String username){
+    public void userupdate(String username, MemberUpdateDTO memberUpdateDTO){
         Optional<Member> memberOptional = memberRepository.findByUsername(username);
         Member member = memberOptional.orElseThrow(() -> new IllegalArgumentException());
 
+
+        member.update(memberUpdateDTO.getNickname(),memberUpdateDTO.getPitcure(),
+                bCryptPasswordEncoder.encode(memberUpdateDTO.getPassword()));
 
     }
 
