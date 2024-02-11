@@ -80,9 +80,13 @@ public String getUsername(){
     public Collection<? extends GrantedAuthority> getAuthorities() { // 계정 권한목록 리턴
 
         Collection<GrantedAuthority> collectors = new ArrayList<>();
-        collectors.add(() -> {
-            return "ROLE_" + member.getRole();
-        });
+        collectors.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return member.getRole().toString();
+            }
+
+    });
 
         return collectors;
     }

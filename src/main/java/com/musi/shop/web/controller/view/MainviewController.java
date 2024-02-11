@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class MainviewController {
 
     @GetMapping("/")
     public String mainView(Model model) {
+
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         // 인기 앨범 불러오기
         Album bestAlbum =  albumService.bestAlbum();

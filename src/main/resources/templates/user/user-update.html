@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="로그인"></title>
+    <!-- 부트스트랩 CSS 파일 링크 -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
 
+<body class="bg-light">
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1 class="display-4">회원 정보 수정</h1>
+            <hr/>
+
+            <form action="/user/update" method="post">
+                <div class="form-group">
+                    <label for="nickname">닉네임</label>
+                    <input type="nickname" class="form-control" id="nickname" name="nickname" placeholder="Username"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">수정</button>
+            </form>
+
+            <a href="/oauth2/authorization/google" class="btn btn-danger mt-2">Google Login</a>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

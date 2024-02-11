@@ -64,6 +64,7 @@ public class BoardController {
     public String writeBoardPost(@ModelAttribute BoardRequestDto boardRequestDto,
                                  @AuthenticationPrincipal PrincipalDetail principalDetail,
                                  Board board){
+
         boardService.createBoard(boardRequestDto,principalDetail.getUsername(), board);
 
         return "redirect:/";

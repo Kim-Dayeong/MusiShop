@@ -96,7 +96,7 @@ public class Membercontroller {
 
 
 // 회원 수정
-    @PostMapping()
+    @PostMapping("/user/update")
     private String postUserupdate(@AuthenticationPrincipal PrincipalDetail principalDetail,
                                   MemberUpdateDTO memberUpdateDTO){
         memberService.userupdate(principalDetail.getUsername(),memberUpdateDTO);

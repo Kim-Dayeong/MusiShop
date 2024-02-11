@@ -31,6 +31,7 @@ public class Member {
     private String email;
     private String picture;
 
+
     private String provider;
     private String providerId;
 
@@ -70,7 +71,7 @@ public class Member {
 
         public Member update(String nickname, String picture, String password){
         this.nickname = nickname;
-        this.picture = picture;
+//        this.picture = picture;
         this.password = password;
 
         return this;
