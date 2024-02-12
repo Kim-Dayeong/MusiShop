@@ -1,6 +1,7 @@
 package com.musi.shop.web.controller.board;
 
 import com.musi.shop.web.config.PrincipalDetail;
+import com.musi.shop.web.config.auth.dto.SessionUser;
 import com.musi.shop.web.dto.ResponseDto;
 import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.dto.comment.CommentResponseDto;
@@ -26,6 +27,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import java.util.*;
 
 
@@ -36,6 +39,7 @@ public class BoardController {
     private final BoardService boardService;
     private final BookmarkService bookmarkService;
     private final CommentService commentService;
+    private final HttpSession httpSession;
 
     @Autowired
     private BoardReporitory boardReporitory;
@@ -53,10 +57,15 @@ public class BoardController {
     }
 
     @GetMapping("/board/write")
-    public String wirteBoard(Model model){
+    public String wirteBoard(Model model,@AuthenticationPrincipal PrincipalDetail principalDetail){
         BoardRequestDto boardRequestDto = new BoardRequestDto();
         model.addAttribute("boardDto", boardRequestDto);
+        System.out.println(principalDetail.getUsername().toString());
 
+//        SessionUser sessionUser = (SessionUser)httpSession.getAttribute("user");
+//        if(sessionUser != null){
+//            System.out.println(sessionUser.getNickname().toString());
+//        }
         return "/board/board-add.html";
     }
 
@@ -64,6 +73,8 @@ public class BoardController {
     public String writeBoardPost(@ModelAttribute BoardRequestDto boardRequestDto,
                                  @AuthenticationPrincipal PrincipalDetail principalDetail,
                                  Board board){
+
+
 
         boardService.createBoard(boardRequestDto,principalDetail.getUsername(), board);
 

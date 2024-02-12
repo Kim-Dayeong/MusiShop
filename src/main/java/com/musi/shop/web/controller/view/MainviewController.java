@@ -26,7 +26,6 @@ public class MainviewController {
     @GetMapping("/")
     public String mainView(Model model) {
 
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         // 인기 앨범 불러오기
         Album bestAlbum =  albumService.bestAlbum();

@@ -32,6 +32,7 @@ public class Member {
     private String picture;
 
 
+
     private String provider;
     private String providerId;
 
@@ -54,7 +55,7 @@ public class Member {
     private Channel channel;
 
     @Builder
-    public Member(String username, String password, String nickname, String email, Role role, String providerId, String provider, String picture){
+    public Member(String username ,String password, String nickname, String email, Role role, String providerId, String provider, String picture){
         this.username = username;
         this.password = password;
         this.email = email;
@@ -63,6 +64,7 @@ public class Member {
         this.provider = provider;
         this.providerId = providerId;
         this.picture = picture;
+
     }
 
     public String getRoleKey(){
@@ -73,6 +75,7 @@ public class Member {
         this.nickname = nickname;
 //        this.picture = picture;
         this.password = password;
+
 
         return this;
     }
