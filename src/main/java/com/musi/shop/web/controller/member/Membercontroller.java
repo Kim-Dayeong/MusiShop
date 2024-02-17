@@ -42,6 +42,10 @@ public class Membercontroller {
 
     @PostMapping("/joinProc")
     public String joinProc(Member member){
+        if (userRepository.findByUsername(member.getUsername()) != null){
+            return "아이디 중복입니다.";
+        } // 이 부분 수정
+
         String rawPassword = member.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);

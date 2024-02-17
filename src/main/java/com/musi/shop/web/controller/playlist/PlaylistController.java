@@ -28,7 +28,14 @@ public class PlaylistController {
 
     private final PlaylistService playlistService;
 
+   // 최신 플레이리스트 전체 보기
+   @GetMapping("/playlist/all")
+   public String playlistAll(Model model){
 
+       model.addAttribute("playlist",  playlistService.PlaylistAll() );
+
+       return "/playlist/playlist-all";
+   }
 
     // 플레이리스트 생성
     @PostMapping("/playlist/{id}/add")
@@ -39,10 +46,13 @@ public class PlaylistController {
         return "redirect:/playlist/view/" + id;
     }
 
-    // 플레이리스트 목록 보기
-    @GetMapping("/playlist/view/{id}")
-    public String playlistView(@PathVariable Long id, Model model){// id -> 멤버 id
-      model.addAttribute("playlists", playlistService.PlaylistView(id));
+    // 내가 만든 플레이리스트 목록 보기
+    @GetMapping("/playlist/view")
+    public String playlistView(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model){
+
+      model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
+
+      // 로그인 안됐을때 에러 처리 하기
 
         return "/playlist/playlist-view";
 

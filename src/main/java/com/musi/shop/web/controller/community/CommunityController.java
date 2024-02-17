@@ -21,6 +21,12 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
+    //커뮤니티 목록 view
+    @GetMapping("/commu/{id}/view") //id = 커뮤니티 id
+    public String viewCommuGet(@PathVariable Long id){
+
+    }
+
     // create
 
     @GetMapping("/commu/{id}/write")

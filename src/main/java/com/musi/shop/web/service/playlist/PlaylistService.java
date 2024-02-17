@@ -53,7 +53,15 @@ public class PlaylistService {
         return playlists;
     }
 
-    // 플레이 리스트 보기
+    // 최신 추가 된 플레이리스트 전체 보기
+
+    public List<Playlist> PlaylistAll() {
+        List<Playlist> playlists = playlistRepository.findAll();
+
+        return playlists;
+    }
+
+    // 플레이 리스트 디테일 보기
     public PlaylistResponseDto PlaylistDetail(Long id){
         Playlist playlist = playlistRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 플레이리스트입니다."));
        PlaylistResponseDto result = PlaylistResponseDto.builder()
