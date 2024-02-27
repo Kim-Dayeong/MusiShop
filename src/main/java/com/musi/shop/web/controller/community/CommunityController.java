@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.awt.print.Pageable;
+
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
@@ -23,8 +25,10 @@ public class CommunityController {
 
     //커뮤니티 목록 view
     @GetMapping("/commu/{id}/view") //id = 커뮤니티 id
-    public String viewCommuGet(@PathVariable Long id){
-
+    public String viewCommuGet(@PathVariable Long id , Model model){
+        communityService.communityList(id);
+        model.addAttribute("comulist",model);
+        return "/community/commu-list";
     }
 
     // create

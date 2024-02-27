@@ -12,9 +12,17 @@ import com.musi.shop.web.repository.community.CommunityRepository;
 import com.musi.shop.web.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Pageable;
+
 import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +57,23 @@ public class CommunityService {
 
         communityRepository.save(community);
 
+    }
+
+    // view
+
+
+    // list
+    public Page<Community> communityList ( long id){
+        Pageable pageable = PageRequest.of(0, 10);
+        Optional<Community> communityOptional = communityRepository.findById(id);
+
+        Community community = communityOptional.orElse(null);
+
+        List<Community> communityList = new ArrayList<>();
+        if(community != null){
+            communityList.add(community);
+        }
+        return new PageImpl<Community>(communityList, pageable, communityList.size());
     }
 
     // write

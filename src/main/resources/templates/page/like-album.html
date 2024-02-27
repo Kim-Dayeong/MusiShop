@@ -1,0 +1,43 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>플레이리스트 보기</title>
+</head>
+<body>
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+<h3>My 좋아요 앨범 목록</h3>
+
+
+<div class="layout">
+  <table>
+    <thead>
+    <tr>
+      <th>album</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="likes : ${likes}">
+
+      <td>
+        <a th:text="${likes.title}" th:href=""></a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+</body>
+</html>

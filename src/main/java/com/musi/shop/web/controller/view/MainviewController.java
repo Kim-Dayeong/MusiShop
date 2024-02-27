@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 
 @Controller
+
 public class MainviewController {
 
     @Autowired
