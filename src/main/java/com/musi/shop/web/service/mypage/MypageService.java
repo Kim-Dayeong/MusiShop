@@ -29,6 +29,8 @@ public class MypageService {
 
     public List<Bookmark> myBoardBookmark(String username){
 
+
+
         return bookmarkRepository.findAllByMemberUsername(username);
 
     }

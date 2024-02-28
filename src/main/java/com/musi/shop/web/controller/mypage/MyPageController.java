@@ -21,6 +21,13 @@ public class MyPageController {
     @Autowired
     private final MypageService mypageService;
 
+
+    @GetMapping("/")
+    public String myPage(Model model){
+
+        return "/page/my-page";
+    }
+
     @GetMapping("/bookmark")
     public String myBookmark(Model model, @AuthenticationPrincipal PrincipalDetail principalDetail){
 

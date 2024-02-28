@@ -17,13 +17,13 @@
     <table>
         <thead>
         <tr>
-            <th>album</th>
+            <th>bookmark</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="bookmark : ${bookmarks}">
             <td>
-                <a th:text="${bookmark.id}" th:href="@{'/albums/' + ${bookmark.id}}"></a>
+                <a th:text="${bookmark.board.title}" th:href="@{'/board/read/' + ${bookmark.board.id}}"></a>
             </td>
         </tr>
         </tbody>
