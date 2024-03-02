@@ -1,6 +1,6 @@
 package com.musi.shop.web.dto.album;
 
-import com.musi.shop.web.dto.heart.HeartDto;
+
 import com.musi.shop.web.dto.song.SongDto;
 import com.musi.shop.web.entity.album.Album;
 
@@ -25,7 +25,7 @@ public class AlbumDto {
     private String regdate;
     private Long heartcnt;
     private List<SongDto> songs;
-    private List<HeartDto> hearts;
+//    private List<HeartDto> hearts;
     private int view;
 
 

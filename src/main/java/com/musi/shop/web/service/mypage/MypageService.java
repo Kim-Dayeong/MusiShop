@@ -1,10 +1,12 @@
 package com.musi.shop.web.service.mypage;
 
-import com.musi.shop.web.entity.album.Heart;
+import com.musi.shop.web.entity.album.Album;
+import com.musi.shop.web.entity.album.HeartAlbum;
 import com.musi.shop.web.entity.board.Bookmark;
 
 import com.musi.shop.web.repository.board.BookmarkRepository;
-import com.musi.shop.web.repository.heart.HeartRepository;
+
+import com.musi.shop.web.repository.heart.HeartAlbumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +26,7 @@ public class MypageService {
     BookmarkRepository bookmarkRepository;
 
     @Autowired
-    HeartRepository heartRepository;
+    HeartAlbumRepository heartAlbumRepository;
 
 
     public List<Bookmark> myBoardBookmark(String username){
@@ -35,9 +37,16 @@ public class MypageService {
 
     }
 
-    public List<Heart> myAlbumHeart(String username){
+    public List<Album> myAlbumHeart(String username){
 
-        return heartRepository.findAllByMemberUsername(username);
+
+        List<HeartAlbum> heartAlbums = heartAlbumRepository.findAllByMemberUsername(username);
+        List<Album> albums = new ArrayList<>();
+        for(HeartAlbum heartAlbum : heartAlbums){
+            Album album = heartAlbum.getAlbum();
+            albums.add(album);
+        }
+        return albums;
 
     }
 }

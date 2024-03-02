@@ -28,7 +28,9 @@
     <tr th:each="likes : ${likes}">
 
       <td>
-        <a th:text="${likes.title}" th:href=""></a>
+
+        <a th:text="${likes.title}" th:href="@{/album/view/{id}(id=${likes.id})}"></a>
+
       </td>
 
     </tr>
