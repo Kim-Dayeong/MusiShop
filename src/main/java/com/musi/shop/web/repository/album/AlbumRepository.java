@@ -2,6 +2,7 @@ package com.musi.shop.web.repository.album;
 
 
 import com.musi.shop.web.entity.album.Album;
+import com.musi.shop.web.entity.playlist.Playlist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,8 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     // 조회수 가장 많은 앨범 1개 가져오기
     @Query("SELECT a FROM Album a ORDER BY a.view ")
     Album findTopByOrderByViewDesc();
+
+    // 검색
+    List<Album> findByTitleContaining(String keyword); // 제목검색
 
 }
