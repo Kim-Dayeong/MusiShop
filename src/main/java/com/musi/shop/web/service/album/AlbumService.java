@@ -123,7 +123,7 @@ public class AlbumService {
     @Transactional
     public AlbumDto getAlbumWithSongs(Long id){
         Album album = albumRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("album not found with id : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("앨범을 찾을 수 없습니다  : " + id));
             List<Song> songs = songRepository.findByAlbumId(id);
 
             List<SongDto> songDtos = songs.stream()
@@ -143,6 +143,13 @@ public class AlbumService {
 
     }
 
+    // 삭제
+    public void albumDelte(Long id){
+
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("앨범을 찾을 수 없습니다  : " + id));
+        albumRepository.delete(album);
+    }
 
 
     }

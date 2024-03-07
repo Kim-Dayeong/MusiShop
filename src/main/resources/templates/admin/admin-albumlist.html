@@ -1,0 +1,57 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 1000px">
+    <div class="py-5 text-center">
+        <h2>앨범 목록</h2>
+    </div>
+
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>조회수</th>
+                <th>등록일</th>
+                <th>발매연도</th>
+                <th>가격</th>
+                <th>좋아요수</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="album : ${list.content}">
+                <td><a  th:text="${album.id}">글 ID</a></td>
+                <td><a  th:href="@{/album/view/{id}(id=${album.id})}" th:text="${album.title}">제목</a></td>
+                <td th:text="${album.view}">조회수</td>
+                <td th:text="${album.createdate}">등록일</td>
+                <td th:text="${album.regdate}">발매연도</td>
+                <td th:text="${album.price}">가격</td>
+                <td th:text="${album.heartcnt}">좋아요수</td>
+                <td>
+                    <form th:action="@{/admin/album/delete/{id}(id=${album.id})}" method="post">
+                        <button type="submit" class="btn btn-delete">삭제</button>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+
+</body>
+</html>

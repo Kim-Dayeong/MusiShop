@@ -11,6 +11,7 @@ public class ChannelController {
 //        retrun
 //    }
 
+    // 채널 진입시 앨범, 커뮤니티 정보 뿌ㄹ기
 
 
 

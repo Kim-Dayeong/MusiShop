@@ -33,7 +33,7 @@ public class AlbumController {
    private final AlbumService albumService;
 // value 주입으로 수정
     private static final String UPLOAD_DIR = "/Users/kimdayeong/intelij/Musishop/src/main/resources/static/albumcover";
-//private static final String UPLOAD_DIR = "/Users/kimdayeong/Documents/albumcover";
+
 
 
 

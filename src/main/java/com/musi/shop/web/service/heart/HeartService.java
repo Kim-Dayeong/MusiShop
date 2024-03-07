@@ -50,7 +50,6 @@ public class HeartService {
         heartAlbumRepository.save(heartalbum);
         return "좋아요 처리 완료";
 
-
     }
 }
 
