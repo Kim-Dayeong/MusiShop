@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 1000px">
+  <div class="py-5 text-center">
+    <h2>게시판 목록</h2>
+  </div>
+
+
+  <hr class="my-4">
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>조회수</th>
+        <th>등록일</th>
+        <th>북마크수</th>
+        <th>게시자</th>
+<!--        <th>좋아요수</th>-->
+
+
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="list : ${list.content}">
+        <td><a  th:text="${list.id}">글 ID</a></td>
+        <td><a  th:href="@{/list/view/{id}(id=${list.id})}" th:text="${list.title}">제목</a></td>
+        <td th:text="${list.view}">조회수</td>
+        <td th:text="${list.createDate}">등록일</td>
+        <td th:text="${list.bookmark}">북마크수</td>
+        <td th:text="${list.member.nickname}">게시자</td>
+<!--        <td th:text="${list.like}">좋아요수</td>-->
+        <td>
+          <form th:action="@{/admin/board/delete/{id}(id=${list.id})}" method="post">
+            <button type="submit" class="btn btn-delete">삭제</button>
+          </form>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

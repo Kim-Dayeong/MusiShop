@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>앨범 목록</title>
+</head>
+
+<style>
+    .layout {
+        width: 80%; /* 조절 가능 */
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+</style>
+
+<body>
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<div class="layout">
+    <h1 class="display-4">앨범 목록</h1>
+    <hr/>
+
+    <div class="card-columns">
+        <div th:each="album: ${list}" class="card">
+            <img th:src="@{'/albumcover/' + ${album.img}}" class="card-img-top" alt="앨범 이미지">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${album.title}"></h5>
+                <p class="card-text">앨범 설명 또는 기타 정보</p>
+                <a th:href="@{/album/view/{id}(id=${album.id})}" class="btn btn-primary">앨범 보기</a>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination mt-3">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/album/list?page=0}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+                <li class="page-item" th:classappend="${page == nowPage} ? 'active' : ''">
+                    <a class="page-link" th:href="@{/album/list(page=${page}-1)}" th:text="${page+1}"></a>
+                </li>
+            </th:block>
+            <li class="page-item">
+                <a class="page-link" th:href="@{/album/list(page=${endtotal})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+</body>
+
+</html>

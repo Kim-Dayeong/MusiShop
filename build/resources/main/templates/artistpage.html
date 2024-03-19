@@ -1,0 +1,25 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<meta charset="UTF-8">
+<head>
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>아티스트 페이지</h1>
+<tbody>
+<tr th:each="album : ${albumDto.albumsList}">
+  <td>
+    <a th:text="${album.title}" th:href="@{/album/view/{id}(id=${album.id})}"></a>
+  </td>
+  <td th:text="${album.img}"></td>
+</tr>
+</tbody>
+
+
+</body>
+</html>

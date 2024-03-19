@@ -1,0 +1,41 @@
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <title>플레이 리스트 수정 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+
+<div class="layout">
+
+    <table>
+        <thead>
+        <tr>
+            <th>playlist</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="playlist : ${playlists}">
+
+            <td>
+                <a th:text="${playlist.title}" th:href="@{/playlist/modify/(listid=${playlist.id})}"></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+</body>
+</html>

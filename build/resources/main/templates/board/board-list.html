@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 부트스트랩 CSS 파일 링크 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- jQuery 및 부트스트랩 JS 파일 링크 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8">
+  <title>게시글 목록</title>
+</head>
+
+<body class="bg-light">
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<div class="container mt-5">
+  <h1 class="display-4">게시글 목록</h1>
+  <hr/>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">글번호</th>
+      <th scope="col">제목</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="board: ${list}">
+      <td th:text="${board.id}"></td>
+      <td>
+        <a th:text="${board.title}" th:href="@{/board/read/{id}(id=${board.id})}" class="text-decoration-none"></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href="@{/board/list?page=0}" class="btn btn-primary">첫 페이지</a>
+  <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+    <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page}-1)}" th:text="${page}"
+       class="btn btn-secondary"></a>
+    <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+  </th:block>
+  <a th:href="@{/board/list(page=${endtotal})}" class="btn btn-primary">끝 페이지</a>
+</div>
+
+</body>
+
+</html>

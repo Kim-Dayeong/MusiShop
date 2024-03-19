@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>검색결과 페이지</title>
+</head>
+
+<style>
+    .layout {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+</style>
+<body>
+<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<div class="layout">
+    <h1 class="display-4">통합검색</h1>
+</div>
+
+<hr class="hr-3">
+<div class="layout">
+    <h3>앨범 검색결과</h3>
+    <hr class="hr-2">
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+<!--            <th>작성자</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="album : ${album}">
+            <td><a th:text="${album.title}" th:href="@{/album/view/{id}(id=${album.id})}"></a></td>
+<!--            <td th:text="${album.name}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="layout">
+    <h3>게시판 검색결과</h3>
+    <hr class="hr-2">
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+<!--            <th>작성자</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${board}">
+            <td><a th:text="${board.title}" th:href="@{/board/view/{id}(id=${board.id})}"></a></td>
+<!--            <td th:text="${board.member.nickname}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="layout">
+    <h3>커뮤니티 검색결과</h3>
+    <hr class="hr-2">
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+<!--            <th>작성자</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="community : ${community}">
+            <td><a th:text="${community.title}" th:href="@{'/commu/' + ${community.id} + '/view'}"></a></td>
+
+<!--            <td th:text="${community.member.nickname}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="layout">
+    <h3>플레이리스트 검색결과</h3>
+    <hr class="hr-2">
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+<!--            <th>작성자</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="playlist : ${playlist}">
+            <td><a th:text="${playlist.title}" th:href="@{/playlist/detail/{id}(id=${playlist.id})}"></a></td>
+
+<!--            <td th:text="${playlist.member.nickname}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="layout">
+    <h3>음악 검색 결과</h3>
+    <hr class="hr-2">
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+<!--            <th>작성자</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="song: ${song}">
+            <td><a th:text="${song.songname}" th:href="@{/album/view/{id}(id=${song.album.id})}"></a></td>
+<!--            <td th:text="${song.album.title}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
