@@ -3,7 +3,6 @@ version: '3.8'
 services:
   database:
     image: mysql:5.7
-    command: --lower_case_table_names=1
     platform: linux/amd64
     restart: always
     container_name: mysql-container
@@ -12,7 +11,6 @@ services:
       MYSQL_ROOT_PASSWORD: rlaekdud
     volumes:
       - ./db:/var/lib/mysql
-      - - ./my.cnf:/etc/mysql/my.cnf
     ports:
       - "3306:3306"
     networks:
@@ -20,9 +18,8 @@ services:
 
   app:
     build:
-      context: .
+      context: src/main
       dockerfile: Dockerfile
-    image: kimdayeong/musi
     restart: always
     ports:
       - "8083:8083"
@@ -30,7 +27,7 @@ services:
       - database
     container_name: musi-container
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/musi?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/musi?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rlaekdud
     networks:
