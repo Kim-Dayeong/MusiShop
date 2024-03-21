@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>회원가입</title>
+</head>
+
+<style>
+    .layout {
+        width: 80%; /* 조절 가능 */
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+</style>
+<body>
+<th:block th:replace="layout/navbar :: navbarFragment"></th:block>
+<h1>아티스트 회원가입</h1>
 
 
-  <h1>아티스트 회원가입 </h1>
-
-    <h2>- 아티스트 개인 채널 생성</h2>
-    <h2>- 앨범 등록 가능</h2>
+    <h4>- 아티스트 개인 채널 생성</h4>
+    <h4>- 앨범 등록 가능</h4>
+<a th:href="@{/artjoin}">아티스트 회원가입 </a>
 
   <h1>일반 회원 회원가입 </h1>
 
-    <h2>- 아티스트 구독 가능</h2>
-    <h2>- 앨범 좋아요 및 플레이리스트 생성 가능</h2>
+    <h4>- 아티스트 구독 가능</h4>
+    <h4>- 앨범 좋아요 및 플레이리스트 생성 가능</h4>
+<a th:href="@{/userjoin}">일반회원 회원가입 </a>
 
-</head>
-<body>
+
 
 </body>
 </html>

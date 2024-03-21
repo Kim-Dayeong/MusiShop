@@ -25,7 +25,7 @@ public class MyPageController {
     @GetMapping("/")
     public String myPage(Model model){
 
-        return "/page/my-page";
+        return "page/my-page";
     }
 
     @GetMapping("/bookmark")
@@ -33,7 +33,7 @@ public class MyPageController {
 
 
         model.addAttribute("bookmarks", mypageService.myBoardBookmark(principalDetail.getUsername()));
-        return "/page/my-bookmark";
+        return "page/my-bookmark";
 
 
     }
@@ -42,7 +42,7 @@ public class MyPageController {
     public String myLikesong(Model model, @AuthenticationPrincipal PrincipalDetail principalDetail){
         model.addAttribute("likes",mypageService.myAlbumHeart(principalDetail.getUsername()));
 
-        return "/page/like-album";
+        return "page/like-album";
 
     }
 

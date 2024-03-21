@@ -21,15 +21,13 @@ public class CommentController {
 
     // write
 
-    @PostMapping("/board/{id}/comment")
+    @PostMapping("board/{id}/comment")
     public String writeComment(@PathVariable Long id, CommentRequestDto commentRequestDto,
                                @AuthenticationPrincipal PrincipalDetail principalDetail){
         commentService.writeComment(commentRequestDto, id, principalDetail);
-        return "redirect:/board/read/" + id;
+        return "redirect:board/read/" + id;
     }
 
-
-    // modify
 
 
     // delete

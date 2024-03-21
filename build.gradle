@@ -127,6 +127,7 @@ dependencies {
 
     // 타임리프에서 스프링시큐리티의 문법이나 형식을 지원하는 확장팩 라이브러리
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
    //spring security oauth2 cleint
     implementation ("org.springframework.boot:spring-boot-starter-oauth2-client")

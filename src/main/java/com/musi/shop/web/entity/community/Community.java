@@ -15,7 +15,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @Setter
@@ -69,7 +69,8 @@ public class Community extends BaseTimeEntity {
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view; // 조회수
 
-    public Community(final String title,final String content, final Channel channel, final Member member) {
+    public Community( final String title, final String content, final Channel channel, final Member member) {
+
         this.title = title;
         this.content = content;
         this.channel = channel;
@@ -78,5 +79,11 @@ public class Community extends BaseTimeEntity {
         this.bookmark = 0;
 
     }
+    //게시글 수정 메서드
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 
 }

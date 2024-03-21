@@ -53,7 +53,7 @@ public class BoardController {
         model.addAttribute("boards", dto);
         model.addAttribute("comments", comments);
 
-        return "/board/board-read";
+        return "board/board-read";
     }
 
     @GetMapping("/board/write")
@@ -66,7 +66,7 @@ public class BoardController {
 //        if(sessionUser != null){
 //            System.out.println(sessionUser.getNickname().toString());
 //        }
-        return "/board/board-add.html";
+        return "board/board-add.html";
     }
 
     @PostMapping("/board/write")
@@ -90,7 +90,7 @@ public class BoardController {
         model.addAttribute("result", result);
         model.addAttribute("id", id);
 
-        return "/board/board-update";
+        return "board/board-update";
     }
 
     @PostMapping("/board/update/{id}")
@@ -98,7 +98,7 @@ public class BoardController {
 
         boardService.updateBoard(id, boardRequestDto);
 
-        return "/board/board-read";
+        return "board/board-read";
     }
 
     // Delete

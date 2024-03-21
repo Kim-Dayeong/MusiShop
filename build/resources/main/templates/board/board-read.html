@@ -41,7 +41,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="bg-light">
-<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<th:block th:replace="layout/navbar :: navbarFragment"></th:block>
 <div class="layout container mt-5">
 
     <table class="table">
@@ -75,7 +75,7 @@
 <!--    </div>-->
 
 
-    <form action="/board/{id}/comment" method="post" th:action="@{'/board/' + ${id} + '/comment'}" class="comment-form">
+    <form action="board/{id}/comment" method="post" th:action="@{'/board/' + ${id} + '/comment'}" class="comment-form">
         <input type="text" class="form-control comment-input" name="content" placeholder="댓글을 입력하세요"/>
         <div class="btn-container">
             <button type="submit" class="btn btn-primary">댓글 등록</button>

@@ -15,7 +15,7 @@
 </head>
 
 <body class="bg-light">
-<th:block th:replace="/layout/navbar :: navbarFragment"></th:block>
+<th:block th:replace="layout/navbar :: navbarFragment"></th:block>
 <div class="container mt-5">
   <h1 class="display-4">게시글 목록</h1>
   <hr/>
@@ -29,10 +29,10 @@
     </thead>
     <tbody>
 
-    <tr th:each="commu: ${comulist.content}">
-      <td th:text="${commu.id}"></td>
+    <tr th:each="commulist: ${list}">
+      <td th:text="${commulist.id}"></td>
       <td>
-        <a th:text="${commu.title}" th:href="@{/board/read/{id}(id=${commu.id})}" class="text-decoration-none"></a>
+        <a th:text="${commulist.title}" th:href="@{/commu/read/{id}(id=${commulist.id})}" class="text-decoration-none"></a>
       </td>
     </tr>
     </tbody>
@@ -44,7 +44,7 @@
        class="btn btn-secondary"></a>
     <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
   </th:block>
-  <a th:href="@{/board/list(page=${endtotal})}" class="btn btn-primary">끝 페이지</a>
+  <a th:href="@{/commu/list(page=${endtotal})}" class="btn btn-primary">끝 페이지</a>
 </div>
 
 </body>

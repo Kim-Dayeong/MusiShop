@@ -23,7 +23,6 @@ public class MainviewController {
     private AlbumService albumService;
 
 
-
     @GetMapping("/")
     public String mainView(Model model) {
 
@@ -47,7 +46,7 @@ public class MainviewController {
 
        model.addAttribute("bestAlbum", bestAlbum);
 
-        return "/index";
+        return "index";
 
     }
 
@@ -68,7 +67,7 @@ public class MainviewController {
     @GetMapping(value = "/join")
     public ModelAndView userForm() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/member/join-select.html");
+        modelAndView.setViewName("member/join-select.html");
 
         return modelAndView;
     }
@@ -76,7 +75,7 @@ public class MainviewController {
     @GetMapping(value = "/userjoin")
     public ModelAndView userjoin() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/join.html");
+        modelAndView.setViewName("join.html");
 
         return modelAndView;
     }

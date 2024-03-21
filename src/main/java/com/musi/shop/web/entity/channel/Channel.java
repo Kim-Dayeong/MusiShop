@@ -6,6 +6,7 @@ import com.musi.shop.web.entity.community.Community;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,5 +24,8 @@ public class Channel {
 
     @OneToOne(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Member member;
+
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Community> communities = new ArrayList<>();
 
 }

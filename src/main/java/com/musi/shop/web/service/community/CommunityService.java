@@ -3,6 +3,7 @@ package com.musi.shop.web.service.community;
 import com.musi.shop.web.dto.board.BoardResponseDto;
 import com.musi.shop.web.dto.channel.ChannelDto;
 import com.musi.shop.web.dto.community.CommunityRequestDto;
+import com.musi.shop.web.dto.community.CommunityResponseDto;
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.channel.Channel;
@@ -59,32 +60,24 @@ public class CommunityService {
 
     }
 
-    // view
+    // read
+    public CommunityResponseDto CommunityDetail(Long id){
+        Community community = communityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        CommunityResponseDto result = CommunityResponseDto.builder()
+                .community(community)
+                .build();
 
-
-    // list
-    public Page<Community> communityList ( long id){
-        Pageable pageable = PageRequest.of(0, 10);
-        Optional<Community> communityOptional = communityRepository.findById(id);
-
-        Community community = communityOptional.orElse(null);
-
-        List<Community> communityList = new ArrayList<>();
-        if(community != null){
-            communityList.add(community);
-        }
-        return new PageImpl<Community>(communityList, pageable, communityList.size());
+        return result;
     }
 
-    // write
 
-//    public ChannelDto ChannelResponse(Long id){
-//        Channel channel = channelRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채널입니다."));
-//       ChannelDto result = ChannelDto.builder()
-//               .channel(channel)
-//                .build();
-//
-//
-//        return result;
-//    }
+
+
+
+    //페이징
+    public Page<Community> commuList(Pageable pageable, long id) {
+        return communityRepository.findById(id,pageable);
+    }
+
+
 }
