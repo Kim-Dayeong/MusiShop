@@ -14,7 +14,7 @@
 
 <style>
     .layout {
-        width: 80%; /* 조절 가능 */
+        width: 80%;
         margin: 0 auto;
         margin-top: 40px;
     }
@@ -31,7 +31,7 @@
             <img th:src="@{'/albumcover/' + ${album.img}}" class="card-img-top" alt="앨범 이미지">
             <div class="card-body">
                 <h5 class="card-title" th:text="${album.title}"></h5>
-                <p class="card-text">앨범 설명 또는 기타 정보</p>
+                <p class="card-text" th:text="${album.channel.member.nickname}"></p>
                 <a th:href="@{/album/view/{id}(id=${album.id})}" class="btn btn-primary">앨범 보기</a>
             </div>
         </div>

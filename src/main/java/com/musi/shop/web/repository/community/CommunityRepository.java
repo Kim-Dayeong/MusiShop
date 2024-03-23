@@ -16,4 +16,6 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
     List<Community> findByTitleContaining(String keyword); // 제목검색
 
     Page<Community> findById(long id, Pageable pageable);
+
+    Page<Community>  findByChannel_Id(Long channelId, Pageable pageable); // 채널 아이디로 커뮤니티 검색
 }

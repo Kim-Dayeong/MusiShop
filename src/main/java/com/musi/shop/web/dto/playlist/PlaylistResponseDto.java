@@ -30,7 +30,7 @@ public class PlaylistResponseDto {
         this.title = playlist.getTitle();
 
         if (playlist.getMusicSet() != null) {
-            this.songs = playlist.getMusicSet().stream().map(song -> new SongDto(song, false)).collect(Collectors.toSet());
+            this.songs = playlist.getMusicSet().stream().map(song -> new SongDto(song, true)).collect(Collectors.toSet());
         }
     }
 }

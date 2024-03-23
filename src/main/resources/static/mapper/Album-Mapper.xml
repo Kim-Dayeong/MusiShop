@@ -5,7 +5,7 @@
 
     <select id="findNewAlbum" resultType="com.musi.shop.web.entity.album.Album">
         SELECT * FROM Album
-        ORDER BY album_id ASC
+        ORDER BY album_id DESC
         LIMIT 4
     </select>
 

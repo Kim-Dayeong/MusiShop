@@ -37,7 +37,7 @@
         <td th:text="${list.view}">조회수</td>
         <td th:text="${list.createDate}">등록일</td>
         <td th:text="${list.bookmark}">북마크수</td>
-        <td th:text="${list.member.nickname}">게시자</td>
+        <td th:text="${list.member.username}">게시자</td>
 <!--        <td th:text="${list.like}">좋아요수</td>-->
         <td>
           <form th:action="@{/admin/board/delete/{id}(id=${list.id})}" method="post">

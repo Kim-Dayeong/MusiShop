@@ -1,6 +1,7 @@
 package com.musi.shop.web.entity.community;
 
 
+import com.musi.shop.web.entity.Comucomment.ComuComment;
 import com.musi.shop.web.entity.Member;
 
 import com.musi.shop.web.entity.channel.Channel;
@@ -45,9 +46,9 @@ public class Community extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
-//    @OneToMany(mappedBy = "community", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//    @OrderBy("id asc ") //댓글 정렬
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "community", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc ") //댓글 정렬
+    private List<ComuComment> comments;
 
     @Column
     @CreatedDate

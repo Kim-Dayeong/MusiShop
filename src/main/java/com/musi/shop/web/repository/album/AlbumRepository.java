@@ -22,10 +22,11 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     int updateView(Long id); // 조회수 증가
 
     // 조회수 가장 많은 앨범 1개 가져오기
-    @Query("SELECT a FROM Album a ORDER BY a.view ")
-    Album findTopByOrderByViewDesc();
-
+    Album findTop1ByOrderByViewDesc();
     // 검색
     List<Album> findByTitleContaining(String keyword); // 제목검색
+
+
+    List<Album> findTop4ByOrderByIdDesc();
 
 }

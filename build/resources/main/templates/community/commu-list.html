@@ -11,13 +11,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <meta charset="UTF-8">
-  <title>게시글 목록</title>
+  <title>커뮤니티 목록</title>
 </head>
 
 <body class="bg-light">
 <th:block th:replace="layout/navbar :: navbarFragment"></th:block>
 <div class="container mt-5">
-  <h1 class="display-4">게시글 목록</h1>
+  <h1 class="display-4"><span th:text="${channelinfo.member.nickname} + ' 커뮤니티'"></span></h1>
   <hr/>
 
   <table class="table table-striped">

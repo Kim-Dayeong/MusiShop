@@ -53,18 +53,26 @@ public class AlbumService {
 
 
     // 최신 앨범 불러오기 (4개)
-    public List<Album> newAlbum(){
+//    public List<Album> newAlbum(){
+//
+//        return albumMapper.findNewAlbum();
+//    }
 
-        return albumMapper.findNewAlbum();
+    public List<Album> newAlbum(){
+        return albumRepository.findTop4ByOrderByIdDesc();
     }
 
 
     // 인기 앨범 불러오기
+//    public Album bestAlbum(){
+//        return albumMapper.bestAlbum();
+//
+//    }
+
     public Album bestAlbum(){
-        return albumMapper.bestAlbum();
+        return albumRepository.findTop1ByOrderByViewDesc();
 
     }
-
 
     //페이징
     public Page<Album> albumList(Pageable pageable) { //앨범 불러오기

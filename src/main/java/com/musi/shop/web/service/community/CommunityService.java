@@ -76,7 +76,7 @@ public class CommunityService {
 
     //페이징
     public Page<Community> commuList(Pageable pageable, long id) {
-        return communityRepository.findById(id,pageable);
+        return communityRepository.findByChannel_Id(id,pageable);
     }
 
 

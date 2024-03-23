@@ -44,7 +44,8 @@
                 <div class="card-body">
 
                 <h2 class="card-title" th:text="${bestAlbum.title}"></h2>
-                    <div th:text="${bestAlbum.name}"></div>
+                    <div th:text="${bestAlbum.price}"></div>
+                    <div th:text="${bestAlbum.channel.member.nickname}"></div>
                     <div th:text="${bestAlbum.regdate}"></div>
 
 
@@ -65,10 +66,12 @@
                         <div class="col-lg-12">
                             <!-- Album entries -->
                             <div th:each="album : ${albumDtoList}" class="card mb-4">
-                                <img th:src="'/albumcover/' + ${album.img}" class="card-img-top" alt="Album Image">
+                                <img th:src="@{'/albumcover/' + ${album.img}}" class="card-img-top" alt="앨범 이미지">
                                 <div class="card-body">
                                     <h2 class="card-title" th:text="${album.title}">Album Title</h2>
-                                    <p class="small text-muted" th:text="${album.price}">Release Date</p>
+                                    <p class="small text-muted" th:text="${album.channel.member.nickname}">artist</p>
+                                    <p class="small text-muted" th:text="${album.regdate}">Release Date</p>
+                                    <p class="small text-muted" th:text="${album.price}">price</p>
                                 </div>
                             </div>
                 </div>

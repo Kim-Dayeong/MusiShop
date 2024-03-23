@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>채널 목록</title>
+</head>
+
+
+<style>
+  .layout {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+</style>
+<body>
+<th:block th:replace="layout/navbar :: navbarFragment"></th:block>
+<div class="layout">
+
+  <h1 class="display-4"><span th:text="${channelinfo.member.nickname} + ' 채널'"></span></h1>
+
+
+</div>
+<a th:href="@{'/commu/' + ${channelId} + '/list'}">커뮤니티 바로가기</a>
+<!-- 앨범 -->
+<div class="card-columns">
+  <div th:each="album: ${list}" class="card">
+    <img th:src="@{'/albumcover/' + ${album.img}}" class="card-img-top" alt="앨범 이미지">
+    <div class="card-body">
+      <h5 class="card-title" th:text="${album.title}"></h5>
+      <p class="card-text" th:text="${album.channel.member.nickname}"></p>
+      <a th:href="@{/album/view/{id}(id=${album.id})}" class="btn btn-primary">앨범 보기</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+</tr>
+</tbody>
+</body>
+</html>

@@ -40,6 +40,7 @@
                 <td th:text="${album.regdate}">발매연도</td>
                 <td th:text="${album.price}">가격</td>
                 <td th:text="${album.heartcnt}">좋아요수</td>
+<!--                <td th:text="${album.channel.nickname}">아티스트</td>-->
                 <td>
                     <form th:action="@{/admin/album/delete/{id}(id=${album.id})}" method="post">
                         <button type="submit" class="btn btn-delete">삭제</button>

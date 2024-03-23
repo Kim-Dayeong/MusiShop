@@ -8,6 +8,7 @@ import com.musi.shop.web.dto.community.CommunityResponseDto;
 import com.musi.shop.web.dto.comucomment.ComuCommentResDto;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.community.Community;
+import com.musi.shop.web.service.channel.ChannelService;
 import com.musi.shop.web.service.community.CommunityService;
 import com.musi.shop.web.service.comument.CommumentService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,8 @@ public class CommunityController {
 
     private final CommumentService commumentService;
 
+    private final ChannelService channelService;
+
     // read
     @GetMapping("/commu/read/{id}")
     public String readCommu(@PathVariable Long id, Model model){
@@ -45,7 +48,7 @@ public class CommunityController {
     }
 
     //커뮤니티 목록 view
-    @GetMapping("/commu/{id}/list") //id = 커뮤니티 id
+    @GetMapping("/commu/{id}/list") //id = 채널 id
     public String viewCommuGet(@PathVariable long id, Model model, @PageableDefault(page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
         Page<Community> list = communityService.commuList(pageable, id);
 
@@ -62,6 +65,8 @@ public class CommunityController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("starttotal", starttotal);
         model.addAttribute("endtotal", endtotal);
+        model.addAttribute("channelinfo", channelService.channelInfo(id));
+//        model.addAttribute("id",)
 
 
 

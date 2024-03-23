@@ -16,26 +16,26 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <h2>플레이리스트 디테일 </h2>
 
-
-
 <div class="layout">
-    <table>
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>노래 제목</th>
+            <th>앨범 제목</th>
+        </tr>
+        </thead>
         <tbody>
-
-        <h2 th:text="${dtos.title}"></h2>
-
-        <tr th:each="song : ${dtos.songs}">
-
+        <tr th:each="song, index : ${dtos.songs}">
+            <td th:text="${index.index + 1}"></td>
             <td th:text="${song.songname}"></td>
-
+            <td>
+                <a th:href="@{'/album/view/' + ${song.albumdto.id}}" th:text="${song.albumdto.title}"></a>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-
-
 
 </body>
 </html>

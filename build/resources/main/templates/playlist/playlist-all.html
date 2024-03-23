@@ -19,35 +19,32 @@
     margin-top: 40px;
   }
 </style>
+
 <body>
 <th:block th:replace="layout/navbar :: navbarFragment"></th:block>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <h2>최신 플레이리스트 보기</h2>
 
-
 <div class="layout">
-  <table>
+  <table class="table">
     <thead>
     <tr>
-      <th>playlist</th>
+      <th>번호</th>
+      <th>플레이리스트</th>
     </tr>
     </thead>
     <tbody>
 
-    <tr th:each="playlist : ${playlist}">
-
+    <tr th:each="playlist, index : ${playlist}">
+      <td th:text="${index.index + 1}"></td>
       <td>
         <a th:text="${playlist.title}" th:href="@{/playlist/detail/{id}(id=${playlist.id})}"></a>
       </td>
-
     </tr>
     </tbody>
   </table>
 </div>
-
-
-
-
 </body>
+
 </html>

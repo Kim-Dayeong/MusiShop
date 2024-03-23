@@ -6,7 +6,7 @@ import com.musi.shop.web.dto.playlist.PlaylistCreateDto;
 import com.musi.shop.web.dto.playlist.PlaylistRequestDto;
 import com.musi.shop.web.dto.playlist.PlaylistResponseDto;
 import com.musi.shop.web.dto.song.SongDto;
-import com.musi.shop.web.dto.song.SongPlayDto;
+
 import com.musi.shop.web.entity.Member;
 import com.musi.shop.web.entity.board.Board;
 import com.musi.shop.web.entity.playlist.Playlist;

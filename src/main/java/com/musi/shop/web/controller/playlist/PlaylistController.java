@@ -34,7 +34,7 @@ public class PlaylistController {
 
        model.addAttribute("playlist",  playlistService.PlaylistAll() );
 
-       return "/playlist/playlist-all";
+       return "playlist/playlist-all";
    }
 
     // 플레이리스트 생성
@@ -54,7 +54,7 @@ public class PlaylistController {
 
       // 로그인 안됐을때 에러 처리 하기
 
-        return "/playlist/playlist-view";
+        return "playlist/playlist-view";
 
     }
 
@@ -65,7 +65,7 @@ public class PlaylistController {
     public String playlistDetail(@PathVariable Long id, Model model){
       PlaylistResponseDto dto = playlistService.PlaylistDetail(id);
        model.addAttribute("dtos",dto);
-        return  "/playlist/playlist-detail";
+        return  "playlist/playlist-detail";
 
     }
 
@@ -81,7 +81,7 @@ public class PlaylistController {
 
        model.addAttribute("playlists", playlistService.PlaylistView(principalDetail.getUsername()));
 
-        return "/playlist/playlist-modify";
+        return "playlist/playlist-modify";
     }
 
     @GetMapping("/playlist/modify/") //songid + listid
@@ -91,13 +91,12 @@ public class PlaylistController {
 
 
 
-
         playlistService.updatePlaylist(listid, (Long) httpSession.getAttribute("songid"));
         model.addAttribute("dto",playlistService.PlaylistDetail(listid));
 
         httpSession.removeAttribute("songid"); // songid 삭제
 
-        return "/playlist/playlist-detail";
+        return "redirect:/playlist/all";
 
     }
 
