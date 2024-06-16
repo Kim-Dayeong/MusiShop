@@ -1,0 +1,44 @@
+server:
+  port: 8083
+
+spring:
+  jpa:
+    show_sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    driver-class-name: ${className}
+    url: ${url}
+    username: ${username}
+    password: ${password}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${clientId}
+            client-secret: ${clientSecret}
+            scope: profile,email
+
+jwt:
+  secret: ${jwt}
+
+logging:
+  level:
+    org:
+      springframework: ERROR
+
+mybatis:
+  type-aliases-package: com.musi.shop
+  mapper-locations: static/mapper/*.xml
