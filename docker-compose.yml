@@ -29,7 +29,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/musi?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rlaekdud
+      SPRING_DATASOURCE_PASSWORD: 
     networks:
       - docker_network
 
